@@ -8,19 +8,25 @@ settings
 
 
 #todo
-* statistic page
-    * party personal page met grafieken (show function)
-* students pages
-    * list pagina om leerlingen te uplaoden in csv/excel
-      * loop over excel data ivm duplicaten
- * admin pages
- * check if login works with roles. doupt it atm
- * log als je gebruiker aanklikt (get)
+* [ ] statistic page
+    * [ ] party personal page met grafieken (show function)
+* [ ] students pages
+    * [ ] list pagina om leerlingen te uplaoden in csv/excel
+        * [ ] log upload to database with who and the time
+        * [x] loop over excel data ivm duplicaten
+    * [ ] check if photo upload works correctly
+ * [ ] admin pages
+ * [ ] check if login works with roles. doupt it atm
+ * [ ] log als je gebruiker aanklikt (get)
+ * [ ] menu being giffy if collapsed
+ * [ ] student sign in
+ * [ ] statistics
+ * [ ] party
+    * [ ] show
+    * [ ] create
+    * [ ] archive
+
 
 default admin login <br>
 user admin@admin.nl<br>
 ww admin
-
-- [x] Finish my changes
-    - [ ] Push my commits to GitHub
-        - [x] Open a pull request
