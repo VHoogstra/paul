@@ -17,6 +17,10 @@ settings
  * check if login works with roles. doupt it atm
  * log als je gebruiker aanklikt (get)
 
-default admin login
-user admin@admin.nl
-ww admin``
+default admin login <br>
+user admin@admin.nl<br>
+ww admin
+
+- [x] Finish my changes
+- [ ] Push my commits to GitHub
+- [ ] Open a pull request

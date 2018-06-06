@@ -80,13 +80,13 @@ class StudentController extends Controller
             array_push($error, "colom F1 is niet gelijk aan woonplaats");
         }
         if ($G != 'adres') {
-            array_push($error, "colom I1 is niet gelijk aan adres");
+            array_push($error, "colom G1 is niet gelijk aan adres");
         }
         if ($H != 'telefoon') {
-            array_push($error, "colom G1 is niet gelijk aan telefoon");
+            array_push($error, "colom H1 is niet gelijk aan telefoon");
         }
         if ($I != 'geboortedatum') {
-            array_push($error, "colom H1 is niet gelijk aan geboortedatum");
+            array_push($error, "colom I1 is niet gelijk aan geboortedatum");
         }
 
         if (count($error) != 0) {
@@ -104,41 +104,63 @@ class StudentController extends Controller
             //    set will be iterated.
             $i = 1;
             if ($p != 0) {
+                $duplicate = false;
                 foreach ($cellIterator as $cell) {
                     if ($cell->getValue()) {
                         switch ($i) {
                             case 1:
-                                $student = new student;
-                                $student->stamnr = $cell->getValue();
+                                if (student::where('stamnr', $cell->getValue())->count() == 1) {
+                                    $duplicate = true;
+                                } else {
+                                    $student = new student;
+                                    $student->stamnr = $cell->getValue();
+                                };
+
                                 break;
                             case 2:
-                                $student->class = $cell->getValue();
+                                if (!$duplicate) {
+                                    $student->class = $cell->getValue();
+                                }
                                 break;
                             case 3:
-                                $student->first_name = $cell->getValue();
+                                if (!$duplicate) {
+                                    $student->first_name = $cell->getValue();
+                                }
                                 break;
                             case 4:
-                                $student->middle_name = $cell->getValue();
+                                if (!$duplicate) {
+                                    $student->middle_name = $cell->getValue();
+                                }
                                 break;
                             case 5:
-                                $student->last_name = $cell->getValue();
+                                if (!$duplicate) {
+                                    $student->last_name = $cell->getValue();
+                                }
                                 break;
                             case 6:
-                                $student->town = $cell->getValue();
+                                if (!$duplicate) {
+                                    $student->town = $cell->getValue();
+                                }
                                 break;
                             case 7:
-                                $student->adres = $cell->getValue();
+                                if (!$duplicate) {
+                                    $student->adres = $cell->getValue();
+                                }
                                 break;
                             case 8:
-                                $student->phone_number = $cell->getValue();
+                                if (!$duplicate) {
+                                    $student->phone_number = $cell->getValue();
+                                }
                                 break;
                             case 9:
-                                $student->birth_date = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($cell->getValue())->format('Y-m-d');
-                                try {
-                                    $student->save();
-                                } catch (\Illuminate\Database\QueryException $ex) {
-                                    array_push($error, $ex->errorInfo[2]);
-                                    return redirect::back()->with('error', $error);
+                                if (!$duplicate) {
+                                    $student->birth_date = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($cell->getValue())->format('Y-m-d');
+                                    try {
+                                        $student->save();
+                                    } catch (\Illuminate\Database\QueryException $ex) {
+                                        array_push($error, $ex->errorInfo[2]);
+                                         return redirect::back()->with('error', $error);
+                                    }
                                 }
                                 break;
                         }
