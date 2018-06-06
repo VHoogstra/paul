@@ -20,11 +20,11 @@ class CreateStudentsTable extends Migration
             $table->string('first_name');
             $table->string('middle_name')->nullable($value = true);
             $table->string('last_name');
-            $table->string('adres');
-            $table->string('postalcode');
-            $table->string('town');
+            $table->string('adres')->nullable($value = true);
+            $table->string('postalcode')->nullable($value = true);
+            $table->string('town')->nullable($value = true);
             $table->string('class');
-            $table->string('phone_number');
+            $table->string('phone_number')->nullable($value = true);
             $table->date('birth_date')->useCurrent();
         });
     }

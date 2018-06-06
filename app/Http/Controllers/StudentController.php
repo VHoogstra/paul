@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\student;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Redirect;
 
 class StudentController extends Controller
 {
@@ -26,7 +27,8 @@ class StudentController extends Controller
      */
     public function create()
     {
-        return view('student.create');
+        $studentCount = student::all()->count();
+        return view('student.create', compact('studentCount'));
     }
 
     /**
@@ -56,42 +58,97 @@ class StudentController extends Controller
         $F = strtolower($spreadsheet->getActiveSheet()->getCell('F1')->getValue());
         $G = strtolower($spreadsheet->getActiveSheet()->getCell('G1')->getValue());
         $H = strtolower($spreadsheet->getActiveSheet()->getCell('H1')->getValue());
-        $cellValue = strtolower($spreadsheet->getActiveSheet()->getCell('A1389')->getValue());
+        $I = strtolower($spreadsheet->getActiveSheet()->getCell('I1')->getValue());
+        //check for errors. are all the headers correct? send error message
+        $error = [];
+        if ($A != 'stamnr') {
+            array_push($error, "colom A1 is niet gelijk aan Stamnr");
+        }
+        if ($B != 'klas') {
+            array_push($error, "colom B1 is niet gelijk aan klas");
+        }
+        if ($C != 'roepnaam') {
+            array_push($error, "colom C1 is niet gelijk aan roepnaam");
+        }
+        if ($D != 'tussenv') {
+            array_push($error, "colom D1 is niet gelijk aan tussenv)");
+        }
+        if ($E != 'achternaam') {
+            array_push($error, "colom E1 is niet gelijk aan achternaam");
+        }
+        if ($F != 'woonplaats') {
+            array_push($error, "colom F1 is niet gelijk aan woonplaats");
+        }
+        if ($G != 'adres') {
+            array_push($error, "colom I1 is niet gelijk aan adres");
+        }
+        if ($H != 'telefoon') {
+            array_push($error, "colom G1 is niet gelijk aan telefoon");
+        }
+        if ($I != 'geboortedatum') {
+            array_push($error, "colom H1 is niet gelijk aan geboortedatum");
+        }
 
+        if (count($error) != 0) {
+            return redirect::back()->with('error', $error);
+        }
 
-        echo $A . " " . $B . " " . $C . " " . $D . " " . $E . " " . $F . " " . $G . " " . $H;
-        //Storage::putFileAs($destination, $file, $file->getClientOriginalName());
         $worksheet = $spreadsheet->getActiveSheet();
-
-        echo '<table>' . PHP_EOL;
+        $p = 0;
         foreach ($worksheet->getRowIterator() as $row) {
-            $i = 1;
 
-            echo '<tr>' . PHP_EOL;
             $cellIterator = $row->getCellIterator();
             $cellIterator->setIterateOnlyExistingCells(FALSE); // This loops through all cells,
             //    even if a cell value is not set.
             // By default, only cells that have a value
             //    set will be iterated.
-            foreach ($cellIterator as $cell) {
-                echo '<td>' .
-                    $cell->getValue();
-                if ($i == 8) {
-                    if (is_numeric($cell->getValue())) {
-
-                        echo '<br> ' . \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($cell->getValue())->format('Y-m-d');;
-                    } else {
-                        echo 'onlytest '.$i;
+            $i = 1;
+            if ($p != 0) {
+                foreach ($cellIterator as $cell) {
+                    if ($cell->getValue()) {
+                        switch ($i) {
+                            case 1:
+                                $student = new student;
+                                $student->stamnr = $cell->getValue();
+                                break;
+                            case 2:
+                                $student->class = $cell->getValue();
+                                break;
+                            case 3:
+                                $student->first_name = $cell->getValue();
+                                break;
+                            case 4:
+                                $student->middle_name = $cell->getValue();
+                                break;
+                            case 5:
+                                $student->last_name = $cell->getValue();
+                                break;
+                            case 6:
+                                $student->town = $cell->getValue();
+                                break;
+                            case 7:
+                                $student->adres = $cell->getValue();
+                                break;
+                            case 8:
+                                $student->phone_number = $cell->getValue();
+                                break;
+                            case 9:
+                                $student->birth_date = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($cell->getValue())->format('Y-m-d');
+                                try {
+                                    $student->save();
+                                } catch (\Illuminate\Database\QueryException $ex) {
+                                    array_push($error, $ex->errorInfo[2]);
+                                    return redirect::back()->with('error', $error);
+                                }
+                                break;
+                        }
                     }
+                    $i++;
                 }
-                echo '</td>' . PHP_EOL;
-
-                $i++;
             }
-            echo '</tr>' . PHP_EOL;
+            $p++;
         }
-        echo '</table>' . PHP_EOL;
-
+        return redirect::back()->with('succes', 'successvol geupload ');
     }
 
     /**
@@ -136,6 +193,7 @@ class StudentController extends Controller
      */
     public function destroy(student $student)
     {
-        //
+        student::truncate();
+        return redirect::back();
     }
 }
