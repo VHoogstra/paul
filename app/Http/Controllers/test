@@ -1,0 +1,38 @@
+object(PhpOffice\PhpSpreadsheet\Spreadsheet)#711 (15) {
+["uniqueID":"PhpOffice\PhpSpreadsheet\Spreadsheet":private]=> string(23) "5b09d9b0a3b8b0.07148106"
+["properties":"PhpOffice\PhpSpreadsheet\Spreadsheet":private]=> object(PhpOffice\PhpSpreadsheet\Document\Properties)#728 (12) {
+    ["creator":"PhpOffice\PhpSpreadsheet\Document\Properties":private]=> string(9) "Anja Peet"
+    ["lastModifiedBy":"PhpOffice\PhpSpreadsheet\Document\Properties":private]=> string(16) "Vincent Hoogstra"
+    ["created":"PhpOffice\PhpSpreadsheet\Document\Properties":private]=> int(1505205905)
+    ["modified":"PhpOffice\PhpSpreadsheet\Document\Properties":private]=> int(1512154705)
+    ["title":"PhpOffice\PhpSpreadsheet\Document\Properties":private]=> string(0) ""
+    ["description":"PhpOffice\PhpSpreadsheet\Document\Properties":private]=> string(0) ""
+    ["subject":"PhpOffice\PhpSpreadsheet\Document\Properties":private]=> string(0) ""
+    ["keywords":"PhpOffice\PhpSpreadsheet\Document\Properties":private]=> string(0) ""
+    ["category":"PhpOffice\PhpSpreadsheet\Document\Properties":private]=> string(0) ""
+    ["manager":"PhpOffice\PhpSpreadsheet\Document\Properties":private]=> string(0) ""
+    ["company":"PhpOffice\PhpSpreadsheet\Document\Properties":private]=> string(21) "Microsoft Corporation"
+    ["customProperties":"PhpOffice\PhpSpreadsheet\Document\Properties":private]=> array(0) { }
+}
+["security":"PhpOffice\PhpSpreadsheet\Spreadsheet":private]=> object(PhpOffice\PhpSpreadsheet\Document\Security)#729 (5) {
+    ["lockRevision":"PhpOffice\PhpSpreadsheet\Document\Security":private]=> bool(false)
+    ["lockStructure":"PhpOffice\PhpSpreadsheet\Document\Security":private]=> bool(false)
+    ["lockWindows":"PhpOffice\PhpSpreadsheet\Document\Security":private]=> bool(false)
+    ["revisionsPassword":"PhpOffice\PhpSpreadsheet\Document\Security":private]=> string(0) ""
+     ["workbookPassword":"PhpOffice\PhpSpreadsheet\Document\Security":private]=> string(0) ""
+}
+["workSheetCollection":"PhpOffice\PhpSpreadsheet\Spreadsheet":private]=> array(1) {
+     [0]=> object(PhpOffice\PhpSpreadsheet\Worksheet\Worksheet)#11952 (41) {
+        ["parent":"PhpOffice\PhpSpreadsheet\Worksheet\Worksheet":private]=> *RECURSION*
+        ["cellCollection":"PhpOffice\PhpSpreadsheet\Worksheet\Worksheet":private]=> object(PhpOffice\PhpSpreadsheet\Collection\Cells)#11953 (7) {
+            ["cache":"PhpOffice\PhpSpreadsheet\Collection\Cells":private]=> object(PhpOffice\PhpSpreadsheet\Collection\Memory)#717 (1) {
+                 ["cache":"PhpOffice\PhpSpreadsheet\Collection\Memory":private]=> array(12490) {
+                    ["phpspreadsheet.5b09d9b0ae90a7.45353400.A1"]=> object(PhpOffice\PhpSpreadsheet\Cell\Cell)#12109 (6) {
+                        ["value":"PhpOffice\PhpSpreadsheet\Cell\Cell":private]=> string(6) "Stamnr"
+                        ["calculatedValue":"PhpOffice\PhpSpreadsheet\Cell\Cell":private]=> NULL
+                        ["dataType":"PhpOffice\PhpSpreadsheet\Cell\Cell":private]=> string(1) "s"
+                        ["parent":"PhpOffice\PhpSpreadsheet\Cell\Cell":private]=> NULL
+                        ["xfIndex":"PhpOffice\PhpSpreadsheet\Cell\Cell":private]=> int(4)
+                        ["formulaAttributes":"PhpOffice\PhpSpreadsheet\Cell\Cell":private]=> NULL
+                    }
+                 ["phpspreadsheet.5b09d9b0ae90a7.45353400.B1"]=> object(PhpOffice\PhpSpreadsheet\Cell\Cell)#12120 (6) { ["value":"PhpOffice\PhpSpreadsheet\Cell\Cell":private]=> string(4) "Klas" ["calculatedValue":"PhpOffice\PhpSpreadsheet\Cell\Cell":private]=> NULL ["dataType":"PhpOffice\PhpSpreadsheet\Cell\Cell":private]=> string(1) "s" ["parent":"PhpOffice\PhpSpreadsheet\Cell\Cell":private]=> NULL ["xfIndex":"PhpOffice\PhpSpreadsheet\Cell\Cell":private]=> int(4) ["formulaAttributes":"PhpOffice\PhpSpreadsheet\Cell\Cell":private]=> NULL } ["phpspreadsheet.5b09d9b0ae90a7.45353400.C1"]=> object(PhpOffice\PhpSpreadsheet\Cell\Cell)#12131 (6) { ["value":"PhpOffice\PhpSpreadsheet\Cell\Cell":private]=> string(8) "Roepnaam" ["calculatedValue":"PhpOffice\PhpSpreadsheet\Cell\Cell":private]=> NULL ["dataType":"PhpOffice\PhpSpreadsheet\Cell\Cell":private]=> string(1) "s" ["parent":"PhpOffice\PhpSpreadsheet\Cell\Cell":private]=> NULL ["xfIndex":"PhpOffice\PhpSpreadsheet\Cell\Cell":private]=> int(4) ["formulaAttributes":"PhpOffice\PhpSpreadsheet\Cell\Cell":private]=> NULL } ["phpspreadsheet.5b09d9b0ae90a7.45353400.D1"]=> object(PhpOffice\PhpSpreadsheet\Cell\Cell)#12142 (6) { ["value":"PhpOffice\PhpSpreadsheet\Cell\Cell":private]=> string(7) "Tussenv" ["calculatedValue":"PhpOffice\PhpSpreadsheet\Cell\Cell":private]=> NULL ["dataType":"PhpOffice\PhpSpreadsheet\Cell\Cell":private]=> string(1) "s" ["parent":"PhpOffice\PhpSpreadsheet\Cell\Cell":private]=> NULL ["xfIndex":"PhpOffice\PhpSpreadsheet\Cell\Cell":private]=> int(4) ["formulaAttributes":"PhpOffice\PhpSpreadsheet\Cell\Cell":private]=> NULL } ["phpspreadsheet.5b09d9b0ae90a7.45353400.E1"]=> object(PhpOffice\PhpSpreadsheet\Cell\Cell)#12153 (6) { ["value":"PhpOffice\PhpSpreadsheet\Cell\Cell":private]=> string(10) "Achternaam" ["calculatedValue":"PhpOffice\PhpSpreadsheet\Cell\Cell":private]=> NULL ["dataType":"PhpOffice\PhpSpreadsheet\Cell\Cell":private]=> string(1) "s" ["parent":"PhpOffice\PhpSpreadsheet\Cell\Cell":private]=> NULL ["xfIndex":"PhpOffice\PhpSpreadsheet\Cell\Cell":private]=> int(4) ["formulaAttributes":"PhpOffice\PhpSpreadsheet\Cell\Cell":private]=> NULL } ["phpspreadsheet.5b09d9b0ae90a7.45353400.F1"]=> object(PhpOffice\PhpSpreadsheet\Cell\Cell)#12164 (6) { ["value":"PhpOffice\PhpSpreadsheet\Cell\Cell":private]=> string(10) "Woonplaats" ["calculatedValue":"PhpOffice\PhpSpreadsheet\Cell\Cell":private]=> NULL
