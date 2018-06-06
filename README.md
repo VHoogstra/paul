@@ -1,4 +1,4 @@
-php artisan migrate 
+php artisan migrate:refresh --seed 
 ---
 php artisan db:seed
 ---

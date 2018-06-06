@@ -5,16 +5,6 @@
 </div>
 <hr>
 
-<form action="{{route('student.store')}}"
-      class="dropzone"
-      id="my-awesome-dropzone" enctype="multipart/form-data">
-{{ csrf_field() }}
-<br>    
-     <div class="fallback">
-    <input name="file" type="file" multiple />
-  </div>
-</form>
-
 
 
 <hr>
@@ -32,7 +22,7 @@
 <br>
 <Br><br>
 
-    <input id="fileupload" type="file" name="files[]" data-url="{{route('student.store')}}" multiple>
+
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src={{asset("js/vendor/jquery.ui.widget.js")}}></script>
 <script src={{asset("js/jquery.iframe-transport.js")}}></script>
