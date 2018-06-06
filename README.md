@@ -22,5 +22,5 @@ user admin@admin.nl<br>
 ww admin
 
 - [x] Finish my changes
-- [ ] Push my commits to GitHub
-- [ ] Open a pull request
+    - [ ] Push my commits to GitHub
+        - [x] Open a pull request
