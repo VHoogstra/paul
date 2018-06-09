@@ -1,32 +1,32 @@
 @extends('layouts.master') @section('content')
 
 <!-- to party.update -->
-<form method='post' action='/party/{{$partys->id}}'>
+<form method='post' action='/party/{{$party->id}}'>
      {{ csrf_field() }}
     {{ method_field('patch') }}
     <div class="form-group row">
         <label for="example-text-input" class="col-2 col-form-label">Feest naam</label>
         <div class="col-10">
-            <input class="form-control" type="text" name='name' value='{{$partys->name}}'>
+            <input class="form-control" type="text" name='name' value='{{$party->name}}'>
         </div>
     </div>
 
     <div class="form-group row">
         <label for="example-number-input" class="col-2 col-form-label">entree prijs</label>
         <div class="col-10">
-            <input class="form-control" type="number" name='price' value='{{$partys->price}}'>
+            <input class="form-control" type="number" name='price' value='{{$party->price}}'>
         </div>
     </div>
     <div class="form-group row">
         <label for="example-number-input" class="col-2 col-form-label">voorverkoop prijs</label>
         <div class="col-10">
-            <input class="form-control" type="number" name='price_presale' value='{{$partys->price_preSale}}'>
+            <input class="form-control" type="number" name='price_presale' value='{{$party->price_preSale}}'>
         </div>
     </div>
     <div class="form-group row">
         <label for="example-number-input" class="col-2 col-form-label">speciale prijs</label>
         <div class="col-10">
-            <input class="form-control" type="number" name='price_speciale' value='{{$partys->price_speciale}}'>
+            <input class="form-control" type="number" name='price_speciale' value='{{$party->price_speciale}}'>
         </div>
     </div>
 

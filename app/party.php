@@ -16,8 +16,9 @@ class party extends Model
 
     static public function getActive(){
         $party = party::where('active',1)->first();
+        $partycount = party::where('active',1)->count();
 
-        if($party == 0){
+        if($partycount == 0){
             return false;
         }else{
             return $party;

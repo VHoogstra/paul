@@ -1,108 +1,86 @@
 @extends('layouts.master') @section('content')
 
-<div class="card-header">
-    <i class="fa fa-table"></i> @if(!$partyActive)
-        Feest active not set
-    @else
-        Feest {{$partyActive->name}} (active)
-    @endif
-    
+    <div class="card-header">
+        <i class="fa fa-table"></i> @if(!$partyActive)
+            Feest active not set
+        @else
+            Feest {{$partyActive->name}} (active)
+        @endif
+
     </div>
-<div class="card-body">
-    <div class="table-responsive">
-        <div id="dataTable_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
-            <div class="row">
-                <div class="col-sm-12">
-                    <table class="table table-bordered dataTable" id="datatable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
-                        <thead>
+    <div class="card-body">
+        <div class="table-responsive">
+            <div id="dataTable_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table class="table table-bordered dataTable" id="datatable" width="100%" cellspacing="0"
+                               role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                            <thead>
                             <tr role="row">
                                 <th rowspan="1" colspan="1">naam</th>
                                 <th rowspan="1" colspan="1">prijs</th>
                                 <th rowspan="1" colspan="1">datum</th>
                                 <th rowspan="1" colspan="1">option</th>
                             </tr>
-                        </thead>
-                        <tfoot>
+                            </thead>
+                            <tfoot>
                             <tr>
                                 <th rowspan="1" colspan="1">naam</th>
                                 <th rowspan="1" colspan="1">prijs</th>
                                 <th rowspan="1" colspan="1">datum</th>
                                 <th rowspan="1" colspan="1">option</th>
                             </tr>
-                        </tfoot>
-                        <tbody>
+                            </tfoot>
+                            <tbody>
                             @foreach($partys as $party)
-                            @if($party->active==1)
-                            <tr style='background-color:#00800042'>
-                            @else 
-                            <tr>
-                                @endif
-                                <td>{{$party->name}}</td>
-                                <td>{{$party->price}}</td>
-                                <td>{{$party->start_date}}</td>
+                                @if($party->active==1)
+                                    <tr style='background-color:#00800042'>
+                                @else
+                                    <tr>
+                                        @endif
+                                        <td>{{$party->name}}</td>
+                                        <td>{{$party->price}}</td>
+                                        <td>{{$party->start_date}}</td>
 
-                                <td>
-                                    <div class="btn-group dropleft">
-                                        <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-                                        Actions
-                                        <span class="caret"></span>
-                                    </button>
-                                        <ul class="dropdown-menu pull-right" role="menu">
-                                            <li>
-                                                <a href='/party/{{$party->id}}/remove'>
-                                                    <span class="fa-stack fa-lg">
-                                                        <i class="fa fa-square fa-stack-2x"></i>
-                                                        <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
-                                                    </span>
-                                                    Remove 
+                                        <td>
+
+                                            <div class="btn-group">
+                                                <form action="{{route("party.destroy", ['id' =>$party->id])}}"
+                                                      method="POST" class="btn-group">
+                                                    <button type="button" class="btn btn-danger">
+                                                        <i class="fa fa-trash-o"></i> Remove
+                                                    </button>
+
+                                                    @CSRF
+                                                    @method('DELETE')
+                                                </form>
+                                                <a class="btn btn-primary" href="{{route("party.edit", ['id' =>$party->id])}}">
+                                                    <i class="fa fa-pencil"></i> Edit
                                                 </a>
-                                            </li>
-                                            <li>
-                                                <a href='/party/{{$party->id}}/edit'>
-                                                    <span class="fa-stack fa-lg">
-                                                        <i class="fa fa-square fa-stack-2x"></i>
-                                                        <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
-                                                    </span> 
-                                                    Edit
+                                                <a class="btn btn-success" href="{{route("party.active", ['id' =>$party->id])}}">
+                                                    <i class="fa fa-toggle-on "></i> Active
                                                 </a>
-                                            </li>
-                                            <li>
-                                                <a href='/party/{{$party->id}}/active'>
-                                                    <span class="fa-stack fa-lg">
-                                                        <i class="fa fa-square fa-stack-2x"></i>
-                                                        <i class="fa fa-toggle-on fa-stack-1x fa-inverse"></i>
-                                                    </span> 
-                                                    Active
+                                                <a class="btn btn-info" href="{{route("party.archive", ['id' =>$party->id])}}">
+                                                    <i class="fa fa-archive "></i> Archive
                                                 </a>
-                                            </li>
-                                            <li class="divider"></li>
-                                            <li>
-                                                <a href='/party/{{$party->id}}/archive'>
-                                                    <span class="fa-stack fa-lg">
-                                                        <i class="fa fa-square fa-stack-2x"></i>
-                                                        <i class="fa fa-archive fa-stack-1x fa-inverse"></i>
-                                                    </span> 
-                                                    Archive
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 
-<script>
-    $(document).ready(function() {
-        var table = $('#datatable').DataTable();
-    });
+    <script>
+        $(document).ready(function () {
+            var table = $('#datatable').DataTable();
+        });
 
-</script>
+    </script>
 @endsection

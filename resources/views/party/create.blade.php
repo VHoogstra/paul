@@ -1,7 +1,7 @@
 @extends('layouts.master') @section('content')
 
 
-<form method='post' action='/party'>
+<form method='post' action='{{route("party.store")}}'>
      {{ csrf_field() }}
     <div class="form-group row">
         <label for="example-text-input" class="col-2 col-form-label">Feest naam</label>

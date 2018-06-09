@@ -34,13 +34,13 @@
                 </a>
                 <ul class="sidenav-second-level collapse" id="collapseComponents">
                     <li>
-                        <a href="#">Show</a>
+                        <a href="{{route("party.index")}}">Show</a>
                     </li>
                     <li>
-                        <a href="#">Create</a>
+                        <a href="{{route("party.create")}}">Create</a>
                     </li>
                     <li>
-                        <a href="#">archief</a>
+                        <a href="{{route("party.indexArchive")}}">archief</a>
                     </li>
                 </ul>
             </li>
