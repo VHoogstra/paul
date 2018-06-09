@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\student;
+use App\settings;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Storage;
@@ -17,7 +18,19 @@ class StudentController extends Controller
      */
     public function index()
     {
-        //
+
+        $year = settings::getPhotoYear();
+        $directories = Storage::directories("/public/images/");
+        for ($i = 0; $i < count($directories); $i++) {
+            $directories[$i] = str_replace("public/images/", " ", $directories[$i]);
+
+        }
+
+        $error = "";
+
+        //$year = DB::table('settings')->where('name', 'photoYear')->first()->value;
+        return view('student.photo', compact('year', 'directories','error'));
+
     }
 
     /**
@@ -159,7 +172,7 @@ class StudentController extends Controller
                                         $student->save();
                                     } catch (\Illuminate\Database\QueryException $ex) {
                                         array_push($error, $ex->errorInfo[2]);
-                                         return redirect::back()->with('error', $error);
+                                        return redirect::back()->with('error', $error);
                                     }
                                 }
                                 break;
@@ -173,39 +186,7 @@ class StudentController extends Controller
         return redirect::back()->with('succes', 'successvol geupload ');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\student $student
-     * @return \Illuminate\Http\Response
-     */
-    public function show(student $student)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\student $student
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(student $student)
-    {
-
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \App\student $student
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, student $student)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.
@@ -218,4 +199,45 @@ class StudentController extends Controller
         student::truncate();
         return redirect::back();
     }
+
+    public function storePhotoYear(Request $request)
+    {
+        $yearmulti = $request->input('yearmulti');
+        $year = $request->input('year');
+        if (is_null($yearmulti)) {
+            if (is_null($year)) {
+                $error = "no thingy thing";
+            } else {
+                settings::updateYear($year);
+                $error = "succes ";
+            }
+        } else {
+            if (is_null($yearmulti)) {
+                $error = "no thingy thing";
+            } else {
+                settings::updateYear($yearmulti);
+                $error = "succes ";
+            }
+        }
+
+        $year = settings::getPhotoYear();
+        $directories = Storage::directories("/public/images/");
+        for ($i = 0; $i < count($directories); $i++) {
+            $directories[$i] = str_replace("public/images/", "", $directories[$i]);
+
+        }
+        return view('student.photo', compact('year', "directories", 'error'));
+
+
+        ///settings::updateYear(6);
+    }
+
+    public function storePhoto(Request $request)
+    {
+        $year = settings::getPhotoYear();
+        $destination = "/public/images/" . $year;
+        $file = Input::file('file');
+        Storage::putFileAs($destination, $file, $file->getClientOriginalName());
+    }
+
 }

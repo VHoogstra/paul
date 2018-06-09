@@ -30,11 +30,15 @@ Route::middleware(['role:user','auth'])->group(function () {
 //    route::get('signIn/inside/{id}', 'sign_inController@inside');
 
     route::resource('statistic', 'statisticController');
+
     route::get('party/archived', 'partyController@indexArchive')->name("party.indexArchive");
     route::get('party/active/{id}', 'partyController@active')->name("party.active");
     route::get('party/archive/{id}', 'partyController@archive')->name("party.archive");
     route::get('party/dearchive/{id}', 'partyController@dearchive')->name("party.dearchive");
     route::resource('party', 'partyController');
+
+    route::post('student/storePhotoYear', 'StudentController@storePhotoYear')->name("studentStoreYear");
+    route::post('student/storePhoto', 'StudentController@storePhoto')->name("studentStore");
     route::resource('student', 'StudentController');
     route::resource('user', 'userController');
 

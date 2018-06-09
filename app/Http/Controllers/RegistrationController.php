@@ -81,7 +81,7 @@ class RegistrationController extends Controller
         $birthDate = Carbon::parse($student->birth_date);
         $age = Carbon::createFromDate($birthDate->year, $birthDate->month, $birthDate->day)->age;
         $year = settings::getPhotoYear();
-        $contents = Storage::url('/images/'.$year.'/'.$student->stamnr.'.jpg');
+        $contents = Storage::url('images/'.$year.'/'.$student->stamnr.'.jpg');
         return view('registration.edit',compact('student','age','payed','payedCount','contents'));
     }
 

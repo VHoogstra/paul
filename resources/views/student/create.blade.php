@@ -30,7 +30,7 @@
             <form method='post' action='{{route('student.store')}}' enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="form-group">
-                    <label for="exampleFormControlFile1">Example file input</label>
+                    <label for="exampleFormControlFile1">excel file van de administratie</label>
                     <input type="file" class="form-control-file " name='file' id="exampleFormControlFile1" multiple>
                 </div>
                 <button type="submit" class="btn btn-danger ">Upload</button>

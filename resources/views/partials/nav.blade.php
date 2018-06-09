@@ -56,7 +56,7 @@
                         <a href="{{route('student.create')}}">Update list</a>
                     </li>
                     <li>
-                        <a href="#">Update Photo's</a>
+                        <a href="{{route('student.index')}}">Update Photo's</a>
                     </li>
                 </ul>
             </li>

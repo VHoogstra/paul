@@ -17,6 +17,7 @@ settings
     * [ ] list pagina om leerlingen te uplaoden in csv/excel
         * [ ] log upload to database with who and the time
         * [x] loop over excel data ivm duplicaten
+    * [ ] fix redirect instead of reloading view on photoyear change
     * [ ] check if photo upload works correctly
 * [ ] check if login works with roles. doupt it atm
 * [ ] log als je gebruiker aanklikt (get)      
@@ -29,7 +30,7 @@ settings
  * [ ] email functionality 
  * [ ] telefoon ook mooi
 
-
+*[ ] save excel file uploaded as failsafe and log it
 
 default admin login <br>
 user admin@admin.nl<br>

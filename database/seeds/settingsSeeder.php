@@ -13,7 +13,13 @@ class settingsSeeder extends Seeder
     {
         DB::table('settings')->insert([
             'name' => "photoYear",
+            'value' => '17-18',
+        ],[
+            'name' => "drinkingAge",
             'value' => '18',
-        ]);   
+        ],[
+            'name' => "photoExtension",
+            'value' => 'jpg',
+        ]);
     }
 }

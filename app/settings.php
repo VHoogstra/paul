@@ -17,4 +17,9 @@ class settings extends Model
         }
         return $value;
     }
+
+    static public function updateYear($year)
+    {
+        DB::table('settings')->where("name", "=", "photoYear")->update(["value" => $year]);
+    }
 }

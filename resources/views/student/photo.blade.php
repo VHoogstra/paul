@@ -5,7 +5,7 @@
 </div>
 <hr>
 
-<form action="/student/storePhoto" class="dropzone" id="my-awesome-dropzone" enctype="multipart/form-data">
+<form action="{{route("studentStore")}}" class="dropzone" id="my-awesome-dropzone" enctype="multipart/form-data">
     {{ csrf_field() }}
     <div class="fallback">
         <input name="file" type="file" multiple />
@@ -14,14 +14,17 @@
 <small>plugin http://www.dropzonejs.com/</small>
 <hr>
 
-Huidige foto map jaar: {{$year}}<br><br>
-<form action="/student/storePhotoYear" method="post">
+Huidige foto map jaar: {{$year}}<p>Wil je naar een ander jaar uploaden? Verander het hieronder</p>
+<hr>
+<h2>Settings</h2>
+<form action="{{route("studentStoreYear")}}" method="post">
     {{ csrf_field() }}
     <div class="form-group">
         <label for="exampleInputEmail1">foldernaam</label>
         <input type="txt" class="form-control" name="year" aria-describedby="yearhelp" placeholder="jaar">
         <small id="yearhelp" class="form-text text-muted">De map word pas aangemaakt als je een foto upload. Een bestaande map gebruiken? Kies hieronder</small>
     </div>
+    <p> <b>OF</b></p>
     <div class="form-group">
         <select class="form-control" name="yearmulti">
             <option value="">geen</option>
