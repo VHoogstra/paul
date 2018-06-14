@@ -8,6 +8,7 @@ use App\settings;
 use Carbon\Carbon;
 use App\registration;
 use Illuminate\Http\Request;
+use App\Events\studentSearched;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -73,8 +74,8 @@ class RegistrationController extends Controller
             $payedCount = false;
 
         }else{
-            $payed = aanmeldingen::where('user_id','=',$id)->where('party_id','=',$activeParty->id)->get();
-            $payedCount = aanmeldingen::where('user_id','=',$id)->where('party_id','=',$activeParty->id)->count();
+            $payed = registration::where('user_id','=',$id)->where('party_id','=',$activeParty->id)->get();
+            $payedCount = registration::where('user_id','=',$id)->where('party_id','=',$activeParty->id)->count();
         }
 
         $student = student::find($id);
@@ -82,6 +83,7 @@ class RegistrationController extends Controller
         $age = Carbon::createFromDate($birthDate->year, $birthDate->month, $birthDate->day)->age;
         $year = settings::getPhotoYear();
         $contents = Storage::url('images/'.$year.'/'.$student->stamnr.'.jpg');
+        event(new studentSearched($student));
         return view('registration.edit',compact('student','age','payed','payedCount','contents'));
     }
 

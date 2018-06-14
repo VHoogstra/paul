@@ -1,7 +1,5 @@
 php artisan migrate:refresh --seed 
 ---
-php artisan db:seed
----
 settings
 ---
  - photoYear, default 18

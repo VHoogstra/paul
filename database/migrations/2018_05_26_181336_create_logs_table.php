@@ -17,7 +17,9 @@ class CreateLogsTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->integer('user_id');
-            $table->timestamp('loginTime')->useCurrent();
+            $table->String('category');
+            $table->String('info');
+            $table->String('var');
         });
     }
 
