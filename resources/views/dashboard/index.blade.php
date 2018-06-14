@@ -17,7 +17,7 @@
                     <div class="card-body-icon">
                         <i class="fa fa-fw fa-paper-plane"></i>
                     </div>
-                    <div class="mr-5">{{$inside}} Inside!</div>
+                    <div class="mr-5">{{$inside}} Binnen!</div>
                 </div>
                 <a class="card-footer text-white clearfix small z-1" href="/inside">
                     <span class="float-left">View Details</span>
@@ -33,7 +33,7 @@
                     <div class="card-body-icon">
                         <i class="fa fa-fw fa-list"></i>
                     </div>
-                    <div class="mr-5">{{$payed}} Payed!</div>
+                    <div class="mr-5">{{$payed}} Betaald!</div>
                 </div>
                 <a class="card-footer text-white clearfix small z-1" href="/payed">
                     <span class="float-left">View Details</span>
@@ -49,7 +49,7 @@
                     <div class="card-body-icon">
                         <i class="fa fa-fw fa-shopping-cart"></i>
                     </div>
-                    <div class="mr-5">{{$payedNInside}} Payed but not inside!</div>
+                    <div class="mr-5">{{$payedNInside}} Betaald maar niet binnen!</div>
                 </div>
                 <a class="card-footer text-white clearfix small z-1" href="/payedNinside">
                     <span class="float-left">View Details</span>

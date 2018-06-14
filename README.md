@@ -6,6 +6,7 @@ settings
 
 
 #todo
+priority admin panel and email function!!
  * [x] party
     * [x] show
     * [x] create
