@@ -2,7 +2,7 @@
 
     <div class="card-header">
         <i class="fa fa-table"></i> {{$student->first_name}} {{$student->middle_name}} {{$student->last_name}}
-        - {{$student->stamnr}}</div>
+        - {{$student->stamnr}} - {{$student->class}}</div>
     <div class="card-body">
         <div class='row'>
             <div class='col-sm-6'>

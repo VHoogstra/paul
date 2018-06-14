@@ -43,13 +43,13 @@ Route::middleware(['role:user', 'auth'])->group(function () {
     route::resource('student', 'StudentController');
     route::resource('user', 'userController');
 
-//
+    route::get('payedNinside', 'HomeController@payedninside');
+    route::get('payed', 'HomeController@payed');
+    route::get('inside', 'HomeController@inside');
+
+
 //    route::get('progress', 'studentController@progress');
-//    route::get('student/updateList', 'studentController@updateList');
-//    route::get('student/updatePhoto', 'studentController@updatePhoto');
-//
-//    route::post('student/storePhoto', 'studentController@storePhoto');
-//    route::post('student/storePhotoYear', 'studentController@storePhotoYear');
+
 //
 //    route::get('party/archive', 'partyController@archive');
 //
