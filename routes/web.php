@@ -18,16 +18,17 @@ Route::get('/notUser', function () {
 })->name('notUser');
 
 //role returned /notuser if u are not logged in or not the right user
-Route::middleware(['role:user','auth'])->group(function () {
+Route::middleware(['role:user', 'auth'])->group(function () {
 
     Route::resource('/', 'dashboardController');
     Route::resource('/dashboard', 'dashboardController');
     route::resource('/registering', 'RegistrationController');
 
-//    route::get('signIn/payed/{id}', 'sign_inController@payed');
-//    route::get('signIn/payedAndInside/{id}', 'sign_inController@payedAndInside');
-//    route::get('signIn/speciale/{id}', 'sign_inController@speciale');
-//    route::get('signIn/inside/{id}', 'sign_inController@inside');
+    route::get('registering/payed/{id}', 'RegistrationController@payed');
+    route::get('registering/reset/{id}', 'RegistrationController@reset');
+    route::get('registering/payedAndInside/{id}', 'RegistrationController@payedAndInside');
+    route::get('registering/speciale/{id}', 'RegistrationController@special');
+    route::get('registering/inside/{id}', 'RegistrationController@inside');
 
     route::resource('statistic', 'statisticController');
 
@@ -56,7 +57,6 @@ Route::middleware(['role:user','auth'])->group(function () {
 //    route::get('party/{id}/active', 'partyController@active');
 //    route::get('party/{id}/archive', 'partyController@setArchive');
 //    route::get('party/{id}/dearchive', 'partyController@deArchive');
-
 
 
 });

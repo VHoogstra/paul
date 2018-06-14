@@ -23,9 +23,9 @@ class dashboardController extends Controller
             $payed= 0;
             $payedNInside= 0;
         }else{
-            $inside = aanmeldingen::where('inside','=','1')->where('party_id','=',$activeParty->id)->count();
-            $payed = aanmeldingen::where('party_id','=',$activeParty->id)->where('payed','=','1')->orwhere('special','=','1')->count();
-            $payedNInside = aanmeldingen::where(function ($query) {
+            $inside = registration::where('inside','=','1')->where('party_id','=',$activeParty->id)->count();
+            $payed = registration::where('party_id','=',$activeParty->id)->where('payed','=','1')->orwhere('special','=','1')->count();
+            $payedNInside = registration::where(function ($query) {
                 $query->where('payed','=','1')
                     ->orwhere('special','=','1');
             })

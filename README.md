@@ -17,8 +17,8 @@ settings
         * [x] loop over excel data ivm duplicaten
     * [ ] fix redirect instead of reloading view on photoyear change
     * [ ] check if photo upload works correctly
-* [ ] check if login works with roles. doupt it atm
-* [ ] log als je gebruiker aanklikt (get)      
+* [x] check if login works with roles. doupt it atm
+* [x] log als je gebruiker aanklikt (get)      
   
 * [ ] statistic page
     * [ ] party personal page met grafieken (show function)
