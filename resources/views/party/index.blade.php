@@ -47,7 +47,7 @@
                                             <div class="btn-group">
                                                 <form action="{{route("party.destroy", ['id' =>$party->id])}}"
                                                       method="POST" class="btn-group">
-                                                    <button type="button" class="btn btn-danger">
+                                                    <button type="submit" class="btn btn-danger">
                                                         <i class="fa fa-trash-o"></i> Remove
                                                     </button>
 

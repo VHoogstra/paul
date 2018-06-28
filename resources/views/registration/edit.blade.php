@@ -1,8 +1,15 @@
 @extends('layouts.master') @section('content')
 
     <div class="card-header">
+
         <i class="fa fa-table"></i> {{$student->first_name}} {{$student->middle_name}} {{$student->last_name}}
-        - {{$student->stamnr}} - {{$student->class}}</div>
+        - {{$student->stamnr}} - {{$student->class}}
+        <a class="pull-right" href="{{route('registering.index')}}">
+            <span class="nav-link-text">back</span>
+            <i class="fa fa-chevron-right"></i>
+        </a>
+    </div>
+
     <div class="card-body">
         <div class='row'>
             <div class='col-sm-6'>
@@ -19,86 +26,136 @@
                 @if(session('error'))
                     <div class="alert alert-warning">{{session('error')}}</div>
                 @endif
-                <div class="btn-group" role="group" aria-label="Basic example">
+
+                <div>
                     @if($payedCount === false)
                         <div class="alert alert-danger" role="alert" style='width:100%;'>
                             <strong>Oh snap!</strong> no active party set!!
                         </div>
-                </div>
-                @else
-                    @if($payedCount == 0)
+                    @else
                         <a href="/registering/payed/{{$student->id}}">
-                            <button class="btn btn-primary ">betaald</button>
+                            @if($payedStatus)
+                                <button class="btn btn-primary btn-sm-block btn-block" style="margin-bottom: 10px;"
+                                > betaald
+                                </button>
+                            @else
+                                <button class="btn btn-primary btn-sm-block btn-block" style="margin-bottom: 10px;"
+                                        disabled>
+                                    betaald
+                                </button>
+                            @endif
                         </a>
-                        <a>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#error"
-                                    disabled>binnen
-                            </button>
+                        <a href="/registering/inside/{{$student->id}}">
+                            @if($insideStatus)
+                                <button type="button" class="btn btn-primary btn-block" style="margin-bottom: 10px;"
+                                >binnen
+                                </button>
+                            @else
+                                <button type="button" class="btn btn-primary btn-block" style="margin-bottom: 10px;"
+                                        disabled>binnen
+                                </button>
+                            @endif
+
                         </a>
+
                         <a href="/registering/speciale/{{$student->id}}">
-                            <button class="btn btn-primary ">speciaal</button>
+                            @if($payedStatus)
+
+                                <button class="btn btn-primary btn-block " style="margin-bottom: 10px;">speciaal
+                                </button>
+                            @else
+                                <button class="btn btn-primary btn-block " style="margin-bottom: 10px;" disabled>
+                                    speciaal
+                                </button>
+                            @endif
+
                         </a>
+                            <a href="/registering/payedAndInside/{{$student->id}}">
+                                @if($payedStatus)
+
+                                <button class="btn btn-warning btn-block " style="margin-bottom: 10px;">betaald en
+                                    binnen
+                                </button>
+                                    @else
+                                    <button class="btn btn-warning btn-block " style="margin-bottom: 10px;" disabled>betaald en
+                                        binnen
+                                    </button>
+                                @endif
+
+                            </a>
+
+
+                        {{--@if($payedCount == 0)--}}
+                        {{--<a href="/registering/payed/{{$student->id}}">--}}
+                        {{--<button class="btn btn-primary ">betaald</button>--}}
+                        {{--</a>--}}
+                        {{--<a>--}}
+                        {{--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#error"--}}
+                        {{--disabled>binnen--}}
+                        {{--</button>--}}
+                        {{--</a>--}}
+                        {{--<a href="/registering/speciale/{{$student->id}}">--}}
+                        {{--<button class="btn btn-primary ">speciaal</button>--}}
+                        {{--</a>--}}
+                        {{--<hr>--}}
+                        {{--<a href="/registering/payedAndInside/{{$student->id}}">--}}
+                        {{--<button class="btn btn-warning ">betaald en binnen</button>--}}
+                        {{--</a>--}}
+                        {{--@else--}}
+                        {{--@if($payed[0]->payed == 1 || $payed[0]->special == 1)<a>--}}
+                        {{--<button class="btn btn-primary" disabled>betaald</button>--}}
+                        {{--</a>--}}
+                        {{--@else <a href="/registering/payed/{{$student->id}}">--}}
+                        {{--<button class="btn btn-primary">betaald</button>--}}
+                        {{--</a> @endif--}}
+                        {{--@if($payed[0]->payed == 1 || $payed[0]->special == 1)--}}
+                        {{--@if($payed[0]->inside == 1)<a>--}}
+                        {{--<button class="btn btn-primary" disabled>binnen</button>--}}
+                        {{--</a>--}}
+                        {{--@else <a href="/registering/inside/{{$student->id}}">--}}
+                        {{--<button class="btn btn-primary ">binnen</button>--}}
+                        {{--</a>@endif--}}
+                        {{--@else--}}
+                        {{--<a>--}}
+                        {{--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#error">--}}
+                        {{--binnen--}}
+                        {{--</button>--}}
+                        {{--</a>--}}
+                        {{--@endif--}}
+                        {{--@if($payed[0]->special == 1 || $payed[0]->payed == 1)<a>--}}
+                        {{--<button class="btn btn-primary" disabled>speciaal</button>--}}
+                        {{--</a>--}}
+                        {{--@else<a href="/registering/speciale/{{$student->id}}">--}}
+                        {{--<button class="btn btn-primary ">speciaal</button>--}}
+                        {{--</a>@endif--}}
+                        {{--<br>--}}
+                        {{--@if($payed[0]->payed == 1 || $payed[0]->special == 1 || $payed[0]->inside == 1)--}}
+                        {{--<a>--}}
+                        {{--<button class="btn btn-warning" disabled>betaald en binnen</button>--}}
+                        {{--</a>--}}
+                        {{--@else--}}
+                        {{--<a href="/registering/payedAndInside/{{$student->id}}">--}}
+                        {{--<button class="btn btn-warning ">betaald en binnen</button>--}}
+                        {{--</a>--}}
+                        {{--@endif--}}
+                        {{--@endif--}}
+                    @endif
+                </div> {{--close button group--}}
+            </div>{{--close row--}}
+
+
+            <div class='col-sm-6'>
+                <img src="{{$contents}}" class="img-fluid">
             </div>
-            <br>
-            <a href="/registering/payedAndInside/{{$student->id}}">
-                <button class="btn btn-warning ">betaald en binnen</button>
-            </a>
-            @else
-                @if($payed[0]->payed == 1 || $payed[0]->special == 1)<a>
-                    <button class="btn btn-primary" disabled>betaald</button>
+            <div class='col-sm-12'>
+                <a href="/registering/reset/{{$student->id}}">
+                    <button class="btn btn-danger btn-block">reset!</button>
                 </a>
-                @else <a href="/registering/payed/{{$student->id}}">
-                    <button class="btn btn-primary">betaald</button>
-                </a> @endif
-
-                @if($payed[0]->payed == 1 || $payed[0]->special == 1)
-                    @if($payed[0]->inside == 1)<a>
-                        <button class="btn btn-primary" disabled>binnen</button>
-                    </a>
-                    @else <a href="/registering/inside/{{$student->id}}">
-                        <button class="btn btn-primary ">binnen</button>
-                    </a>@endif
-
-                @else
-                    <a>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#error">binnen
-                        </button>
-                    </a>
-                @endif
-
-                @if($payed[0]->special == 1 || $payed[0]->payed == 1)<a>
-                    <button class="btn btn-primary" disabled>speciaal</button>
-                </a>
-                @else<a href="/registering/speciale/{{$student->id}}">
-                    <button class="btn btn-primary ">speciaal</button>
-                </a>@endif
-
+            </div>
 
         </div>
-        <br>
-        @if($payed[0]->payed == 1 || $payed[0]->special == 1 || $payed[0]->inside == 1)
-            <a>
-                <button class="btn btn-warning" disabled>betaald en binnen</button>
-            </a>
-        @else
-            <a href="/registering/payedAndInside/{{$student->id}}">
-                <button class="btn btn-warning ">betaald en binnen</button>
-            </a>
-        @endif
-        @endif
-        @endif
-
-
     </div>
 
-    <div class='col-sm-6'>
-        <img src="{{$contents}}" class="img-fluid">
-    </div>
-    <hr>
-    <a href="/registering/reset/{{$student->id}}">
-        <button class="btn btn-danger btn-block">reset!</button>
-    </a>
-    </div>
 
     <!-- Modal -->
     <div class="modal fade" id="error" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"

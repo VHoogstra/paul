@@ -15,11 +15,11 @@
             </li>
 
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                <a class="nav-link" href="{{route('registering.index')}}">
+
+            </li><a class="nav-link" href="{{route('registering.index')}}">
                     <i class="fa fa-fw fa-paper-plane"></i>
                     <span class="nav-link-text">Student sign in</span>
                 </a>
-            </li>
 
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
                 <a class="nav-link" href="#">

@@ -95,8 +95,9 @@ class PartyController extends Controller
         $stop = new DateTime($party->stop_date);
         $stop =  $stop->format('Y-m-d')."T".$stop->format('h:i');
 
+
         return view("party.edit",compact('party','startsale',"start","stop"));
-    }//,"start","stop"
+    }
 
     /**
      * Update the specified resource in storage.
@@ -105,9 +106,19 @@ class PartyController extends Controller
      * @param  \App\party  $party
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, party $party)
+    public function update(Request $request,  $party)
     {
-        //
+        $party =  party::find($party);
+        $party->name =$request->name ;
+        $party->price =$request->price ;
+        $party->price_preSale =$request->price_presale ;
+        $party->price_speciale = $request->price_speciale;
+        $party->preSale_start =$request->presale_start ;
+        $party->start_date = $request->start_date;
+        $party->stop_date =$request->stop_date;
+        $party->save();
+        return redirect::route("party.index");
+
     }
 
     /**

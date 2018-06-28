@@ -24,7 +24,7 @@ class dashboardController extends Controller
             $payedNInside= 0;
         }else{
             $inside = registration::where('inside','=','1')->where('party_id','=',$activeParty->id)->count();
-   
+
             $payed = registration::where(function ($query) {
                 $query->where('payed','=','1')
                     ->orwhere('special','=','1');
