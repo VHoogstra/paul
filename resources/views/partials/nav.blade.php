@@ -1,12 +1,13 @@
 <!-- Nvincent_Hoogstra@live.nlavigation-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="{{route('dashboard.index')}}">{{ config('app.name', 'Laravel') }}</a>
+    <a class="navbar-brand" href="{{route('dashboard.index')}}">{{ config('app.name', 'Laravel') }}  </a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+            @if(Auth::user()->role >1)
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
                 <a class="nav-link" href="{{route('dashboard.index')}}">
                     <i class="fa fa-fw fa-dashboard"></i>
                     <span class="nav-link-text">Dashboard</span>
@@ -26,7 +27,8 @@
                     <span class="nav-link-text">Statistics</span>
                 </a>
             </li>
-
+@endif
+            @if(Auth::user()->role >2)
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
                 <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
                     <i class="fa fa-fw fa-calendar-o"></i>
@@ -44,7 +46,6 @@
                     </li>
                 </ul>
             </li>
-
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
                 <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
                     <i class="fa fa-fw fa-address-book-o"></i>
@@ -85,6 +86,8 @@
                     </li>
                 </ul>
             </li>
+            @endif
+
         </ul>
         <ul class="navbar-nav sidenav-toggler">
             <li class="nav-item">
