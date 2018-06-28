@@ -73,7 +73,7 @@
                         <a class="nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti2">Users</a>
                         <ul class="sidenav-third-level collapse" id="collapseMulti2">
                             <li>
-                                <a href="#">Show</a>
+                                <a href="{{route('user.index')}}">Show</a>
                             </li>
                             <li>
                                 <a href="#">Edit</a>

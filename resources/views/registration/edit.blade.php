@@ -73,6 +73,7 @@
                     <button class="btn btn-primary ">speciaal</button>
                 </a>@endif
 
+
         </div>
         <br>
         @if($payed[0]->payed == 1 || $payed[0]->special == 1 || $payed[0]->inside == 1)
@@ -86,16 +87,17 @@
         @endif
         @endif
         @endif
-        <hr>
-        <a href="/registering/reset/{{$student->id}}">
-            <button class="btn btn-danger btn-block">reset!</button>
-        </a>
+
 
     </div>
 
     <div class='col-sm-6'>
         <img src="{{$contents}}" class="img-fluid">
     </div>
+    <hr>
+    <a href="/registering/reset/{{$student->id}}">
+        <button class="btn btn-danger btn-block">reset!</button>
+    </a>
     </div>
 
     <!-- Modal -->

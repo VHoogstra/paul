@@ -20,6 +20,24 @@ class User extends Authenticatable
         'name', 'email', 'password',
     ];
 
+    public static function roleAll()
+    {
+        $users = DB::table('users')->select('users.name', 'users.email', 'user_roles.name as role','users.id')
+            ->leftJoin('user_roles', 'users.role', '=', 'user_roles.id')
+            ->get();
+        return $users;
+    }
+
+    public static function roleId($id)
+    {
+        $users = DB::table('users')->select('users.name', 'users.email', 'user_roles.name as role','users.id','users.role as role_id')
+            ->leftJoin('user_roles', 'users.role', '=', 'user_roles.id')
+            ->where('users.id','=',$id)
+            ->first();
+        return $users;
+    }
+
+
     /**
      * The attributes that should be hidden for arrays.
      *
