@@ -24,7 +24,14 @@ class dashboardController extends Controller
             $payedNInside= 0;
         }else{
             $inside = registration::where('inside','=','1')->where('party_id','=',$activeParty->id)->count();
-            $payed = registration::where('party_id','=',$activeParty->id)->where('payed','=','1')->orwhere('special','=','1')->count();
+   
+            $payed = registration::where(function ($query) {
+                $query->where('payed','=','1')
+                    ->orwhere('special','=','1');
+            })
+                ->where('party_id','=',$activeParty->id)
+                ->count();
+
             $payedNInside = registration::where(function ($query) {
                 $query->where('payed','=','1')
                     ->orwhere('special','=','1');
@@ -33,7 +40,6 @@ class dashboardController extends Controller
                 ->where('party_id','=',$activeParty->id)
                 ->count();
         }
-
 
         return view('dashboard.index',compact('activeParty','inside','payed','payedNInside'));
     }
