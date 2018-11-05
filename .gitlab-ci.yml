@@ -7,7 +7,7 @@ stages:
 
 build:
   stage: build
-  image: php:7-fpm
+  image: php:7.0
   script:
   - install_composer
   artifacts:
@@ -36,6 +36,25 @@ phpcs:
   - php vendor/bin/phpcs --error-severity=1 --warning-severity=8 --extensions=php --colors
 
 .before_script_bash: &before_script_bash |
+#!/bin/bash
+
+# We need to install dependencies only for Docker
+  [[ ! -e /.dockerenv ]] && exit 0
+
+  set -xe
+
+  # Install git (the php image doesn't have it) which is required by composer
+  apt-get update -yqq
+  apt-get install git -yqq
+
+  # Install phpunit, the tool that we will use for testing
+  curl --location --output /usr/local/bin/phpunit https://phar.phpunit.de/phpunit.phar
+  chmod +x /usr/local/bin/phpunit
+
+  # Install mysql driver
+  # Here you can install any other extension that you need
+  docker-php-ext-install pdo_mysql
+
   # DevOps variables and functions
   [[ "$TRACE" ]] && set -x
 
@@ -55,11 +74,7 @@ phpcs:
     && pecl install xdebug-2.6.0 \
     && docker-php-ext-enable xdebug
   }
-  function install_gd() {
-    apt-get update && \
-      apt-get install -y \
-      zlib1g-dev
-  }
+
 
 before_script:
 - docker-php-ext-install gd
