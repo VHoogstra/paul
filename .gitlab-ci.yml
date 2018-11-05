@@ -59,4 +59,4 @@ phpcs:
 
 before_script:
 - *before_script_bash
-- cp php.ini /usr/local/etc/php/conf.d/test.ini
+- cp conf.d/20-gd.ini /usr/local/etc/php/conf.d/gd_php.ini
