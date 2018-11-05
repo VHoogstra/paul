@@ -22,7 +22,7 @@ class User extends Authenticatable
 
     public static function roleAll()
     {
-        $users = DB::table('users')->select('users.name', 'users.email', 'user_roles.name as role','users.id')
+        $users = DB::table('users')->select('users.name', 'users.email', 'user_roles.name as role', 'users.id')
             ->leftJoin('user_roles', 'users.role', '=', 'user_roles.id')
             ->get();
         return $users;
@@ -30,9 +30,9 @@ class User extends Authenticatable
 
     public static function roleId($id)
     {
-        $users = DB::table('users')->select('users.name', 'users.email', 'user_roles.name as role','users.id','users.role as role_id')
+        $users = DB::table('users')->select('users.name', 'users.email', 'user_roles.name as role', 'users.id', 'users.role as role_id')
             ->leftJoin('user_roles', 'users.role', '=', 'user_roles.id')
-            ->where('users.id','=',$id)
+            ->where('users.id', '=', $id)
             ->first();
         return $users;
     }
@@ -46,18 +46,19 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-    static public function hasRole($role){
+    public static function hasRole($role)
+    {
         $user_id = Auth::id();
 
         $role= DB::table('user_roles')
-            ->where('name','=',$role)
+            ->where('name', '=', $role)
             ->get();
         $user =DB::table('users')
-            ->where('role','=',$role[0]->id)
+            ->where('role', '=', $role[0]->id)
             ->get();
-        if(count($user)==1){
+        if (count($user)==1) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }

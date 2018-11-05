@@ -23,7 +23,7 @@ class studentSearche
     /**
      * Handle the event.
      *
-     * @param  studentSearched  $event
+     * @param  studentSearched $event
      * @return void
      */
     public function handle(studentSearched $event)

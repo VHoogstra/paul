@@ -8,8 +8,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 
-
-
 class PartyController extends Controller
 {
     /**
@@ -20,8 +18,8 @@ class PartyController extends Controller
     public function index()
     {
         $partyActive = party::getActive();
-        $partys = party::all()->where('archive',0);
-        return view("party.index",compact("partyActive","partys"));
+        $partys = party::all()->where('archive', 0);
+        return view("party.index", compact("partyActive", "partys"));
     }
 
     /**
@@ -32,8 +30,8 @@ class PartyController extends Controller
     public function indexArchive()
     {
         $partyActive = party::getActive();
-        $partys = party::all()->where('archive',1);
-        return view("party.archive",compact("partyActive","partys"));
+        $partys = party::all()->where('archive', 1);
+        return view("party.archive", compact("partyActive", "partys"));
     }
 
     /**
@@ -44,13 +42,13 @@ class PartyController extends Controller
     public function create()
     {
         $today = date("YY-MM-DD");
-        return view("party.create",compact("today"));
+        return view("party.create", compact("today"));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -70,7 +68,7 @@ class PartyController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\party  $party
+     * @param  \App\party $party
      * @return \Illuminate\Http\Response
      */
     public function show(party $party)
@@ -81,7 +79,7 @@ class PartyController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\party  $party
+     * @param  \App\party $party
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -96,17 +94,17 @@ class PartyController extends Controller
         $stop =  $stop->format('Y-m-d')."T".$stop->format('h:i');
 
 
-        return view("party.edit",compact('party','startsale',"start","stop"));
+        return view("party.edit", compact('party', 'startsale', "start", "stop"));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\party  $party
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\party               $party
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,  $party)
+    public function update(Request $request, $party)
     {
         $party =  party::find($party);
         $party->name =$request->name ;
@@ -118,29 +116,28 @@ class PartyController extends Controller
         $party->stop_date =$request->stop_date;
         $party->save();
         return redirect::route("party.index");
-
     }
 
     /**
      * remove a party
      *
-     * @param $id
+     * @param  $id
      * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {
         Party::destroy($id);
         return redirect::route("party.index");
-
     }
 
     /**
      * set party to active and all other parties to not active
      *
-     * @param $id
+     * @param  $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function active($id){
+    public function active($id)
+    {
         $oldActive=  DB::table('parties')
             ->where('active', 1)
             ->update(['active' => 0]);
@@ -148,16 +145,16 @@ class PartyController extends Controller
         $party->active =1 ;
         $party->save();
         return redirect::route("party.index");
-
     }
 
     /**
      * archive a party and remove active
      *
-     * @param $id
+     * @param  $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function archive($id){
+    public function archive($id)
+    {
         $party = party::find($id);
         $party->archive =1 ;
         $party->active =0 ;
@@ -168,10 +165,11 @@ class PartyController extends Controller
     /**
      * dearchive party
      *
-     * @param $id
+     * @param  $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function dearchive($id){
+    public function dearchive($id)
+    {
         $party = party::find($id);
         $party->archive =0 ;
         $party->save();

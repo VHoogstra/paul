@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<ruleset name="DCS">
+    <description>paul styling</description>
+    <rule ref="PSR1"/>
+    <rule ref="PSR2"/>
+
+    <file>app/</file>
+    <file>tests/</file>
+
+    <exclude-pattern>vendor</exclude-pattern>
+    <exclude-pattern>tests/_*</exclude-pattern>
+</ruleset>

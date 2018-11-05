@@ -30,7 +30,7 @@ class SettingsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -41,7 +41,7 @@ class SettingsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\settings  $settings
+     * @param  \App\settings $settings
      * @return \Illuminate\Http\Response
      */
     public function show(settings $settings)
@@ -52,7 +52,7 @@ class SettingsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\settings  $settings
+     * @param  \App\settings $settings
      * @return \Illuminate\Http\Response
      */
     public function edit(settings $settings)
@@ -63,8 +63,8 @@ class SettingsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\settings  $settings
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\settings            $settings
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, settings $settings)
@@ -75,7 +75,7 @@ class SettingsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\settings  $settings
+     * @param  \App\settings $settings
      * @return \Illuminate\Http\Response
      */
     public function destroy(settings $settings)
