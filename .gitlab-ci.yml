@@ -1,4 +1,4 @@
-image: composer
+image: php:7-fpm
 
 stages:
 - build
@@ -7,7 +7,7 @@ stages:
 
 build:
   stage: build
-  image: composer
+  image: php:7-fpm
   script:
   - install_composer
   artifacts:
@@ -16,7 +16,7 @@ build:
 
 unit_test:
   stage: test
-  image: php:7.2-fpm-alpine
+  image: php:7-fpm
   script:
   - php vendor/bin/codecept run unit --colors
 
