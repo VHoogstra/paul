@@ -59,6 +59,6 @@ phpcs:
 
 
 before_script:
-- bash ci/docker_install.sh > /dev/null
+- bash docker_install.sh > /dev/null
 
 
