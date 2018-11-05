@@ -7,7 +7,7 @@ stages:
 
 build:
   stage: build
-  image: php:7.0
+  image: php:7.1
   script:
   - install_composer
   artifacts:
@@ -16,7 +16,7 @@ build:
 
 unit_test:
   stage: test
-  image: php:7-fpm
+  image: php:7.1
   script:
   - php vendor/bin/codecept run unit --colors
 
