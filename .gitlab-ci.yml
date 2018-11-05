@@ -57,7 +57,6 @@ phpcs:
   }
 
 before_script:
-- apt-get install php7.0-gd
 - *before_script_bash
 
 
