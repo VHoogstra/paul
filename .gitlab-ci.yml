@@ -58,6 +58,5 @@ phpcs:
 
 before_script:
 - *before_script_bash
-- docker-php-ext-install pdo_mysql
-- sudo apt-get install php7.0-gd
+- docker-php-ext-install php7.0-gd
 
