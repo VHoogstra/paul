@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class settings extends Model
 {
-    static public function getPhotoYear()
+    public static function getPhotoYear()
     {
         $year = DB::table('settings')->select("value")->where("name", "=", "photoYear")->first();
         if (!$year) {
@@ -18,7 +18,7 @@ class settings extends Model
         return $value;
     }
 
-    static public function updateYear($year)
+    public static function updateYear($year)
     {
         DB::table('settings')->where("name", "=", "photoYear")->update(["value" => $year]);
     }
