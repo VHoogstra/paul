@@ -41,14 +41,14 @@ phpcs:
 
   # Install composer and install project dependencies
   function install_composer() {
+  sudo apt-get install php7.0-gd
+
     # Install composer
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
     # Install all project dependencies
     composer install
-  sudo apt-get install php7.0-gd
-  sudo apt-get install php7.0-intl
-  sudo apt-get install php7.0-xsl
+
   }
 
   function install_xdebug() {
