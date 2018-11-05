@@ -58,5 +58,6 @@ before_script:
 - *before_script_bash
 - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 - composer install
+- php --ini
 
 
