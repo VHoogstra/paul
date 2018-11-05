@@ -1,0 +1,84 @@
+image: php:7.2-fpm-alpine
+
+stages:
+  - build
+  - test
+  - quality
+
+build:
+  stage: build
+  image: php:7.2-fpm-alpine
+  script:
+  - install_composer
+  artifacts:
+    paths:
+    - ./vendor/*
+
+unit_test:
+  stage: test
+  image: php:7.2-fpm-alpine
+  script:
+  - php vendor/bin/codecept run unit --colors
+
+coverage:
+  stage: quality
+  script:
+  - install_xdebug
+  - php vendor/bin/codecept run unit --coverage --coverage-html
+  artifacts:
+    paths:
+    - ./tests/_output/coverage/*
+
+phpcs:
+  stage: quality
+  allow_failure: true
+  script:
+  - php vendor/bin/phpcs --error-severity=1 --warning-severity=8 --extensions=php --colors
+
+code_quality:
+  stage: quality
+  image: docker:stable
+  variables:
+    DOCKER_DRIVER: overlay2
+  allow_failure: true
+  services:
+  - docker:stable-dind
+  script:
+  - setup_docker
+  - export SP_VERSION=$(echo "$CI_SERVER_VERSION" | sed 's/^\([0-9]*\)\.\([0-9]*\).*/\1-\2-stable/')
+  - docker run
+      --env SOURCE_CODE="$PWD"
+      --volume "$PWD":/code
+      --volume /var/run/docker.sock:/var/run/docker.sock
+      "registry.gitlab.com/gitlab-org/security-products/codequality:$SP_VERSION" /code
+  artifacts:
+    paths: [gl-code-quality-report.json]
+
+.before_script_bash: &before_script_bash |
+  # DevOps variables and functions
+  [[ "$TRACE" ]] && set -x
+
+  # Install composer and install project dependencies
+  function install_composer() {
+    # Install composer
+    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+    # Install all project dependencies
+    composer install
+  }
+
+  function install_xdebug() {
+    apk add --no-cache --virtual .phpize-deps $PHPIZE_DEPS \
+    && pecl install xdebug-2.6.0 \
+    && docker-php-ext-enable xdebug
+  }
+
+  function setup_docker() {
+    if ! docker info &>/dev/null; then
+      if [ -z "$DOCKER_HOST" -a "$KUBERNETES_PORT" ]; then
+        export DOCKER_HOST='tcp://localhost:2375'
+      fi
+    fi
+  }
+before_script:
+- *before_script_bash
