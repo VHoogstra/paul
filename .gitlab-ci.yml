@@ -46,6 +46,7 @@ phpcs:
 
     # Install all project dependencies
     composer install
+  sudo apt-get install php7.0-gd
   sudo apt-get install php7.0-intl
   sudo apt-get install php7.0-xsl
   }
