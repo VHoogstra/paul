@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\log;
+use App\Log;
 use Illuminate\Http\Request;
 
 class LogController extends Controller
@@ -41,10 +41,10 @@ class LogController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\log $log
+     * @param  \App\Log $log
      * @return \Illuminate\Http\Response
      */
-    public function show(log $log)
+    public function show(Log $log)
     {
         //
     }
@@ -52,10 +52,10 @@ class LogController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\log $log
+     * @param  \App\Log $log
      * @return \Illuminate\Http\Response
      */
-    public function edit(log $log)
+    public function edit(Log $log)
     {
         //
     }
@@ -64,10 +64,10 @@ class LogController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  \App\log                 $log
+     * @param  \App\Log                 $log
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, log $log)
+    public function update(Request $request, Log $log)
     {
         //
     }
@@ -75,10 +75,10 @@ class LogController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\log $log
+     * @param  \App\Log $log
      * @return \Illuminate\Http\Response
      */
-    public function destroy(log $log)
+    public function destroy(Log $log)
     {
         //
     }

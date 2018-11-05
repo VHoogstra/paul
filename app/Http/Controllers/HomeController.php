@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\party;
-use App\registration;
+use App\Party;
+use App\Registration;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -26,24 +26,24 @@ class HomeController extends Controller
     public function payedninside()
     {
         $location = 'Betaald en Binnen';
-        $activeParty = party::getActive();
-        $students = registration::payedNinsde($activeParty->id);
+        $activeParty = Party::getActive();
+        $students = Registration::payedNinsde($activeParty->id);
         return view('home', compact('students', 'location', 'activeParty'));
     }
 
     public function inside()
     {
         $location = 'Binnen';
-        $activeParty = party::getActive();
-        $students = registration::insideUsers($activeParty->id);
+        $activeParty = Party::getActive();
+        $students = Registration::insideUsers($activeParty->id);
         return view('home', compact('students', 'location', 'activeParty'));
     }
 
     public function payed()
     {
         $location = 'Betaald';
-        $activeParty = party::getActive();
-        $students = registration::payedUsers($activeParty->id);
+        $activeParty = Party::getActive();
+        $students = Registration::payedUsers($activeParty->id);
         return view('home', compact('students', 'location', 'activeParty'));
     }
 }

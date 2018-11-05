@@ -4,9 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class party extends Model
+class Party extends Model
 {
-
+    /**
+     * @return mixed
+     */
     public static function getArchive()
     {
         $users = DB::table('party')
@@ -15,31 +17,42 @@ class party extends Model
         return $users;
     }
 
+    /**
+     * @return array
+     */
     public static function getActive()
     {
-        $party = party::where('active', 1)->first();
-        $partycount = party::where('active', 1)->count();
+        $party = self::where('active', 1)->first();
+        $partycount = self::where('active', 1)->count();
 
-        if ($partycount == 0) {
+        if ($partycount === 0) {
             return false;
-        } else {
-            return $party;
-        };
+        }
+
+        return $party;
     }
 
-    public static function setActive($id)
+    /**
+     * @param $id
+     */
+    public static function setActive($id): void
     {
-        $users = DB::table('party')
+        DB::table('party')
             ->where('active', '=', '1')
             ->update(['active' => 0]);
 
-        $users = DB::table('party')
+        DB::table('party')
             ->where('id', '=', $id)
             ->update(['active' => 1]);
     }
-    public static function setArchive($id, $status)
+
+    /**
+     * @param $id
+     * @param $status
+     */
+    public static function setArchive($id, $status): void
     {
-        $users = DB::table('party')
+        DB::table('party')
             ->where('id', '=', $id)
             ->update(['archive' => $status]);
     }

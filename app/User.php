@@ -17,9 +17,23 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name',
+        'email',
+        'password',
+    ];
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'password',
+        'remember_token',
     ];
 
+    /**
+     * @return \Illuminate\Support\Collection
+     */
     public static function roleAll()
     {
         $users = DB::table('users')->select('users.name', 'users.email', 'user_roles.name as role', 'users.id')
@@ -28,38 +42,39 @@ class User extends Authenticatable
         return $users;
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Query\Builder|null|object
+     */
     public static function roleId($id)
     {
-        $users = DB::table('users')->select('users.name', 'users.email', 'user_roles.name as role', 'users.id', 'users.role as role_id')
+        $users = DB::table('users')->select(
+            'users.name',
+            'users.email',
+            'user_roles.name as role',
+            'users.id',
+            'users.role as role_id'
+        )
             ->leftJoin('user_roles', 'users.role', '=', 'user_roles.id')
             ->where('users.id', '=', $id)
             ->first();
         return $users;
     }
 
-
     /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
+     * @param $role
+     * @return bool
      */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
     public static function hasRole($role)
     {
         $user_id = Auth::id();
 
-        $role= DB::table('user_roles')
+        $role = DB::table('user_roles')
             ->where('name', '=', $role)
             ->get();
-        $user =DB::table('users')
+        $user = DB::table('users')
             ->where('role', '=', $role[0]->id)
             ->get();
-        if (count($user)==1) {
-            return true;
-        } else {
-            return false;
-        }
+        return count($user) === 1;
     }
 }

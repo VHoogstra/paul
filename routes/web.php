@@ -21,8 +21,8 @@ Route::get('/notUser', function () {
 Route::middleware(['role:1', 'auth'])->group(function () {
 });
 Route::middleware(['role:2', 'auth'])->group(function () {
-    Route::resource('/', 'dashboardController');
-    Route::resource('/dashboard', 'dashboardController');
+    Route::resource('/', 'DashboardController');
+    Route::resource('/dashboard', 'DashboardController');
     route::resource('/registering', 'RegistrationController');
 
     route::get('registering/payed/{id}', 'RegistrationController@payed');
@@ -30,7 +30,7 @@ Route::middleware(['role:2', 'auth'])->group(function () {
     route::get('registering/payedAndInside/{id}', 'RegistrationController@payedAndInside');
     route::get('registering/speciale/{id}', 'RegistrationController@special');
     route::get('registering/inside/{id}', 'RegistrationController@inside');
-    route::resource('statistic', 'statisticController');
+    route::resource('statistic', 'StatisticController');
     route::resource('student', 'StudentController');
     route::get('payedNinside', 'HomeController@payedninside');
     route::get('payed', 'HomeController@payed');
@@ -38,13 +38,13 @@ Route::middleware(['role:2', 'auth'])->group(function () {
 });
 
 Route::middleware(['role:3', 'auth'])->group(function () {
-    route::get('party/archived', 'partyController@indexArchive')->name("party.indexArchive");
-    route::get('party/active/{id}', 'partyController@active')->name("party.active");
-    route::get('party/archive/{id}', 'partyController@archive')->name("party.archive");
-    route::get('party/dearchive/{id}', 'partyController@dearchive')->name("party.dearchive");
+    route::get('party/archived', 'PartyController@indexArchive')->name("party.indexArchive");
+    route::get('party/active/{id}', 'PartyController@active')->name("party.active");
+    route::get('party/archive/{id}', 'PartyController@archive')->name("party.archive");
+    route::get('party/dearchive/{id}', 'PartyController@dearchive')->name("party.dearchive");
     route::resource('party', 'partyController');
     route::post('student/storePhotoYear', 'StudentController@storePhotoYear')->name("studentStoreYear");
     route::post('student/storePhoto', 'StudentController@storePhoto')->name("studentStore");
-    route::resource('user', 'userController');
+    route::resource('user', 'UserController');
 
 });

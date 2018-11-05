@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\student;
-use App\settings;
+use App\Student;
+use App\Settings;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Storage;
@@ -19,13 +19,14 @@ class StudentController extends Controller
     public function index()
     {
 
-        $year = settings::getPhotoYear();
-        $directories = Storage::directories("/public/images/");
-        for ($i = 0; $i < count($directories); $i++) {
-            $directories[$i] = str_replace("public/images/", " ", $directories[$i]);
+        $year = Settings::getPhotoYear();
+        $directories = Storage::directories('/public/images/');
+        $directoriesLength = count($directories);
+        for ($i = 0; $i < $directoriesLength; $i++) {
+            $directories[$i] = str_replace('public/images/', ' ', $directories[$i]);
         }
 
-        $error = "";
+        $error = '';
 
         //$year = DB::table('settings')->where('name', 'photoYear')->first()->value;
         return view('student.photo', compact('year', 'directories', 'error'));
@@ -38,21 +39,21 @@ class StudentController extends Controller
      */
     public function create()
     {
-        $studentCount = student::all()->count();
+        $studentCount = Student::all()->count();
         return view('student.create', compact('studentCount'));
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \PhpOffice\PhpSpreadsheet\Exception
+     * @throws \PhpOffice\PhpSpreadsheet\Reader\Exception
      */
     public function store(Request $request)
     {
         //https://phpspreadsheet.readthedocs.io/en/develop/search.html?q=date
 
-        $destination = "/public/tmp/";
+        $destination = '/public/tmp/';
         $file = Input::file('file');
 
         $returnDateType = \PhpOffice\PhpSpreadsheet\Calculation\Functions::RETURNDATE_PHP_OBJECT;
@@ -60,8 +61,8 @@ class StudentController extends Controller
         $inputFileName = $file;
 
         /**
- * Load $inputFileName to a Spreadsheet Object
-**/
+         * Load $inputFileName to a Spreadsheet Object
+         **/
         $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($inputFileName);
         $A = strtolower($spreadsheet->getActiveSheet()->getCell('A1')->getValue());
         $B = strtolower($spreadsheet->getActiveSheet()->getCell('B1')->getValue());
@@ -74,35 +75,35 @@ class StudentController extends Controller
         $I = strtolower($spreadsheet->getActiveSheet()->getCell('I1')->getValue());
         //check for errors. are all the headers correct? send error message
         $error = [];
-        if ($A != 'stamnr') {
-            array_push($error, "colom A1 is niet gelijk aan Stamnr");
+        if ($A !== 'stamnr') {
+            $error[] = 'colom A1 is niet gelijk aan Stamnr';
         }
-        if ($B != 'klas') {
-            array_push($error, "colom B1 is niet gelijk aan klas");
+        if ($B !== 'klas') {
+            $error[] = 'colom B1 is niet gelijk aan klas';
         }
-        if ($C != 'roepnaam') {
-            array_push($error, "colom C1 is niet gelijk aan roepnaam");
+        if ($C !== 'roepnaam') {
+            $error[] = 'colom C1 is niet gelijk aan roepnaam';
         }
-        if ($D != 'tussenv') {
-            array_push($error, "colom D1 is niet gelijk aan tussenv)");
+        if ($D !== 'tussenv') {
+            $error[] = 'colom D1 is niet gelijk aan tussenv)';
         }
-        if ($E != 'achternaam') {
-            array_push($error, "colom E1 is niet gelijk aan achternaam");
+        if ($E !== 'achternaam') {
+            $error[] = 'colom E1 is niet gelijk aan achternaam';
         }
-        if ($F != 'woonplaats') {
-            array_push($error, "colom F1 is niet gelijk aan woonplaats");
+        if ($F !== 'woonplaats') {
+            $error[] = 'colom F1 is niet gelijk aan woonplaats';
         }
-        if ($G != 'adres') {
-            array_push($error, "colom G1 is niet gelijk aan adres");
+        if ($G !== 'adres') {
+            $error[] = 'colom G1 is niet gelijk aan adres';
         }
-        if ($H != 'telefoon') {
-            array_push($error, "colom H1 is niet gelijk aan telefoon");
+        if ($H !== 'telefoon') {
+            $error[] = 'colom H1 is niet gelijk aan telefoon';
         }
-        if ($I != 'geboortedatum') {
-            array_push($error, "colom I1 is niet gelijk aan geboortedatum");
+        if ($I !== 'geboortedatum') {
+            $error[] = 'colom I1 is niet gelijk aan geboortedatum';
         }
 
-        if (count($error) != 0) {
+        if (count($error) !== 0) {
             return redirect::back()->with('error', $error);
         }
 
@@ -115,16 +116,16 @@ class StudentController extends Controller
             // By default, only cells that have a value
             //    set will be iterated.
             $i = 1;
-            if ($p != 0) {
+            if ($p !== 0) {
                 $duplicate = false;
                 foreach ($cellIterator as $cell) {
                     if ($cell->getValue()) {
                         switch ($i) {
                             case 1:
-                                if (student::where('stamnr', $cell->getValue())->count() == 1) {
+                                if (Student::where('stamnr', $cell->getValue())->count() === 1) {
                                     $duplicate = true;
                                 } else {
-                                    $student = new student;
+                                    $student = new Student;
                                     $student->stamnr = $cell->getValue();
                                 };
 
@@ -186,16 +187,15 @@ class StudentController extends Controller
     }
 
 
-
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\student $student
+     * @param  \App\Student $student
      * @return \Illuminate\Http\Response
      */
-    public function destroy(student $student)
+    public function destroy(Student $student)
     {
-        student::truncate();
+        Student::truncate();
         return redirect::back();
     }
 
@@ -203,37 +203,38 @@ class StudentController extends Controller
     {
         $yearmulti = $request->input('yearmulti');
         $year = $request->input('year');
-        if (is_null($yearmulti)) {
-            if (is_null($year)) {
-                $error = "no thingy thing";
+        if ($yearmulti === null) {
+            if ($year === null) {
+                $error = 'no thingy thing';
             } else {
-                settings::updateYear($year);
-                $error = "succes ";
+                Settings::updateYear($year);
+                $error = 'succes ';
             }
         } else {
-            if (is_null($yearmulti)) {
-                $error = "no thingy thing";
+            if ($yearmulti === null) {
+                $error = 'no thingy thing';
             } else {
-                settings::updateYear($yearmulti);
-                $error = "succes ";
+                Settings::updateYear($yearmulti);
+                $error = 'succes ';
             }
         }
 
-        $year = settings::getPhotoYear();
-        $directories = Storage::directories("/public/images/");
-        for ($i = 0; $i < count($directories); $i++) {
-            $directories[$i] = str_replace("public/images/", "", $directories[$i]);
+        $year = Settings::getPhotoYear();
+        $directories = Storage::directories('/public/images/');
+        $directoriesLength = count($directories);
+        for ($i = 0; $i < $directoriesLength; $i++) {
+            $directories[$i] = str_replace('public/images/', '', $directories[$i]);
         }
-        return view('student.photo', compact('year', "directories", 'error'));
+        return view('student.photo', compact('year', 'directories', 'error'));
 
 
         ///settings::updateYear(6);
     }
 
-    public function storePhoto(Request $request)
+    public function storePhoto(Request $request):void
     {
-        $year = settings::getPhotoYear();
-        $destination = "/public/images/" . $year;
+        $year = Settings::getPhotoYear();
+        $destination = '/public/images/' . $year;
         $file = Input::file('file');
         Storage::putFileAs($destination, $file, $file->getClientOriginalName());
     }
