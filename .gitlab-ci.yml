@@ -1,4 +1,4 @@
-image: php:7.2-fpm-alpine
+image: composer
 
 stages:
 - build
@@ -7,7 +7,7 @@ stages:
 
 build:
   stage: build
-  image: php:7.2-fpm-alpine
+  image: composer
   script:
   - install_composer
   artifacts:
