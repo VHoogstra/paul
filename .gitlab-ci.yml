@@ -41,7 +41,6 @@ phpcs:
 
   # Install composer and install project dependencies
   function install_composer() {
-  apt-get install php7.0-gd
 
     # Install composer
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
