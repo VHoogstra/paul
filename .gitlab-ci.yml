@@ -46,6 +46,8 @@ phpcs:
 
     # Install all project dependencies
     composer install
+  sudo apt-get install php7.0-intl
+  sudo apt-get install php7.0-xsl
   }
 
   function install_xdebug() {
@@ -55,9 +57,8 @@ phpcs:
   }
 
 before_script:
+- docker-php-ext-install zip
+- docker-php-ext-install gd
 - *before_script_bash
-- curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-- composer install
-- php --ini
 
 
