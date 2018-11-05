@@ -57,8 +57,7 @@ phpcs:
   }
 
 before_script:
-- docker-php-ext-install zip
-- docker-php-ext-install gd
+- apt-get install php7.0-gd
 - *before_script_bash
 
 
