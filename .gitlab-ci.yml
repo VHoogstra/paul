@@ -9,7 +9,6 @@ build:
   stage: build
   image: php:7.1
   script:
-  - install_composer
   artifacts:
     paths:
     - ./vendor/*
@@ -60,5 +59,6 @@ phpcs:
 
 before_script:
 - bash docker_install.sh > /dev/null
+- *before_script_bash
 
 
