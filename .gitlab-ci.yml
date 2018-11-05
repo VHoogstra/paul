@@ -58,7 +58,6 @@ phpcs:
 
 before_script:
 - *before_script_bash
-- docker-php-ext-install libpng
 - docker-php-ext-install zip
 - docker-php-ext-install gd
 
