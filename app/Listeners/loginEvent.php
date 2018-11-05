@@ -31,8 +31,8 @@ class loginEvent
         $log = new log();
         $log->user_id = $event->user->id;
         $log->category = 'logon';
-        $log->info = $event->user->email. ' logged in at '. \Carbon\Carbon::now() . ' from: '.app('request')->ip() ;
-        $log->var = app('request')->ip() ;
+        $log->info = $event->user->email. ' logged in at '. \Carbon\Carbon::now() . ' from: '.app('request')->ip();
+        $log->var = app('request')->ip();
         $log->save();
     }
 }

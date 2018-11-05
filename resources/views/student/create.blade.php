@@ -24,7 +24,7 @@
     <h4>
         {{$studentCount}} studenten in het systeem <small>(dit getal kan anders zijn dan het aantal excel rijen ivm duplicaten)</small>
     </h4>
-    <div class="container" style="margin:0px;">
+    <div class="container" style="margin:0;">
         <div class="row">
         <div class="col-6">
             <form method='post' action='{{route('student.store')}}' enctype="multipart/form-data">

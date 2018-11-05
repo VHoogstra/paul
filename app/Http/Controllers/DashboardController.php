@@ -18,30 +18,34 @@ class dashboardController extends Controller
     {
         $activeParty = party::getActive();
         $role = User::hasRole('user');
-        if($activeParty==false){
+        if ($activeParty==false) {
             $inside= 0;
             $payed= 0;
             $payedNInside= 0;
-        }else{
-            $inside = registration::where('inside','=','1')->where('party_id','=',$activeParty->id)->count();
+        } else {
+            $inside = registration::where('inside', '=', '1')->where('party_id', '=', $activeParty->id)->count();
 
-            $payed = registration::where(function ($query) {
-                $query->where('payed','=','1')
-                    ->orwhere('special','=','1');
-            })
-                ->where('party_id','=',$activeParty->id)
+            $payed = registration::where(
+                function ($query) {
+                    $query->where('payed', '=', '1')
+                        ->orwhere('special', '=', '1');
+                }
+            )
+                ->where('party_id', '=', $activeParty->id)
                 ->count();
 
-            $payedNInside = registration::where(function ($query) {
-                $query->where('payed','=','1')
-                    ->orwhere('special','=','1');
-            })
-                ->where('inside','=','0')
-                ->where('party_id','=',$activeParty->id)
+            $payedNInside = registration::where(
+                function ($query) {
+                    $query->where('payed', '=', '1')
+                        ->orwhere('special', '=', '1');
+                }
+            )
+                ->where('inside', '=', '0')
+                ->where('party_id', '=', $activeParty->id)
                 ->count();
         }
 
-        return view('dashboard.index',compact('activeParty','inside','payed','payedNInside'));
+        return view('dashboard.index', compact('activeParty', 'inside', 'payed', 'payedNInside'));
     }
 
     /**
@@ -57,7 +61,7 @@ class dashboardController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -68,7 +72,7 @@ class dashboardController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -79,7 +83,7 @@ class dashboardController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -90,8 +94,8 @@ class dashboardController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int                      $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -102,7 +106,7 @@ class dashboardController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

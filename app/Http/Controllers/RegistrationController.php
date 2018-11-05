@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 use App\Events\studentSearched;
 use Illuminate\Support\Facades\Storage;
 
-
 class RegistrationController extends Controller
 {
     /**
@@ -62,7 +61,7 @@ class RegistrationController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param   $id
+     * @param  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -71,7 +70,6 @@ class RegistrationController extends Controller
         if (!$activeParty) {
             $payed = false;
             $payedCount = false;
-
         } else {
             $payed = registration::where('user_id', '=', $id)->where('party_id', '=', $activeParty->id)->first();
             $payedCount = registration::where('user_id', '=', $id)->where('party_id', '=', $activeParty->id)->count();
@@ -103,7 +101,7 @@ class RegistrationController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  \App\registration $registration
+     * @param  \App\registration        $registration
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, registration $registration)
@@ -158,7 +156,8 @@ class RegistrationController extends Controller
                 return back()->with('error', "not payed!");
             }
         }
-        return back()->with('error', "success!");;
+        return back()->with('error', "success!");
+        ;
     }
 
     public function special($id)
@@ -212,6 +211,7 @@ class RegistrationController extends Controller
             $registration->special = 0;
             $registration->save();
         }
-        return back()->with('error', "success!");;
+        return back()->with('error', "success!");
+        ;
     }
 }

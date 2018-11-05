@@ -23,14 +23,12 @@ class StudentController extends Controller
         $directories = Storage::directories("/public/images/");
         for ($i = 0; $i < count($directories); $i++) {
             $directories[$i] = str_replace("public/images/", " ", $directories[$i]);
-
         }
 
         $error = "";
 
         //$year = DB::table('settings')->where('name', 'photoYear')->first()->value;
-        return view('student.photo', compact('year', 'directories','error'));
-
+        return view('student.photo', compact('year', 'directories', 'error'));
     }
 
     /**
@@ -61,7 +59,9 @@ class StudentController extends Controller
         \PhpOffice\PhpSpreadsheet\Calculation\Functions::setReturnDateType($returnDateType);
         $inputFileName = $file;
 
-        /** Load $inputFileName to a Spreadsheet Object  **/
+        /**
+ * Load $inputFileName to a Spreadsheet Object
+**/
         $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($inputFileName);
         $A = strtolower($spreadsheet->getActiveSheet()->getCell('A1')->getValue());
         $B = strtolower($spreadsheet->getActiveSheet()->getCell('B1')->getValue());
@@ -109,9 +109,8 @@ class StudentController extends Controller
         $worksheet = $spreadsheet->getActiveSheet();
         $p = 0;
         foreach ($worksheet->getRowIterator() as $row) {
-
             $cellIterator = $row->getCellIterator();
-            $cellIterator->setIterateOnlyExistingCells(FALSE); // This loops through all cells,
+            $cellIterator->setIterateOnlyExistingCells(false); // This loops through all cells,
             //    even if a cell value is not set.
             // By default, only cells that have a value
             //    set will be iterated.
@@ -224,7 +223,6 @@ class StudentController extends Controller
         $directories = Storage::directories("/public/images/");
         for ($i = 0; $i < count($directories); $i++) {
             $directories[$i] = str_replace("public/images/", "", $directories[$i]);
-
         }
         return view('student.photo', compact('year', "directories", 'error'));
 
@@ -239,5 +237,4 @@ class StudentController extends Controller
         $file = Input::file('file');
         Storage::putFileAs($destination, $file, $file->getClientOriginalName());
     }
-
 }

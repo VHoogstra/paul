@@ -7,7 +7,6 @@ use App\user_role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
-
 class userController extends Controller
 {
     /**
@@ -18,7 +17,7 @@ class userController extends Controller
     public function index()
     {
         $users = user::roleAll();
-        return view('user.index',compact('users'));
+        return view('user.index', compact('users'));
     }
 
     /**
@@ -34,7 +33,7 @@ class userController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -45,7 +44,7 @@ class userController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -56,21 +55,21 @@ class userController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         $users = user::roleId($id);
-    $roles = user_role::all();
-        return view('user.edit',compact('users','roles'));
+        $roles = user_role::all();
+        return view('user.edit', compact('users', 'roles'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int                      $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -84,7 +83,7 @@ class userController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

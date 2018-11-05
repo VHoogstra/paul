@@ -28,7 +28,7 @@ class HomeController extends Controller
         $location = 'Betaald en Binnen';
         $activeParty = party::getActive();
         $students = registration::payedNinsde($activeParty->id);
-        return view('home',compact('students','location','activeParty'));
+        return view('home', compact('students', 'location', 'activeParty'));
     }
 
     public function inside()
@@ -36,7 +36,7 @@ class HomeController extends Controller
         $location = 'Binnen';
         $activeParty = party::getActive();
         $students = registration::insideUsers($activeParty->id);
-        return view('home',compact('students','location','activeParty'));
+        return view('home', compact('students', 'location', 'activeParty'));
     }
 
     public function payed()
@@ -44,6 +44,6 @@ class HomeController extends Controller
         $location = 'Betaald';
         $activeParty = party::getActive();
         $students = registration::payedUsers($activeParty->id);
-        return view('home',compact('students','location','activeParty'));
+        return view('home', compact('students', 'location', 'activeParty'));
     }
 }
