@@ -57,6 +57,7 @@ phpcs:
   }
 
 before_script:
+- docker-php-ext-install dg
 - *before_script_bash
 
 
