@@ -42,7 +42,7 @@ Route::middleware(['role:3', 'auth'])->group(function () {
     route::get('party/active/{id}', 'PartyController@active')->name("party.active");
     route::get('party/archive/{id}', 'PartyController@archive')->name("party.archive");
     route::get('party/dearchive/{id}', 'PartyController@dearchive')->name("party.dearchive");
-    route::resource('party', 'partyController');
+    route::resource('party', 'PartyController');
     route::post('student/storePhotoYear', 'StudentController@storePhotoYear')->name("studentStoreYear");
     route::post('student/storePhoto', 'StudentController@storePhoto')->name("studentStore");
     route::resource('user', 'UserController');

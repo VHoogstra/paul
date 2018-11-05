@@ -51,12 +51,59 @@ class Registration extends Model
      * @param  $id
      * @return array
      */
-    public static function payedNinsde($id): array
+    public static function payedAndNotInside($id): array
     {
         $users = DB::select(
             'select * from registrations join students on registrations.user_id = students.id where party_id = ? AND (payed= 1 OR special =1) AND inside=0',
             [$id]
         );
+        self::where(
+            function ($query) {
+                $query->where('payed', '=', '1')
+                    ->orwhere('special', '=', '1');
+            });
         return $users;
+    }
+
+    /**
+     * @return int
+     */
+    public static function payedNotInsideCount(): int
+    {
+        $activeParty = Party::getActive();
+        $userCount = self::where(
+            function ($query) {
+                $query->where('payed', '=', '1')
+                    ->orwhere('special', '=', '1');
+            })
+            ->where('inside', '=', 0)
+            ->where('party_id', '=', $activeParty->id)
+            ->count();
+        return $userCount;
+    }
+
+    /**
+     * @return int
+     */
+    public static function payedCount(): int
+    {
+        $activeParty = Party::getActive();
+        $userCount = self::where(
+            function ($query) {
+                $query->where('payed', '=', '1')
+                    ->orwhere('special', '=', '1');
+            })
+            ->where('party_id', '=', $activeParty->id)
+            ->count();
+        return $userCount;
+    }
+    /**
+     * @return int
+     */
+    public static function insideCount(): int
+    {
+        $activeParty = Party::getActive();
+        $userCount = self::where('inside', '=', '1')->where('party_id', '=', $activeParty->id)->count();
+        return $userCount;
     }
 }

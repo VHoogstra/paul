@@ -27,7 +27,7 @@ class HomeController extends Controller
     {
         $location = 'Betaald en Binnen';
         $activeParty = Party::getActive();
-        $students = Registration::payedNinsde($activeParty->id);
+        $students = Registration::payedAndNotInside($activeParty->id);
         return view('home', compact('students', 'location', 'activeParty'));
     }
 
