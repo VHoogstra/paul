@@ -1,9 +1,9 @@
 image: php:7.2-fpm-alpine
 
 stages:
-  - build
-  - test
-  - quality
+- build
+- test
+- quality
 
 build:
   stage: build
@@ -46,7 +46,6 @@ phpcs:
 
     # Install all project dependencies
     composer install
-  sudo apt-get install php7.0-gd
   sudo apt-get install php7.0-intl
   sudo apt-get install php7.0-xsl
   }
@@ -59,4 +58,6 @@ phpcs:
 
 before_script:
 - *before_script_bash
-- cp gd.ini /usr/local/etc/php/conf.d/gd_php.ini
+- docker-php-ext-install pdo_mysql
+- sudo apt-get install php7.0-gd
+
