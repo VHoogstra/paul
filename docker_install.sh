@@ -16,3 +16,9 @@ chmod +x /usr/local/bin/phpunit
 # Install mysql driver
 # Here you can install any other extension that you need
 docker-php-ext-install pdo_mysql
+
+# Install composer
+curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# Install all project dependencies
+composer install
