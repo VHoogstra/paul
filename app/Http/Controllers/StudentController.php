@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\student;
-use App\settings;
+use App\Student;
+use App\Settings;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Storage;
@@ -19,7 +19,7 @@ class StudentController extends Controller
     public function index()
     {
 
-        $year = settings::getPhotoYear();
+        $year = Settings::getPhotoYear();
         $directories = Storage::directories("/public/images/");
         for ($i = 0; $i < count($directories); $i++) {
             $directories[$i] = str_replace("public/images/", " ", $directories[$i]);
@@ -38,7 +38,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        $studentCount = student::all()->count();
+        $studentCount = Student::all()->count();
         return view('student.create', compact('studentCount'));
     }
 
@@ -121,10 +121,10 @@ class StudentController extends Controller
                     if ($cell->getValue()) {
                         switch ($i) {
                             case 1:
-                                if (student::where('stamnr', $cell->getValue())->count() == 1) {
+                                if (Student::where('stamnr', $cell->getValue())->count() == 1) {
                                     $duplicate = true;
                                 } else {
-                                    $student = new student;
+                                    $student = new Student;
                                     $student->stamnr = $cell->getValue();
                                 };
 
@@ -190,12 +190,12 @@ class StudentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\student $student
+     * @param  \App\Student $student
      * @return \Illuminate\Http\Response
      */
-    public function destroy(student $student)
+    public function destroy(Student $student)
     {
-        student::truncate();
+        Student::truncate();
         return redirect::back();
     }
 
@@ -207,19 +207,19 @@ class StudentController extends Controller
             if (is_null($year)) {
                 $error = "no thingy thing";
             } else {
-                settings::updateYear($year);
+                Settings::updateYear($year);
                 $error = "succes ";
             }
         } else {
             if (is_null($yearmulti)) {
                 $error = "no thingy thing";
             } else {
-                settings::updateYear($yearmulti);
+                Settings::updateYear($yearmulti);
                 $error = "succes ";
             }
         }
 
-        $year = settings::getPhotoYear();
+        $year = Settings::getPhotoYear();
         $directories = Storage::directories("/public/images/");
         for ($i = 0; $i < count($directories); $i++) {
             $directories[$i] = str_replace("public/images/", "", $directories[$i]);
@@ -232,7 +232,7 @@ class StudentController extends Controller
 
     public function storePhoto(Request $request)
     {
-        $year = settings::getPhotoYear();
+        $year = Settings::getPhotoYear();
         $destination = "/public/images/" . $year;
         $file = Input::file('file');
         Storage::putFileAs($destination, $file, $file->getClientOriginalName());

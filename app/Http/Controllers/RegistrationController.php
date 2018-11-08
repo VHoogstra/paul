@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\party;
-use App\student;
-use App\settings;
+use App\Party;
+use App\Student;
+use App\Settings;
 use Carbon\Carbon;
-use App\registration;
+use App\Registration;
 use Illuminate\Http\Request;
-use App\Events\studentSearched;
+use App\Events\StudentSearched;
 use Illuminate\Support\Facades\Storage;
 
 class RegistrationController extends Controller
@@ -21,8 +21,8 @@ class RegistrationController extends Controller
     public function index()
     {
 
-        $activeParty = party::getActive();
-        $students = student::all();
+        $activeParty = Party::getActive();
+        $students = Student::all();
         return view('registration.index', compact('activeParty', 'students'));
     }
 
@@ -50,10 +50,10 @@ class RegistrationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\registration $registration
+     * @param  \App\Registration $registration
      * @return \Illuminate\Http\Response
      */
-    public function show(registration $registration)
+    public function show(Registration $registration)
     {
         //
     }
@@ -66,21 +66,21 @@ class RegistrationController extends Controller
      */
     public function edit($id)
     {
-        $activeParty = party::getActive();
+        $activeParty = Party::getActive();
         if (!$activeParty) {
             $payed = false;
             $payedCount = false;
         } else {
-            $payed = registration::where('user_id', '=', $id)->where('party_id', '=', $activeParty->id)->first();
-            $payedCount = registration::where('user_id', '=', $id)->where('party_id', '=', $activeParty->id)->count();
+            $payed = Registration::where('user_id', '=', $id)->where('party_id', '=', $activeParty->id)->first();
+            $payedCount = Registration::where('user_id', '=', $id)->where('party_id', '=', $activeParty->id)->count();
         }
 
-        $student = student::find($id);
+        $student = Student::find($id);
         $birthDate = Carbon::parse($student->birth_date);
         $age = Carbon::createFromDate($birthDate->year, $birthDate->month, $birthDate->day)->age;
-        $year = settings::getPhotoYear();
+        $year = Settings::getPhotoYear();
         $contents = Storage::url('images/' . $year . '/' . $student->stamnr . '.jpg');
-        event(new studentSearched($student));
+        event(new StudentSearched($student));
         $payedStatus = true;
         $insideStatus = false;
         if ($payedCount == 0) {
@@ -101,10 +101,10 @@ class RegistrationController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  \App\registration        $registration
+     * @param  \App\Registration        $registration
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, registration $registration)
+    public function update(Request $request, Registration $registration)
     {
         //
     }
@@ -112,10 +112,10 @@ class RegistrationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\registration $registration
+     * @param  \App\Registration $registration
      * @return \Illuminate\Http\Response
      */
-    public function destroy(registration $registration)
+    public function destroy(Registration $registration)
     {
         //
     }
@@ -125,16 +125,16 @@ class RegistrationController extends Controller
      */
     public function payed($id)
     {
-        $currentParty = party::getActive();
-        $registration = registration::get_user_row($currentParty->id, $id);
+        $currentParty = Party::getActive();
+        $registration = Registration::getUserRow($currentParty->id, $id);
         if (empty($registration)) {
-            $registration = new registration();
+            $registration = new Registration();
             $registration->user_id = $id;
             $registration->party_id = $currentParty->id;
             $registration->payed = 1;
             $registration->save();
         } else {
-            $registration = registration::find($registration[0]->id);
+            $registration = Registration::find($registration[0]->id);
             $registration->payed = 1;
             $registration->save();
         }
@@ -143,13 +143,13 @@ class RegistrationController extends Controller
 
     public function inside($id)
     {
-        $currentParty = party::getActive();
-        $registration = registration::get_user_row($currentParty->id, $id);
+        $currentParty = Party::getActive();
+        $registration = Registration::getUserRow($currentParty->id, $id);
         if (empty($registration)) {
             return back()->with('error', "not payed!");
         } else {
             if ($registration[0]->payed || $registration[0]->special) {
-                $registration = registration::find($registration[0]->id);
+                $registration = Registration::find($registration[0]->id);
                 $registration->inside = 1;
                 $registration->save();
             } else {
@@ -162,16 +162,16 @@ class RegistrationController extends Controller
 
     public function special($id)
     {
-        $currentParty = party::getActive();
-        $registration = registration::get_user_row($currentParty->id, $id);
+        $currentParty = Party::getActive();
+        $registration = Registration::getUserRow($currentParty->id, $id);
         if (empty($registration)) {
-            $registration = new registration();
+            $registration = new Registration();
             $registration->user_id = $id;
             $registration->party_id = $currentParty->id;
             $registration->special = 1;
             $registration->save();
         } else {
-            $registration = registration::find($registration[0]->id);
+            $registration = Registration::find($registration[0]->id);
             $registration->special = 1;
             $registration->save();
         }
@@ -180,17 +180,17 @@ class RegistrationController extends Controller
 
     public function payedAndInside($id)
     {
-        $currentParty = party::getActive();
-        $registration = registration::get_user_row($currentParty->id, $id);
+        $currentParty = Party::getActive();
+        $registration = Registration::getUserRow($currentParty->id, $id);
         if (empty($registration)) {
-            $registration = new registration();
+            $registration = new Registration();
             $registration->user_id = $id;
             $registration->party_id = $currentParty->id;
             $registration->payed = 1;
             $registration->inside = 1;
             $registration->save();
         } else {
-            $registration = registration::find($registration[0]->id);
+            $registration = Registration::find($registration[0]->id);
             $registration->payed = 1;
             $registration->inside = 1;
             $registration->save();
@@ -200,12 +200,12 @@ class RegistrationController extends Controller
 
     public function reset($id)
     {
-        $currentParty = party::getActive();
-        $registration = registration::get_user_row($currentParty->id, $id);
+        $currentParty = Party::getActive();
+        $registration = Registration::getUserRow($currentParty->id, $id);
         if (empty($registration)) {
             return back()->with('error', "nothing to reset");
         } else {
-            $registration = registration::find($registration[0]->id);
+            $registration = Registration::find($registration[0]->id);
             $registration->payed = 0;
             $registration->inside = 0;
             $registration->special = 0;

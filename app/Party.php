@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class party extends Model
+class Party extends Model
 {
 
     public static function getArchive()
@@ -17,8 +17,8 @@ class party extends Model
 
     public static function getActive()
     {
-        $party = party::where('active', 1)->first();
-        $partycount = party::where('active', 1)->count();
+        $party = Party::where('active', 1)->first();
+        $partycount = Party::where('active', 1)->count();
 
         if ($partycount == 0) {
             return false;

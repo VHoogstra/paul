@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 
-class settings extends Model
+class Settings extends Model
 {
     public static function getPhotoYear()
     {
@@ -18,7 +18,7 @@ class settings extends Model
         return $value;
     }
 
-    public static function updateYear($year)
+    public static function updateYear($year): void
     {
         DB::table('settings')->where("name", "=", "photoYear")->update(["value" => $year]);
     }

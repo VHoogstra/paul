@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\party;
+use App\Party;
 use App\User;
-use App\registration;
+use App\Registration;
 
-class dashboardController extends Controller
+class DashboardController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,16 +16,16 @@ class dashboardController extends Controller
      */
     public function index()
     {
-        $activeParty = party::getActive();
+        $activeParty = Party::getActive();
         $role = User::hasRole('user');
         if ($activeParty==false) {
             $inside= 0;
             $payed= 0;
             $payedNInside= 0;
         } else {
-            $inside = registration::where('inside', '=', '1')->where('party_id', '=', $activeParty->id)->count();
+            $inside = Registration::where('inside', '=', '1')->where('party_id', '=', $activeParty->id)->count();
 
-            $payed = registration::where(
+            $payed = Registration::where(
                 function ($query) {
                     $query->where('payed', '=', '1')
                         ->orwhere('special', '=', '1');
@@ -34,7 +34,7 @@ class dashboardController extends Controller
                 ->where('party_id', '=', $activeParty->id)
                 ->count();
 
-            $payedNInside = registration::where(
+            $payedNInside = Registration::where(
                 function ($query) {
                     $query->where('payed', '=', '1')
                         ->orwhere('special', '=', '1');

@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\user;
-use App\user_role;
+use App\UserRole;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
-class userController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -61,7 +61,7 @@ class userController extends Controller
     public function edit($id)
     {
         $users = user::roleId($id);
-        $roles = user_role::all();
+        $roles = UserRole::all();
         return view('user.edit', compact('users', 'roles'));
     }
 

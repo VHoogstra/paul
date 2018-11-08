@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\party;
+use App\Party;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -17,8 +17,8 @@ class PartyController extends Controller
      */
     public function index()
     {
-        $partyActive = party::getActive();
-        $partys = party::all()->where('archive', 0);
+        $partyActive = Party::getActive();
+        $partys = Party::all()->where('archive', 0);
         return view("party.index", compact("partyActive", "partys"));
     }
 
@@ -29,8 +29,8 @@ class PartyController extends Controller
      */
     public function indexArchive()
     {
-        $partyActive = party::getActive();
-        $partys = party::all()->where('archive', 1);
+        $partyActive = Party::getActive();
+        $partys = Party::all()->where('archive', 1);
         return view("party.archive", compact("partyActive", "partys"));
     }
 
@@ -53,7 +53,7 @@ class PartyController extends Controller
      */
     public function store(Request $request)
     {
-        $party = new party;
+        $party = new Party;
         $party->name =$request->name ;
         $party->price =$request->price ;
         $party->price_preSale =$request->price_presale ;
@@ -68,10 +68,10 @@ class PartyController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\party $party
+     * @param  \App\Party $party
      * @return \Illuminate\Http\Response
      */
-    public function show(party $party)
+    public function show(Party $party)
     {
         //
     }
@@ -79,12 +79,12 @@ class PartyController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\party $party
+     * @param  \App\Party $party
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $party = party::find($id);
+        $party = Party::find($id);
         $startsale = new DateTime($party->presale_start);
         $startsale =  $startsale->format('Y-m-d')."T".$startsale->format('h:i');
         $startDate = new DateTime($party->start_date);
@@ -101,12 +101,12 @@ class PartyController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  \App\party               $party
+     * @param  \App\Party               $party
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $party)
     {
-        $party =  party::find($party);
+        $party =  Party::find($party);
         $party->name =$request->name ;
         $party->price =$request->price ;
         $party->price_preSale =$request->price_presale ;
@@ -141,7 +141,7 @@ class PartyController extends Controller
         $oldActive=  DB::table('parties')
             ->where('active', 1)
             ->update(['active' => 0]);
-        $party = party::find($id);
+        $party = Party::find($id);
         $party->active =1 ;
         $party->save();
         return redirect::route("party.index");
@@ -155,7 +155,7 @@ class PartyController extends Controller
      */
     public function archive($id)
     {
-        $party = party::find($id);
+        $party = Party::find($id);
         $party->archive =1 ;
         $party->active =0 ;
         $party->save();
@@ -170,7 +170,7 @@ class PartyController extends Controller
      */
     public function dearchive($id)
     {
-        $party = party::find($id);
+        $party = Party::find($id);
         $party->archive =0 ;
         $party->save();
         return redirect::route("party.indexArchive");

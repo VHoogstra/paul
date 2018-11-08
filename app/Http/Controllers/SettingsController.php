@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\settings;
+use App\Settings;
 use Illuminate\Http\Request;
 
 class SettingsController extends Controller
@@ -41,10 +41,10 @@ class SettingsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\settings $settings
+     * @param  \App\Settings $settings
      * @return \Illuminate\Http\Response
      */
-    public function show(settings $settings)
+    public function show(Settings $settings)
     {
         //
     }
@@ -52,10 +52,10 @@ class SettingsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\settings $settings
+     * @param  \App\Settings $settings
      * @return \Illuminate\Http\Response
      */
-    public function edit(settings $settings)
+    public function edit(Settings $settings)
     {
         //
     }
@@ -64,10 +64,10 @@ class SettingsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  \App\settings            $settings
+     * @param  \App\Settings            $settings
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, settings $settings)
+    public function update(Request $request, Settings $settings)
     {
         //
     }
@@ -75,10 +75,10 @@ class SettingsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\settings $settings
+     * @param  \App\Settings $settings
      * @return \Illuminate\Http\Response
      */
-    public function destroy(settings $settings)
+    public function destroy(Settings $settings)
     {
         //
     }

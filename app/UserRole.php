@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class log extends Model
+class UserRole extends Model
 {
     //
 }
