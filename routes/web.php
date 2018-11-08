@@ -12,6 +12,9 @@
 */
 
 Auth::routes();
+Route::get('/test', function () {
+    echo phpinfo();
+});
 
 Route::get('/notUser', function () {
     return view('notUser');
