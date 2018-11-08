@@ -18,7 +18,6 @@ class StudentController extends Controller
      */
     public function index()
     {
-
         $year = Settings::getPhotoYear();
         $directories = Storage::directories('/public/images/');
         $directoriesLength = count($directories);

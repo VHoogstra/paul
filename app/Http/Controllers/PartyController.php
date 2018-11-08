@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Redirect;
 class PartyController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display all parties
      *
      * @return \Illuminate\Http\Response
      */
@@ -23,7 +23,7 @@ class PartyController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Display all parties that are archived
      *
      * @return \Illuminate\Http\Response
      */
@@ -41,6 +41,7 @@ class PartyController extends Controller
      */
     public function create()
     {
+        //todo this is not showing on the page?
         $today = date('YY-MM-DD');
         return view('party.create', compact('today'));
     }
@@ -74,6 +75,7 @@ class PartyController extends Controller
     public function show(Party $party)
     {
         //
+        //todo show a single party on page, fixed this with edit page?
     }
 
     /**
@@ -138,6 +140,7 @@ class PartyController extends Controller
      */
     public function active($id)
     {
+        //todo move this to model
         $oldActive=  DB::table('parties')
             ->where('active', 1)
             ->update(['active' => 0]);

@@ -10,7 +10,7 @@ use App\Registration;
 class DashboardController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display the front page
      *
      * @return \Illuminate\Http\Response
      */
