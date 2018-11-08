@@ -22,6 +22,7 @@ unit_test:
 
 coverage:
   stage: quality
+  allow_failure: true
   script:
   - install_xdebug
   - php vendor/bin/codecept run unit --coverage --coverage-html
