@@ -18,7 +18,7 @@ class CreateStudentsTable extends Migration
             $table->timestamps();
             $table->integer('stamnr')->unique();
             $table->string('first_name')->nullable($value = true);
-            $table->string('middle_name')->nullable($value = true);
+            $table->string('middle_name')->nullable($value = true)->default('');
             $table->string('last_name')->nullable($value = true);
             $table->string('adres')->nullable($value = true);
             $table->string('postalcode')->nullable($value = true);

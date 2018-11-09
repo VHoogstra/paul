@@ -15,6 +15,15 @@ class RegistrationController extends Controller
 {
     //todo don't make this a resource class
     /**
+     * @param $search
+     * @return mixed
+     */
+    public static function find($search)
+    {
+        return Student::search($search)->get();
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -84,25 +93,28 @@ class RegistrationController extends Controller
         event(new StudentSearched($student));
         $payedStatus = true;
         $insideStatus = false;
-        if ($payedCount == 0) {
+        if ($payedCount === 0) {
             $payedStatus = true;
             $insideStatus = false;
         } else {
-            if (($payed->special == 1 || $payed->payed == 1) && $payed->inside == 0) {
+            if (($payed->special === 1 || $payed->payed === 1) && $payed->inside === 0) {
                 $insideStatus = true;
             }
-            if ($payedCount == 1 && ($payed->specal == 1 || $payed->payed == 1)) {
+            if ($payedCount === 1 && ($payed->specal === 1 || $payed->payed === 1)) {
                 $payedStatus = false;
             }
         }
-        return view('registration.edit', compact('student', 'age', 'payed', 'payedCount', 'contents', 'insideStatus', 'payedStatus'));
+        return view(
+            'registration.edit',
+            compact('student', 'age', 'payed', 'payedCount', 'contents', 'insideStatus', 'payedStatus')
+        );
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  \App\Registration        $registration
+     * @param  \App\Registration $registration
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Registration $registration)
@@ -123,6 +135,7 @@ class RegistrationController extends Controller
 
     /**
      * @param $id
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function payed($id)
     {
@@ -142,6 +155,10 @@ class RegistrationController extends Controller
         return back()->with('error', 'success!');
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function inside($id)
     {
         $currentParty = Party::getActive();
@@ -158,9 +175,12 @@ class RegistrationController extends Controller
             }
         }
         return back()->with('error', 'success!');
-        ;
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function special($id)
     {
         $currentParty = Party::getActive();
@@ -179,6 +199,10 @@ class RegistrationController extends Controller
         return back()->with('error', 'success!');
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function payedAndInside($id)
     {
         $currentParty = Party::getActive();
@@ -199,6 +223,10 @@ class RegistrationController extends Controller
         return back()->with('error', 'success!');
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function reset($id)
     {
         $currentParty = Party::getActive();
@@ -213,6 +241,5 @@ class RegistrationController extends Controller
             $registration->save();
         }
         return back()->with('error', 'success!');
-        ;
     }
 }
