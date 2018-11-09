@@ -41,8 +41,7 @@ class PartyController extends Controller
      */
     public function create()
     {
-        //todo this is not showing on the page?
-        $today = date('YY-MM-DD');
+        $today = date('Y-m-d\TH:i');
         return view('party.create', compact('today'));
     }
 
