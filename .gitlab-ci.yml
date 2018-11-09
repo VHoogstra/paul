@@ -46,7 +46,7 @@ deploy:
   - apt-get update -qq && apt-get install -y -qq sshpass
   - sshpass -V
   - export SSHPASS=$USER_PASS
-  - sshpass -e scp -o stricthostkeychecking=no -r . ozmd_paulsite@ozmd.ftp.infomaniak.com:/paulDev
+  - sshpass -e scp -o stricthostkeychecking=no -r . ozmd_paulsite@ozmd.ftp.infomaniak.com:paulDev
 
 
 .before_script_bash: &before_script_bash |
