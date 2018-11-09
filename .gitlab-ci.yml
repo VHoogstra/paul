@@ -42,9 +42,8 @@ deploy:
   only:
   - dev
   script:
+  - bash docker_install.sh > /dev/null
   - apt-get update -qq && apt-get install -y -qq sshpass
-  - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-  - composer install
   - sshpass -V
   - export SSHPASS=$USER_PASS
   - sshpass -e scp -o stricthostkeychecking=no -r . ozmd_paulsite@ozmd.ftp.infomaniak.com:/paulDev
