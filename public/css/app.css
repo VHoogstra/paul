@@ -10515,8 +10515,6 @@ a.text-dark:focus {
 
 .nav-side-menu ul :not(collapsed) .arrow:before,
 .nav-side-menu li :not(collapsed) .arrow:before {
-  font-family: FontAwesome;
-  content: "\F078";
   display: inline-block;
   padding-left: 10px;
   padding-right: 10px;
@@ -10572,7 +10570,7 @@ a.text-dark:focus {
 
 .nav-side-menu li a {
   text-decoration: none;
-  color: #e1ffff;
+  color: #ffffff;
 }
 
 .nav-side-menu li a i {

@@ -105,38 +105,42 @@
     <div class="menu-list">
         <ul id="menu-content" class="menu-content collapse out">
             <li>
-                <a href="#">
-                    <i class="fa fa-dashboard fa-lg"></i> Dashboard
+                <a href="{{route('dashboard.index')}}">
+                    <i class="fas fa-tachometer-alt fa-lg"></i> Dashboard
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="{{route('registering.index')}}">
                     <i class="fa fa-users fa-lg"></i> Studenten aanmelden
                 </a>
             </li>
             <li>
-                <a href="#">
-                    <i class="fa fa-dashboard fa-lg"></i> Statistiek
+                <a href="">
+                    {{--<i class="fa fa-chart-line fa-lg"></i>--}}
+                    <i class="fas fa-user-injured"></i>Statistiek <span class="badge badge-warning">(comming soon)</span>
+
                 </a>
             </li>
             <li>
-                <a href="#">
-                    <i class="fa fa-dashboard fa-lg"></i> Feesten
+                <a href="{{route("party.index")}}">
+                    <i class="fab fa-fort-awesome-alt fa-lg"></i> Feesten
                 </a>
             </li>
             <li>
-                <a href="#">
-                    <i class="fa fa-dashboard fa-lg"></i> admin
+                <a href="{{route('user.index')}}">
+
+                    <i class="fas fa-hat-wizard fa-lg"></i> Admin
                 </a>
             </li>
             <li>
-                <a href="#">
-                    <i class="fa fa-user fa-lg"></i> profiel
+                <a href="{{route('dashboard.index')}}">
+                    <i class="fa fa-user fa-lg"></i> Profiel <span class="badge badge-warning">(comming soon)</span>
                 </a>
             </li>
 
             <li data-toggle="collapse" data-target="#service" class="collapsed">
-                <a href="#"><i class="fa fa-globe fa-lg"></i> Services <span class="arrow"></span></a>
+                <a href="{{route('dashboard.index')}}" style="width: 100%;"><i class="fa fa-globe fa-lg"></i> Services <span
+                            class="fas fa-angle-down arrow"></span></a>
             </li>
             <ul class="sub-menu collapse" id="service">
                 <li>New Service 1</li>
@@ -144,7 +148,7 @@
                 <li>New Service 3</li>
             </ul>
 
-
+            {{--<i class="fas fa-user-injured"></i> for unfinished pages--}}
         </ul>
     </div>
 </div>
