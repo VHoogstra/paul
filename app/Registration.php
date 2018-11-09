@@ -113,6 +113,4 @@ class Registration extends Model
         $userCount = self::where('inside', '=', '1')->where('party_id', '=', $activeParty->id)->count();
         return $userCount;
     }
-
-
 }
