@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Settings extends Model
 {
+    protected $table = 'settings';
+
     /**
      * @return Model|\Illuminate\Database\Query\Builder|mixed|null|object
      */

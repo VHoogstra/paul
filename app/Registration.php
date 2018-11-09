@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\DB;
 
 class Registration extends Model
 {
+
+    protected $table = 'registrations';
+
     /**
      * @param  $id
      * @param  $userId
