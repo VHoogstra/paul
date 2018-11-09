@@ -67,7 +67,6 @@
             if (test == null) {
                 return
             }
-            console.log('start  ' + test);
             $.ajax({
                 url: "/registering/find/" + test,
                 context: document.body
