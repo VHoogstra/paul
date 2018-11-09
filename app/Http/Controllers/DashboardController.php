@@ -26,4 +26,29 @@ class DashboardController extends Controller
 
         return view('dashboard.index', compact('activeParty', 'inside', 'payed', 'payedNInside'));
     }
+
+    /**
+     * Display the list of users depending on status
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function show($status)
+    {
+        $activeParty = Party::getActive();
+        switch ($status) {
+            case 'payed':
+                $location = 'Betaald';
+                $students = Registration::payedUsers($activeParty->id);
+                break;
+            case 'inside':
+                $location = 'Binnen';
+                $students = Registration::insideUsers($activeParty->id);
+                break;
+            case 'payedAndNotInside':
+                $location = 'Betaald en niet binnen';
+                $students = Registration::payedAndNotInside($activeParty->id);
+                break;
+        }
+        return view('dashboard.list', compact('students', 'location', 'activeParty'));
+    }
 }

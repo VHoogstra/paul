@@ -17,43 +17,5 @@ class HomeController extends Controller
     {
         $this->middleware('auth');
     }
-
-    /**
-     * Show all people payed and inside
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function payedninside()
-    {
-        $location = 'Betaald en Binnen';
-        $activeParty = Party::getActive();
-        $students = Registration::payedAndNotInside($activeParty->id);
-        return view('home', compact('students', 'location', 'activeParty'));
-    }
-
-    /**
-     * show all people that are inside
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function inside()
-    {
-        $location = 'Binnen';
-        $activeParty = Party::getActive();
-        $students = Registration::insideUsers($activeParty->id);
-        return view('home', compact('students', 'location', 'activeParty'));
-    }
-
-    /**
-     * show all people that have payed
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function payed()
-    {
-        $location = 'Betaald';
-        $activeParty = Party::getActive();
-        $students = Registration::payedUsers($activeParty->id);
-        return view('home', compact('students', 'location', 'activeParty'));
-    }
+//todo can be removed?
 }
