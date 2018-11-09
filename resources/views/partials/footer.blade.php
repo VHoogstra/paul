@@ -17,9 +17,9 @@
         <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
         <!-- Custom scripts for all pages-->
-        <script src="/js/sb-admin.min.js"></script>
+        {{--<script src="/js/sb-admin.min.js"></script>--}}
         <!-- Custom scripts for this page-->
-        <script src="/js/sb-admin-datatables.min.js"></script>
+        {{--<script src="/js/sb-admin-datatables.min.js"></script>--}}
     </div>
 </div>
 </body>

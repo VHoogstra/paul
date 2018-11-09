@@ -1,5 +1,6 @@
 @include('partials.header') @include('partials.nav')
 
+<div class="container" id="main">
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
@@ -28,5 +29,8 @@
 <div class="content-wrapper">
     <div class="container-fluid">
         <!-- Icon Cards-->
-@yield('content')
+    @yield('content')
+
+</div>
+
 @include('partials.footer')

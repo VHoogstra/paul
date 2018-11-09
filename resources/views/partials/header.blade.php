@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,9 +16,11 @@
     <!-- Page level plugin CSS-->
     <link href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css" rel="stylesheet">
     <!-- Custom styles for this template-->
-    <link href="/css/sb-admin.min.css" rel="stylesheet">
-    <link href="/css/dropzone.css" rel="stylesheet">
-    <script src="/js/dropzone.js"></script>
+    <link href="/css/app.css" rel="stylesheet">
+    <link href="/css/all.css" rel="stylesheet">
+    {{--<link href="/css/sb-admin.min.css" rel="stylesheet">--}}
+    {{--<link href="/css/dropzone.css" rel="stylesheet">--}}
+    <script src="/js/all.js"></script>
 </head>
 
-<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+<body class="" id="page-top">
