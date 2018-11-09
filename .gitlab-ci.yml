@@ -4,6 +4,7 @@ stages:
 - build
 - test
 - quality
+- deploy
 
 build:
   stage: build
@@ -35,6 +36,18 @@ phpcs:
   allow_failure: true
   script:
   - php vendor/bin/phpcs --error-severity=1 --warning-severity=8 --extensions=php --colors
+
+deploy:
+  stage: deploy
+  only:
+  - dev
+  script:
+  - apt-get update -qq && apt-get install -y -qq sshpass
+  - composer install
+  - sshpass -V
+  - export SSHPASS=$USER_PASS
+  - sshpass -e scp -o stricthostkeychecking=no -r . ozmd_paulsite@ozmd.ftp.infomaniak.com:/paulDev
+
 
 .before_script_bash: &before_script_bash |
 
