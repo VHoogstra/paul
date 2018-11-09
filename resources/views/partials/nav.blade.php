@@ -105,41 +105,42 @@
     <div class='menu-list'>
         <ul id='menu-content' class='menu-content collapse out'>
             <li>
-                <a href='{{route('dashboard.index')}}'>
+                <a href='{{route('dashboard.index')}}' class="link_full_space">
                     <i class='fas fa-tachometer-alt fa-lg'></i> Dashboard
                 </a>
             </li>
             <li>
-                <a href='{{route('registering.index')}}'>
+                <a href='{{route('registering.index')}}' class="link_full_space">
                     <i class='fa fa-users fa-lg'></i> Studenten aanmelden
                 </a>
             </li>
             <li>
-                <a href=''>
+                <a href='' class="link_full_space">
                     {{--<i class='fa fa-chart-line fa-lg'></i>--}}
                     <i class='fas fa-user-injured'></i>Statistiek <span class='badge badge-warning higher-badge'>(comming soon)</span>
 
                 </a>
             </li>
             <li>
-                <a href='{{route('party.index')}}'>
+                <a href='{{route('party.index')}}' class="link_full_space">
                     <i class='fab fa-fort-awesome-alt fa-lg'></i> Feesten
                 </a>
             </li>
             <li>
-                <a href='{{route('user.index')}}'>
+                <a href='{{route('user.index')}}' class="link_full_space">
 
                     <i class='fas fa-hat-wizard fa-lg'></i> Admin
                 </a>
             </li>
             <li>
-                <a href='{{route('dashboard.index')}}'>
+                <a href='{{route('dashboard.index')}}' class="link_full_space">
                     <i class='fa fa-user fa-lg'></i> Profiel <span class='badge badge-warning higher-badge'>(comming soon)</span>
                 </a>
             </li>
 
             <li data-toggle='collapse' data-target='#service' class='collapsed'>
-                <a href='{{route('dashboard.index')}}' style='width: 100%;'><i class='fa fa-globe fa-lg'></i> Services <span
+                <a href='{{route('dashboard.index')}}' class="link_full_space" style='width: 100%;'>
+                    <i class='fa fa-globe fa-lg'></i> Services <span
                             class='fas fa-angle-down arrow'></span></a>
             </li>
             <ul class='sub-menu collapse' id='service'>
