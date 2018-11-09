@@ -16,9 +16,9 @@ class CreatePartiesTable extends Migration
         Schema::create('parties', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->double('price',4,2);
-            $table->double('price_preSale',4,2);
-            $table->double('price_special',4,2);
+            $table->double('price', 4, 2);
+            $table->double('price_preSale', 4, 2);
+            $table->double('price_special', 4, 2);
             $table->timestamp('preSale_start');
             $table->timestamp('start_date')->nullable($value = true);
             $table->timestamp('stop_date')->nullable($value = true);

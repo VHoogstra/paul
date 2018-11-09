@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Redirect;
 class PartyController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display all parties
      *
      * @return \Illuminate\Http\Response
      */
@@ -23,7 +23,7 @@ class PartyController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Display all parties that are archived
      *
      * @return \Illuminate\Http\Response
      */
@@ -41,6 +41,7 @@ class PartyController extends Controller
      */
     public function create()
     {
+        //todo this is not showing on the page?
         $today = date('YY-MM-DD');
         return view('party.create', compact('today'));
     }
@@ -54,13 +55,13 @@ class PartyController extends Controller
     public function store(Request $request)
     {
         $party = new Party;
-        $party->name =$request->name ;
-        $party->price =$request->price ;
-        $party->price_preSale =$request->price_presale ;
-        $party->price_speciale = $request->price_speciale;
-        $party->preSale_start =$request->presale_start ;
+        $party->name = $request->name;
+        $party->price = $request->price;
+        $party->price_preSale = $request->price_presale;
+        $party->price_special = $request->price_speciale;
+        $party->preSale_start = $request->presale_start;
         $party->start_date = $request->start_date;
-        $party->stop_date =$request->stop_date;
+        $party->stop_date = $request->stop_date;
         $party->save();
         return redirect::route('party.index');
     }
@@ -74,6 +75,7 @@ class PartyController extends Controller
     public function show(Party $party)
     {
         //
+        //todo show a single party on page, fixed this with edit page?
     }
 
     /**
@@ -86,12 +88,12 @@ class PartyController extends Controller
     {
         $party = Party::find($id);
         $startsale = new DateTime($party->presale_start);
-        $startsale =  $startsale->format('Y-m-d').'T'.$startsale->format('h:i');
+        $startsale = $startsale->format('Y-m-d') . 'T' . $startsale->format('h:i');
         $startDate = new DateTime($party->start_date);
-        $start = $startDate->format('Y-m-d').'T'.$startDate->format('h:i');
+        $start = $startDate->format('Y-m-d') . 'T' . $startDate->format('h:i');
 
         $stop = new DateTime($party->stop_date);
-        $stop =  $stop->format('Y-m-d').'T'.$stop->format('h:i');
+        $stop = $stop->format('Y-m-d') . 'T' . $stop->format('h:i');
 
 
         return view('party.edit', compact('party', 'startsale', 'start', 'stop'));
@@ -101,19 +103,19 @@ class PartyController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  \App\Party               $party
+     * @param  \App\Party $party
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $party)
     {
-        $party =  Party::find($party);
-        $party->name =$request->name ;
-        $party->price =$request->price ;
-        $party->price_preSale =$request->price_presale ;
-        $party->price_speciale = $request->price_speciale;
-        $party->preSale_start =$request->presale_start ;
+        $party = Party::find($party);
+        $party->name = $request->name;
+        $party->price = $request->price;
+        $party->price_preSale = $request->price_presale;
+        $party->price_special = $request->price_speciale;
+        $party->preSale_start = $request->presale_start;
         $party->start_date = $request->start_date;
-        $party->stop_date =$request->stop_date;
+        $party->stop_date = $request->stop_date;
         $party->save();
         return redirect::route('party.index');
     }
@@ -138,11 +140,12 @@ class PartyController extends Controller
      */
     public function active($id)
     {
-        $oldActive=  DB::table('parties')
+        //todo move this to model
+        $oldActive = DB::table('parties')
             ->where('active', 1)
             ->update(['active' => 0]);
         $party = Party::find($id);
-        $party->active =1 ;
+        $party->active = 1;
         $party->save();
         return redirect::route('party.index');
     }
@@ -156,8 +159,8 @@ class PartyController extends Controller
     public function archive($id)
     {
         $party = Party::find($id);
-        $party->archive =1 ;
-        $party->active =0 ;
+        $party->archive = 1;
+        $party->active = 0;
         $party->save();
         return redirect::route('party.index');
     }
@@ -171,7 +174,7 @@ class PartyController extends Controller
     public function dearchive($id)
     {
         $party = Party::find($id);
-        $party->archive =0 ;
+        $party->archive = 0;
         $party->save();
         return redirect::route('party.indexArchive');
     }

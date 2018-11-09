@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\DB;
 
 class Registration extends Model
 {
+
+    protected $table = 'registrations';
+
     /**
      * @param  $id
      * @param  $userId
@@ -61,7 +64,8 @@ class Registration extends Model
             function ($query) {
                 $query->where('payed', '=', '1')
                     ->orwhere('special', '=', '1');
-            });
+            }
+        );
         return $users;
     }
 
@@ -75,7 +79,8 @@ class Registration extends Model
             function ($query) {
                 $query->where('payed', '=', '1')
                     ->orwhere('special', '=', '1');
-            })
+            }
+        )
             ->where('inside', '=', 0)
             ->where('party_id', '=', $activeParty->id)
             ->count();
@@ -92,11 +97,13 @@ class Registration extends Model
             function ($query) {
                 $query->where('payed', '=', '1')
                     ->orwhere('special', '=', '1');
-            })
+            }
+        )
             ->where('party_id', '=', $activeParty->id)
             ->count();
         return $userCount;
     }
+
     /**
      * @return int
      */

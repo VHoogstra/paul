@@ -19,7 +19,7 @@ class HomeController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Show all people payed and inside
      *
      * @return \Illuminate\Http\Response
      */
@@ -31,6 +31,11 @@ class HomeController extends Controller
         return view('home', compact('students', 'location', 'activeParty'));
     }
 
+    /**
+     * show all people that are inside
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function inside()
     {
         $location = 'Binnen';
@@ -39,6 +44,11 @@ class HomeController extends Controller
         return view('home', compact('students', 'location', 'activeParty'));
     }
 
+    /**
+     * show all people that have payed
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function payed()
     {
         $location = 'Betaald';

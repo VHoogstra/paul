@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Storage;
 
 class RegistrationController extends Controller
 {
+    //todo don't make this a resource class
     /**
      * Display a listing of the resource.
      *
@@ -20,7 +21,6 @@ class RegistrationController extends Controller
      */
     public function index()
     {
-
         $activeParty = Party::getActive();
         $students = Student::all();
         return view('registration.index', compact('activeParty', 'students'));
@@ -66,6 +66,7 @@ class RegistrationController extends Controller
      */
     public function edit($id)
     {
+        //todo make this les code in this page, maybe move it to register class
         $activeParty = Party::getActive();
         if (!$activeParty) {
             $payed = false;
