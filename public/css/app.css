@@ -10649,3 +10649,31 @@ body {
   bottom: 8px;
 }
 
+.content-wrapper {
+  overflow-x: hidden;
+  background: #f5f8fa;
+}
+
+body.sticky-footer .content-wrapper {
+  min-height: calc(100vh -  56px);
+}
+
+footer.sticky-footer {
+  position: absolute;
+  left: 200px;
+  bottom: 0;
+  width: calc(100% - 200px);
+  height: 56px;
+  background-color: #e9ecef;
+  line-height: 55px;
+}
+
+body.sticky-footer {
+  margin-bottom: 56px;
+}
+
+.thead-dark tr th {
+  padding-bottom: 5px;
+  padding-top: 5px;
+}
+

@@ -2,11 +2,9 @@
         <!-- /.container-fluid-->
         <!-- /.content-wrapper-->
         <footer class="sticky-footer">
-            <div class="container">
                 <div class="text-center">
-                    <small>Copyright © dezlv.nl 2018</small>
+                    <small>Copyright © dezlv.nl 2018 {{ config('app.name', 'Laravel') }} V{{ config('app.version', 'Laravel') }}</small>
                 </div>
-            </div>
         </footer>
         <!-- Logout Modal-->
         <!-- Bootstrap core JavaScript-->
