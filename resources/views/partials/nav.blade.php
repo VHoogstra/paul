@@ -117,7 +117,7 @@
             <li>
                 <a href="">
                     {{--<i class="fa fa-chart-line fa-lg"></i>--}}
-                    <i class="fas fa-user-injured"></i>Statistiek <span class="badge badge-warning">(comming soon)</span>
+                    <i class="fas fa-user-injured"></i>Statistiek <span class="badge badge-warning higher-badge">(comming soon)</span>
 
                 </a>
             </li>
@@ -134,7 +134,7 @@
             </li>
             <li>
                 <a href="{{route('dashboard.index')}}">
-                    <i class="fa fa-user fa-lg"></i> Profiel <span class="badge badge-warning">(comming soon)</span>
+                    <i class="fa fa-user fa-lg"></i> Profiel <span class="badge badge-warning higher-badge">(comming soon)</span>
                 </a>
             </li>
 

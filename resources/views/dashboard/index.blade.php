@@ -31,7 +31,8 @@
             <div class="card text-white bg-warning o-hidden h-100">
                 <div class="card-body">
                     <div class="card-body-icon">
-                        <i class="fa fa-fw fa-list"></i>
+                        <i class="fas fa-dollar-sign"></i>
+                        {{--<i class="fa fa-fw fa-list"></i>--}}
                     </div>
                     <div class="mr-5">{{$payed}} Betaald!</div>
                 </div>
@@ -47,7 +48,7 @@
             <div class="card text-white bg-success o-hidden h-100">
                 <div class="card-body">
                     <div class="card-body-icon">
-                        <i class="fa fa-fw fa-shopping-cart"></i>
+                        <i class="fas fa-times"></i>
                     </div>
                     <div class="mr-5">{{$payedNInside}} Betaald maar niet binnen!</div>
                 </div>
