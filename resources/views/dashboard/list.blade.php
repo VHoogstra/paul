@@ -8,7 +8,6 @@
     <table class="table dataTable" cellspacing="0" width="100%">
         <thead>
         <tr role="row">
-            <th rowspan="1" colspan="1">show</th>
             <th rowspan="1" colspan="1">student nummer</th>
             <th rowspan="1" colspan="1">naam</th>
             <th rowspan="1" colspan="1">klas</th>
@@ -16,7 +15,6 @@
         </thead>
         <tfoot>
         <tr>
-            <th rowspan="1" colspan="1">show</th>
             <th rowspan="1" colspan="1">student nummer</th>
             <th rowspan="1" colspan="1">naam</th>
             <th rowspan="1" colspan="1">klas</th>
@@ -24,10 +22,10 @@
         </tfoot>
         <tbody>
         @foreach ($students as $student)
-            <tr>
-                <td><a class='btn btn-secondary' href='{{ route('registering.edit',['id' => $student->id])}}'><i
-                                class="fa fa-plus" aria-hidden="true"></i></a></td>
-                <td>{{ $student->stamnr}}</td>
+            <tr style="height:100%;">
+                <td style="padding:0px;height:0px;"><a class="link_full_space_party" style="padding:12px;"
+                       href='{{ route('registering.edit',['id' => $student->id])}}'><strong>{{ $student->stamnr}}</strong></a></td>
+                {{--<td>{{ $student->stamnr}}</td>--}}
                 <td>{{ $student->first_name}} {{ $student->middle_name}} {{ $student->last_name}}</td>
                 <td>{{ $student->class}}</td>
             </tr>

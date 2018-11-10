@@ -10683,3 +10683,20 @@ body.sticky-footer {
   height: 100%;
 }
 
+.link_full_space_party {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+}
+
+.link_full_space_party:hover {
+  text-decoration: none;
+  color: #ffffff;
+  background-color: #a9d4e9;
+}
+
+html,
+body {
+  height: 100%;
+}
+

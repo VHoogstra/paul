@@ -3,7 +3,7 @@
     <div class="h4">
         <i class="fa fa-users fa-lg"></i> Gebruikers
     </div>
-
+    <hr>
 
     <div class="form-row">
         <div class="form-group" style="padding:2px;margin-bottom:0px;">
