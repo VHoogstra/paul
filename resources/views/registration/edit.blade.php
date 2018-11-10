@@ -4,7 +4,7 @@
 
         <i class="fa fa-table"></i> {{$student->first_name}} {{$student->middle_name}} {{$student->last_name}}
         - {{$student->stamnr}} - {{$student->class}}
-        <a class="pull-right" href="{{route('registering.index')}}">
+        <a class="float-right" href="{{route('registering.index')}}">
             <span class="nav-link-text">back</span>
             <i class="fa fa-chevron-right"></i>
         </a>
