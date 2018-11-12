@@ -3,12 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class Registration extends Model
 {
 
     protected $table = 'registrations';
+    protected $appends = array('state');
 
     /**
      * @param  $id
@@ -129,21 +131,40 @@ class Registration extends Model
     }
 
     /**
+     * returns null if user has not payed and isn't inside
+     * returns 1 if user has payed but not inside
+     * returns 2 if user has pasyed and is inside
+     *
      * @param $userId
      * @param $partyId
-     * @return array
+     * @return null|int
      */
-    public static function status($userId, $partyId)
+    public static function status()
     {
+        Auth::user()->id;
+        $partyId = Party::getActive()->id;
         $user = self::where('user_id', '=', $userId)->where('party_id', '=', $partyId)->first();
-        if ($user == null || ($user->payed === 0 && $user->inside === 0)) {
-            return ['code' => 0, "msg" => 'not payed not inside'];
+        if ($user == null || ($user->payed === 0 && $user->special === 0 && $user->inside === 0)) {
+            return null;
         }
-        if ($user->payed === 1 && $user->inside === 0) {
-            return ['code' => 1, "msg" => 'payed but not inside'];
+        if (($user->payed === 1 || $user->special === 1) && $user->inside === 0) {
+            return 1;
         }
-        if ($user->payed === 1 && $user->inside === 1) {
-            return ['code' => 2, "msg" => 'payed and inside'];
+        if (($user->payed === 1 || $user->special === 1) && $user->inside === 1) {
+            return 2;
         }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getState()
+    {
+        return $this->status;
+    }
+
+    public function hasUser()
+    {
+        return $this->belongsTo('App\User');
     }
 }
