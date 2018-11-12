@@ -134,8 +134,7 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function (data) {
-                    console.log(data);
-                    //location.reload();
+                    location.reload();
                 },
                 error: function(data){
                     console.log(data);
