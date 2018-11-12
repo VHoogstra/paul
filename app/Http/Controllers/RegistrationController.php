@@ -75,7 +75,7 @@ class RegistrationController extends Controller
             $payed = Registration::where('user_id', '=', $id)->where('party_id', '=', $activeParty->id)->first();
             $payedCount = Registration::where('user_id', '=', $id)->where('party_id', '=', $activeParty->id)->count();
         }
-
+        $status = Registration::status($id, $activeParty->id);
         $student = Student::find($id);
         $birthDate = Carbon::parse($student->birth_date);
         $age = Carbon::createFromDate($birthDate->year, $birthDate->month, $birthDate->day)->age;
@@ -95,14 +95,17 @@ class RegistrationController extends Controller
                 $payedStatus = false;
             }
         }
-        return view('registration.edit', compact('student', 'age', 'payed', 'payedCount', 'contents', 'insideStatus', 'payedStatus'));
+        return view(
+            'registration.edit',
+            compact('student', 'age', 'payed', 'payedCount', 'contents', 'insideStatus', 'payedStatus','status')
+        );
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  \App\Registration        $registration
+     * @param  \App\Registration $registration
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Registration $registration)
@@ -157,8 +160,7 @@ class RegistrationController extends Controller
                 return back()->with('error', 'not payed!');
             }
         }
-        return back()->with('error', 'success!');
-        ;
+        return back()->with('error', 'success!');;
     }
 
     public function special($id)
@@ -212,7 +214,6 @@ class RegistrationController extends Controller
             $registration->special = 0;
             $registration->save();
         }
-        return back()->with('error', 'success!');
-        ;
+        return back()->with('error', 'success!');;
     }
 }

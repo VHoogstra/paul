@@ -77,4 +77,12 @@ class User extends Authenticatable
             ->get();
         return count($user) === 1;
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function userRole()
+    {
+        return $this->hasOne('App\UserRole','id','role');
+    }
 }

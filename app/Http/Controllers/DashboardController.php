@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Party;
 use App\User;
 use App\Registration;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -24,6 +25,7 @@ class DashboardController extends Controller
             $payedNInside = Registration::payedNotInsideCount();
         }
 
+//        dd(Auth::user()->userRole);
         return view('dashboard.index', compact('activeParty', 'inside', 'payed', 'payedNInside'));
     }
 
