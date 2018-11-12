@@ -68,9 +68,7 @@
         // $(document).ready(function () {
         //     var table = $('#datatable').DataTable();
         // });
-        //href="{{route("party.archive", ['id' =>$party->id])}}">
-        // href="{{route("party.active", ['id' =>$party->id])}}">
-        //ction="{{route("party.destroy", ['id' =>$party->id])}}"
+
         //and delete
         {{--<form action="{{route("party.destroy", ['id' =>$party->id])}}"--}}
         {{--method="POST" class="btn-group">--}}

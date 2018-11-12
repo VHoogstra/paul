@@ -138,13 +138,13 @@
                 </a>
             </li>
             <li>
-                <a href='{{route('dashboard.index')}}' class="link_full_space">
+                <a class="link_full_space">
                     <i class='fa fa-user fa-lg'></i> Profiel <span class='badge badge-warning higher-badge'>(comming soon)</span>
                 </a>
             </li>
 
             <li data-toggle='collapse' data-target='#service' class='collapsed'>
-                <a href='{{route('dashboard.index')}}' class="link_full_space" style='width: 100%;'>
+                <a class="link_full_space" style='width: 100%;'>
                     <i class='fa fa-globe fa-lg'></i> Services <span
                             class='fas fa-angle-down arrow'></span><span class='badge badge-warning higher-badge'>(comming soon)</span></a>
             </li>
