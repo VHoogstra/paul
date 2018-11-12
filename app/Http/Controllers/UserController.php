@@ -6,6 +6,7 @@ use App\user;
 use App\UserRole;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Response;
 
 class UserController extends Controller
 {
@@ -16,8 +17,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = user::roleAll();
-        return view('user.index', compact('users'));
+        $userRoles = UserRole::all();
+        $users = user::all();
+        return view('user.index', compact('users', 'userRoles'));
     }
 
     /**
@@ -27,7 +29,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+//        $users = user::roleId($id);
+        $roles = UserRole::all();
+        return view('user.create', compact('roles'));
     }
 
     /**
@@ -38,7 +42,22 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+            'role' => 'required',
+        ]);
+
+        $user = new user();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = $request->password;
+        $user->role = $request->role;
+        $user->save();
+
+
+        return redirect(route('user.index'));
     }
 
     /**
@@ -66,18 +85,26 @@ class UserController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int                      $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, $id)
     {
+
+        if ($id == 0) {
+            user::whereIn('id', $request->users)->update(['role' => $request->role]);
+            return Response::json('true', 200);
+        }
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'role' => 'required',
+        ]);
         $user = user::find($id);
+        $user->name = $request->name;
         $user->role = $request->role;
         $user->save();
-        return redirect::route("user.index");
+        return redirect()->back();
     }
 
     /**
@@ -86,8 +113,9 @@ class UserController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        user::whereIn('id', $request->users)->delete();
+        return Response::json('true', 200);
     }
 }
