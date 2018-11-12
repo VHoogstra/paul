@@ -24,7 +24,7 @@
     <tbody>
         @foreach ($students as $student)
         <tr>
-            <td><a class='btn btn-secondary' href='{{ route('registering.edit',['id' => $student->id])}}'><i class="fa fa-plus" aria-hidden="true"></i></a></td>
+            <td><a class='btn btn-secondary' href='{{ route('registering.edit',['id' => $student->stamnr])}}'><i class="fa fa-plus" aria-hidden="true"></i></a></td>
             <td>{{ $student->stamnr}}</td>
             <td>{{ $student->first_name}} {{ $student->middle_name}} {{ $student->last_name}}</td>
             <td>{{ $student->class}}</td>

@@ -75,31 +75,18 @@ class RegistrationController extends Controller
             $payed = Registration::where('user_id', '=', $id)->where('party_id', '=', $activeParty->id)->first();
             $payedCount = Registration::where('user_id', '=', $id)->where('party_id', '=', $activeParty->id)->count();
         }
-        $registration = Registration::where('user_id', $id)->first();
+        $registration = Registration::where('user_id', $id)->where('party_id', '=', $activeParty->id)->first();
         if (!$registration) {
-            $status = null;
+            $status = ['code'=>0,'msg'=>'Wie is dit?'];
         } else {
-            $status = $registration->state();
+            $status = $registration->getState();
         }
-        $student = Student::find($id);
+        $student = Student::where('stamnr', $id)->first();
         $birthDate = Carbon::parse($student->birth_date);
         $age = Carbon::createFromDate($birthDate->year, $birthDate->month, $birthDate->day)->age;
         $year = Settings::getPhotoYear();
         $contents = Storage::url('images/' . $year . '/' . $student->stamnr . '.jpg');
         event(new StudentSearched($student));
-//        $payedStatus = true;
-//        $insideStatus = false;
-//        if ($payedCount == 0) {
-//            $payedStatus = true;
-//            $insideStatus = false;
-//        } else {
-//            if (($payed->special == 1 || $payed->payed == 1) && $payed->inside == 0) {
-//                $insideStatus = true;
-//            }
-//            if ($payedCount == 1 && ($payed->specal == 1 || $payed->payed == 1)) {
-//                $payedStatus = false;
-//            }
-//        }
         return view(
             'registration.edit',
             compact('student', 'age', 'payed', 'payedCount', 'contents', 'status')

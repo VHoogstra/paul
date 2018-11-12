@@ -33,7 +33,7 @@ class Registration extends Model
     public static function payedUsers($id): array
     {
         $users = DB::select(
-            'select * from registrations join students on registrations.user_id = students.id where party_id = ? AND (payed= 1 OR special =1)',
+            'select * from registrations join students on registrations.user_id = students.stamnr where party_id = ? AND (payed= 1 OR special =1)',
             [$id]
         );
         return $users;
@@ -46,7 +46,7 @@ class Registration extends Model
     public static function insideUsers($id): array
     {
         $users = DB::select(
-            'select * from registrations join students on registrations.user_id = students.id where party_id = ? AND (inside= 1 )',
+            'select * from registrations join students on registrations.user_id = students.stamnr where party_id = ? AND (inside= 1 )',
             [$id]
         );
         return $users;
@@ -59,7 +59,7 @@ class Registration extends Model
     public static function payedAndNotInside($id): array
     {
         $users = DB::select(
-            'select * from registrations join students on registrations.user_id = students.id where party_id = ? AND (payed= 1 OR special =1) AND inside=0',
+            'select * from registrations join students on registrations.user_id = students.stamnr where party_id = ? AND (payed= 1 OR special =1) AND inside=0',
             [$id]
         );
         self::where(
@@ -139,19 +139,20 @@ class Registration extends Model
      * @param $partyId
      * @return null|int
      */
-    public static function status()
+    public function status()
     {
-        Auth::user()->id;
-        $partyId = Party::getActive()->id;
-        $user = self::where('user_id', '=', $userId)->where('party_id', '=', $partyId)->first();
+        $user= $this;
         if ($user == null || ($user->payed === 0 && $user->special === 0 && $user->inside === 0)) {
-            return null;
+            return ['code'=>0,'msg'=>'Wie is dit?'];
+//          return null;
         }
         if (($user->payed === 1 || $user->special === 1) && $user->inside === 0) {
-            return 1;
+            return ['code'=>1,'msg'=>'Student heeft betaald'];
+//            return 1;
         }
         if (($user->payed === 1 || $user->special === 1) && $user->inside === 1) {
-            return 2;
+            return ['code'=>2,'msg'=>'Student heeft betaald en is binnen'];
+//          return 2;
         }
     }
 
@@ -160,7 +161,7 @@ class Registration extends Model
      */
     public function getState()
     {
-        return $this->status;
+        return $this->status();
     }
 
     public function hasUser()
