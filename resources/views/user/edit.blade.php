@@ -1,24 +1,30 @@
 @extends('layouts.master') @section('content')
 
-<h2> edit user name</h2>
-
+<h2> edit User</h2>
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 <form action = '/user/{{$users->id}}' method = 'post'>
         {{ csrf_field() }}
         {{ method_field('patch') }}
-    <div class="form-group">
+       <div class="form-group">
         <label for="exampleFormControlInput1">name</label>
-        <input type="email" class="form-control" value="{{$users->name}}" readonly>
+        <input type="txt" class="form-control" name="name" value="{{$users->name}}">
     </div>
     <div class="form-group">
         <label for="exampleFormControlInput1">email</label>
-        <input type="email" class="form-control" value="{{$users->email}}" readonly>
+        <input type="email" class="form-control" name="email" value="{{$users->email}}" readonly>
     </div>
-
     <div class="form-group">
         <label for="exampleFormControlSelect1">role</label>
-        <select class="form-control" name="role" value="{{$users->role_id}}">
-
-           @foreach($roles as $role)
+        <select class="form-control" name="role" >
+            @foreach($roles as $role)
                 @if ($users->role_id == $role->id)
                     <option value="{{$role->id}}" selected>{{$role->name}}</option>
                 @else
@@ -28,7 +34,7 @@
 
         </select>
     </div>
-    <button type="submit" class="btn btn-primary "> change</button>
+    <button type="submit" class="btn btn-primary ">Opslaan</button>
 
 
 </form>

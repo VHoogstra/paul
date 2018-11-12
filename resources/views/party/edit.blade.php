@@ -26,7 +26,7 @@
     <div class="form-group row">
         <label for="example-number-input" class="col-2 col-form-label">speciale prijs</label>
         <div class="col-10">
-            <input class="form-control" type="number" name='price_speciale' value='{{$party->price_speciale}}'>
+            <input class="form-control" type="number" name='price_speciale' value='{{$party->price_special}}'>
         </div>
     </div>
 

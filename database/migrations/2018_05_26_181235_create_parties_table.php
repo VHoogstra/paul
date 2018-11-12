@@ -18,7 +18,7 @@ class CreatePartiesTable extends Migration
             $table->string('name');
             $table->double('price', 4, 2);
             $table->double('price_preSale', 4, 2);
-            $table->double('price_special', 4, 2);
+            $table->double('price_special', 4, 2)->nullable($value = true);
             $table->timestamp('preSale_start');
             $table->timestamp('start_date')->nullable($value = true);
             $table->timestamp('stop_date')->nullable($value = true);

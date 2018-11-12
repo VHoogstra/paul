@@ -7,6 +7,7 @@ use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Response;
 
 class PartyController extends Controller
 {
@@ -53,6 +54,10 @@ class PartyController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'price' => 'required',
+            'price_presale' => 'required',
+        ]);
         $party = new Party;
         $party->name = $request->name;
         $party->price = $request->price;
@@ -125,10 +130,12 @@ class PartyController extends Controller
      * @param  $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        Party::destroy($id);
-        return redirect::route('party.index');
+        if ($id == 0) {
+            Party::whereIn('id', $request->users)->delete();
+            return Response::json('true', 200);
+        }
     }
 
     /**
@@ -146,7 +153,7 @@ class PartyController extends Controller
         $party = Party::find($id);
         $party->active = 1;
         $party->save();
-        return redirect::route('party.index');
+        return Response::json('true', 200);
     }
 
     /**
@@ -155,8 +162,13 @@ class PartyController extends Controller
      * @param  $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function archive($id)
+    public function archive(Request $request,$id)
     {
+        if ($id == 0) {
+            Party::whereIn('id', $request->users)->update(['archive'=>1,'active'=>0]);
+            return Response::json('true', 200);
+        }
+
         $party = Party::find($id);
         $party->archive = 1;
         $party->active = 0;

@@ -31,16 +31,6 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    /**
-     * @return \Illuminate\Support\Collection
-     */
-    public static function roleAll()
-    {
-        $users = DB::table('users')->select('users.name', 'users.email', 'user_roles.name as role', 'users.id')
-            ->leftJoin('user_roles', 'users.role', '=', 'user_roles.id')
-            ->get();
-        return $users;
-    }
 
     /**
      * @param $id
@@ -76,5 +66,13 @@ class User extends Authenticatable
             ->where('role', '=', $role[0]->id)
             ->get();
         return count($user) === 1;
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function userRole()
+    {
+        return $this->hasOne('App\UserRole','id','role');
     }
 }
