@@ -75,15 +75,20 @@ class Registration extends Model
     public static function payedNotInsideCount(): int
     {
         $activeParty = Party::getActive();
-        $userCount = self::where(
-            function ($query) {
-                $query->where('payed', '=', '1')
-                    ->orwhere('special', '=', '1');
-            }
-        )
-            ->where('inside', '=', 0)
-            ->where('party_id', '=', $activeParty->id)
-            ->count();
+
+        if (!$activeParty) {
+            $userCount = 0;
+        } else {
+            $userCount = self::where(
+                function ($query) {
+                    $query->where('payed', '=', '1')
+                        ->orwhere('special', '=', '1');
+                }
+            )
+                ->where('inside', '=', 0)
+                ->where('party_id', '=', $activeParty->id)
+                ->count();
+        }
         return $userCount;
     }
 
@@ -93,14 +98,19 @@ class Registration extends Model
     public static function payedCount(): int
     {
         $activeParty = Party::getActive();
-        $userCount = self::where(
-            function ($query) {
-                $query->where('payed', '=', '1')
-                    ->orwhere('special', '=', '1');
-            }
-        )
-            ->where('party_id', '=', $activeParty->id)
-            ->count();
+        if (!$activeParty) {
+            $userCount = 0;
+        } else {
+            $userCount = self::where(
+                function ($query) {
+                    $query->where('payed', '=', '1')
+                        ->orwhere('special', '=', '1');
+                }
+            )
+                ->where('party_id', '=', $activeParty->id)
+                ->count();
+        }
+
         return $userCount;
     }
 
@@ -110,7 +120,11 @@ class Registration extends Model
     public static function insideCount(): int
     {
         $activeParty = Party::getActive();
-        $userCount = self::where('inside', '=', '1')->where('party_id', '=', $activeParty->id)->count();
+        if (!$activeParty) {
+            $userCount = 0;
+        } else {
+            $userCount = self::where('inside', '=', '1')->where('party_id', '=', $activeParty->id)->count();
+        }
         return $userCount;
     }
 
@@ -122,7 +136,7 @@ class Registration extends Model
     public static function status($userId, $partyId)
     {
         $user = self::where('user_id', '=', $userId)->where('party_id', '=', $partyId)->first();
-        if ($user == null||($user->payed === 0 && $user->inside === 0)) {
+        if ($user == null || ($user->payed === 0 && $user->inside === 0)) {
             return ['code' => 0, "msg" => 'not payed not inside'];
         }
         if ($user->payed === 1 && $user->inside === 0) {

@@ -3,11 +3,11 @@
     <div class="h4">
         <i class="fa fa-table"></i> @if(!$partyActive)
             Feest active not set
-            <button class="btn" onclick="window.location.href='{{route("party.create")}}'">Nieuw feest</button>
         @else
             Feest {{$partyActive->name}} (active)
-            <button class="btn" onclick="window.location.href='{{route("party.create")}}'">Nieuw feest</button>
         @endif
+        <button class="btn btn-outline-success" onclick="window.location.href='{{route("party.create")}}'">Nieuw feest</button>
+
     </div>
     <hr>
 
