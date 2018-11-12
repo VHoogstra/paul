@@ -15,6 +15,15 @@ class RegistrationController extends Controller
 {
     //todo don't make this a resource class
     /**
+     * @param $search
+     * @return mixed
+     */
+    public static function find($search)
+    {
+        return Student::search($search)->get();
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -118,6 +127,7 @@ class RegistrationController extends Controller
 
     /**
      * @param $id
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function payed($id)
     {
@@ -137,6 +147,10 @@ class RegistrationController extends Controller
         return back()->with('error', 'success!');
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function inside($id)
     {
         $currentParty = Party::getActive();
@@ -152,9 +166,13 @@ class RegistrationController extends Controller
                 return back()->with('error', 'not payed!');
             }
         }
-        return back()->with('error', 'success!');;
+        return back()->with('error', 'success!');
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function special($id)
     {
         $currentParty = Party::getActive();
@@ -173,6 +191,10 @@ class RegistrationController extends Controller
         return back()->with('error', 'success!');
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function payedAndInside($id)
     {
         $currentParty = Party::getActive();
@@ -193,6 +215,10 @@ class RegistrationController extends Controller
         return back()->with('error', 'success!');
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function reset($id)
     {
         $currentParty = Party::getActive();
@@ -206,6 +232,6 @@ class RegistrationController extends Controller
             $registration->special = 0;
             $registration->save();
         }
-        return back()->with('error', 'success!');;
+        return back()->with('error', 'success!');
     }
 }

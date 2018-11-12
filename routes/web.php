@@ -12,8 +12,8 @@
 */
 
 Auth::routes();
-Route::get('/test', function () {
-    echo phpinfo();
+Route::get('/', function(){
+    return redirect('login');
 });
 
 Route::get('/notUser', function () {
@@ -27,6 +27,8 @@ Route::middleware(['role:2', 'auth'])->group(function () {
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard.index');
     Route::get('/dashboard/{status}', 'DashboardController@show');
     route::resource('/registering', 'RegistrationController');
+    route::get('/registering/find/{search}', 'RegistrationController@find');
+    route::get('/registering/get/{id}', 'RegistrationController@edit');
 
     route::get('registering/payed/{id}', 'RegistrationController@payed');
     route::get('registering/reset/{id}', 'RegistrationController@reset');
@@ -35,7 +37,6 @@ Route::middleware(['role:2', 'auth'])->group(function () {
     route::get('registering/inside/{id}', 'RegistrationController@inside');
     route::resource('statistic', 'StatisticController');
     route::resource('student', 'StudentController');
-
 });
 
 Route::middleware(['role:3', 'auth'])->group(function () {
@@ -47,5 +48,4 @@ Route::middleware(['role:3', 'auth'])->group(function () {
     route::post('student/storePhotoYear', 'StudentController@storePhotoYear')->name('studentStoreYear');
     route::post('student/storePhoto', 'StudentController@storePhoto')->name('studentStore');
     route::resource('user', 'UserController');
-
 });
