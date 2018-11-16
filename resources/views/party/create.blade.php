@@ -21,19 +21,19 @@
     <div class="form-group row">
         <label for="example-number-input" class="col-2 col-form-label">entree prijs</label>
         <div class="col-10">
-            <input class="form-control" type="number" name='price'>
+            <input class="form-control" type="number" name='price' value="0">
         </div>
     </div>
     <div class="form-group row">
         <label for="example-number-input" class="col-2 col-form-label">voorverkoop prijs</label>
         <div class="col-10">
-            <input class="form-control" type="number" name='price_presale'>
+            <input class="form-control" type="number" name='price_presale' value="0">
         </div>
     </div>
     <div class="form-group row">
         <label for="example-number-input" class="col-2 col-form-label">speciale prijs</label>
         <div class="col-10">
-            <input class="form-control" type="number" name='price_speciale'>
+            <input class="form-control" type="number" name='price_speciale' value="0">
         </div>
     </div>
 

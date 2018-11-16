@@ -58,11 +58,11 @@
                     <i class="fas fa-sign-out-alt fa-lg"></i> Logout
                 </a>
             </li>
-            <li>
-                Logout
-                {{(Auth::user()->userRole->name)}}
+            {{--<li>--}}
+                {{--Logout--}}
+                {{--{{(Auth::user()->userRole->name)}}--}}
                 {{--@if(Auth::user()->role >2)--}}
-            </li>
+            {{--</li>--}}
             {{--<i class='fas fa-user-injured'></i> for unfinished pages--}}
         </ul>
     </div>
