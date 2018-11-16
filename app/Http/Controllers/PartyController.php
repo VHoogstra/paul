@@ -162,7 +162,7 @@ class PartyController extends Controller
      * @param  $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function archive(Request $request,$id)
+    public function archive(Request $request, $id)
     {
         if ($id == 0) {
             Party::whereIn('id', $request->users)->update(['archive'=>1,'active'=>0]);

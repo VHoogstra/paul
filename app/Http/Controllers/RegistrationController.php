@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\StudentSiteSearch;
 use App\Party;
 use App\Student;
 use App\Settings;
@@ -20,6 +21,7 @@ class RegistrationController extends Controller
      */
     public static function find($search)
     {
+        event(new StudentSiteSearch($search));
         return Student::search($search)->get();
     }
 

@@ -75,7 +75,7 @@
                     .clear();
                 for (let i = 0; i < data.length; i++) {
                     table.row.add([
-                        "<a class='btn btn-secondary' href='/registering/get/" + data[i].id + "'><i class='fa fa-plus' aria-hidden='true'></i></a>",
+                        "<a class='btn btn-secondary' href='/registering/get/" + data[i].stamnr + "'><i class='fa fa-plus' aria-hidden='true'></i></a>",
                         data[i].stamnr,
                         data[i].first_name + ' ' + data[i].middle_name + ' ' + data[i].last_name,
                         data[i].class,

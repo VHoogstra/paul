@@ -16,6 +16,7 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\Event' => ['App\Listeners\EventListener',],
         'Illuminate\Auth\Events\Login' => ['App\Listeners\LoginEvent',],
         'App\Events\StudentSearched' => ['App\Listeners\StudentSearche'],
+        'App\Events\StudentSiteSearch' => ['App\Listeners\StudentSiteSearchListener'],
     ];
 
     /**
