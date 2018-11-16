@@ -21,7 +21,7 @@
             <li>
                 <a href='' class="link_full_space">
                     {{--<i class='fa fa-chart-line fa-lg'></i>--}}
-                    <i class='fas fa-user-injured'></i>Statistiek <span class='badge badge-warning higher-badge'>(comming soon)</span>
+                    <i class='fas fa-user-injured  fa-lg'></i>Statistiek <span class='badge badge-warning higher-badge'>(comming soon)</span>
 
                 </a>
             </li>
@@ -34,34 +34,34 @@
                 <a href='{{route('user.index')}}' class="link_full_space">
 
                     <i class='fas fa-hat-wizard fa-lg'></i> Admin
+
                 </a>
             </li>
+            {{--<li data-toggle='collapse' data-target='#service' class='collapsed'>--}}
+            {{--<a class="link_full_space" style='width: 100%;'>--}}
+            {{--<i class='fa fa-globe fa-lg'></i> Services <span--}}
+            {{--class='fas fa-angle-down arrow'></span><span class='badge badge-warning higher-badge'>(comming soon)</span></a>--}}
+            {{--</li>--}}
+            {{--<ul class='sub-menu collapse' id='service'>--}}
+            {{--<li>New Service 1</li>--}}
+            {{--<li>New Service 2</li>--}}
+            {{--<li>New Service 3</li>--}}
+            {{--</ul>--}}
+            @endif
             <li>
                 <a class="link_full_space">
                     <i class='fa fa-user fa-lg'></i> Profiel <span class='badge badge-warning higher-badge'>(comming soon)</span>
                 </a>
             </li>
-
-            <li data-toggle='collapse' data-target='#service' class='collapsed'>
-                <a class="link_full_space" style='width: 100%;'>
-                    <i class='fa fa-globe fa-lg'></i> Services <span
-                            class='fas fa-angle-down arrow'></span><span class='badge badge-warning higher-badge'>(comming soon)</span></a>
-            </li>
-            <ul class='sub-menu collapse' id='service'>
-                <li>New Service 1</li>
-                <li>New Service 2</li>
-                <li>New Service 3</li>
-            </ul>
-            @endif
             <li>
                 <a class="link_full_space" data-toggle="modal" data-target="#LogoutModel" class="link_full_space">
                     <i class="fas fa-sign-out-alt fa-lg"></i> Logout
                 </a>
             </li>
             {{--<li>--}}
-                {{--Logout--}}
-                {{--{{(Auth::user()->userRole->name)}}--}}
-                {{--@if(Auth::user()->role >2)--}}
+            {{--Logout--}}
+            {{--{{(Auth::user()->userRole->name)}}--}}
+            {{--@if(Auth::user()->role >2)--}}
             {{--</li>--}}
             {{--<i class='fas fa-user-injured'></i> for unfinished pages--}}
         </ul>
