@@ -2,36 +2,37 @@
 
 namespace App\Http\Controllers;
 
-use App\party;
+use App\Party;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Response;
 
 class PartyController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display all parties
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $partyActive = party::getActive();
-        $partys = party::all()->where('archive', 0);
-        return view("party.index", compact("partyActive", "partys"));
+        $partyActive = Party::getActive();
+        $partys = Party::all()->where('archive', 0);
+        return view('party.index', compact('partyActive', 'partys'));
     }
 
     /**
-     * Display a listing of the resource.
+     * Display all parties that are archived
      *
      * @return \Illuminate\Http\Response
      */
     public function indexArchive()
     {
-        $partyActive = party::getActive();
-        $partys = party::all()->where('archive', 1);
-        return view("party.archive", compact("partyActive", "partys"));
+        $partyActive = Party::getActive();
+        $partys = Party::all()->where('archive', 1);
+        return view('party.archive', compact('partyActive', 'partys'));
     }
 
     /**
@@ -41,8 +42,8 @@ class PartyController extends Controller
      */
     public function create()
     {
-        $today = date("YY-MM-DD");
-        return view("party.create", compact("today"));
+        $today = date('Y-m-d\TH:i');
+        return view('party.create', compact('today'));
     }
 
     /**
@@ -53,69 +54,74 @@ class PartyController extends Controller
      */
     public function store(Request $request)
     {
-        $party = new party;
-        $party->name =$request->name ;
-        $party->price =$request->price ;
-        $party->price_preSale =$request->price_presale ;
-        $party->price_speciale = $request->price_speciale;
-        $party->preSale_start =$request->presale_start ;
+        $request->validate([
+            'price' => 'required',
+            'price_presale' => 'required',
+        ]);
+        $party = new Party;
+        $party->name = $request->name;
+        $party->price = $request->price;
+        $party->price_preSale = $request->price_presale;
+        $party->price_special = $request->price_speciale;
+        $party->preSale_start = $request->presale_start;
         $party->start_date = $request->start_date;
-        $party->stop_date =$request->stop_date;
+        $party->stop_date = $request->stop_date;
         $party->save();
-        return redirect::route("party.index");
+        return redirect::route('party.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\party $party
+     * @param  \App\Party $party
      * @return \Illuminate\Http\Response
      */
-    public function show(party $party)
+    public function show(Party $party)
     {
         //
+        //todo show a single party on page, fixed this with edit page?
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\party $party
+     * @param  \App\Party $party
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $party = party::find($id);
+        $party = Party::find($id);
         $startsale = new DateTime($party->presale_start);
-        $startsale =  $startsale->format('Y-m-d')."T".$startsale->format('h:i');
+        $startsale = $startsale->format('Y-m-d') . 'T' . $startsale->format('h:i');
         $startDate = new DateTime($party->start_date);
-        $start = $startDate->format('Y-m-d')."T".$startDate->format('h:i');
+        $start = $startDate->format('Y-m-d') . 'T' . $startDate->format('h:i');
 
         $stop = new DateTime($party->stop_date);
-        $stop =  $stop->format('Y-m-d')."T".$stop->format('h:i');
+        $stop = $stop->format('Y-m-d') . 'T' . $stop->format('h:i');
 
 
-        return view("party.edit", compact('party', 'startsale', "start", "stop"));
+        return view('party.edit', compact('party', 'startsale', 'start', 'stop'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  \App\party               $party
+     * @param  \App\Party $party
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $party)
     {
-        $party =  party::find($party);
-        $party->name =$request->name ;
-        $party->price =$request->price ;
-        $party->price_preSale =$request->price_presale ;
-        $party->price_speciale = $request->price_speciale;
-        $party->preSale_start =$request->presale_start ;
+        $party = Party::find($party);
+        $party->name = $request->name;
+        $party->price = $request->price;
+        $party->price_preSale = $request->price_presale;
+        $party->price_special = $request->price_speciale;
+        $party->preSale_start = $request->presale_start;
         $party->start_date = $request->start_date;
-        $party->stop_date =$request->stop_date;
+        $party->stop_date = $request->stop_date;
         $party->save();
-        return redirect::route("party.index");
+        return redirect::route('party.index');
     }
 
     /**
@@ -124,10 +130,12 @@ class PartyController extends Controller
      * @param  $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        Party::destroy($id);
-        return redirect::route("party.index");
+        if ($id == 0) {
+            Party::whereIn('id', $request->users)->delete();
+            return Response::json('true', 200);
+        }
     }
 
     /**
@@ -138,13 +146,14 @@ class PartyController extends Controller
      */
     public function active($id)
     {
-        $oldActive=  DB::table('parties')
+        //todo move this to model
+        $oldActive = DB::table('parties')
             ->where('active', 1)
             ->update(['active' => 0]);
-        $party = party::find($id);
-        $party->active =1 ;
+        $party = Party::find($id);
+        $party->active = 1;
         $party->save();
-        return redirect::route("party.index");
+        return Response::json('true', 200);
     }
 
     /**
@@ -153,13 +162,18 @@ class PartyController extends Controller
      * @param  $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function archive($id)
+    public function archive(Request $request, $id)
     {
-        $party = party::find($id);
-        $party->archive =1 ;
-        $party->active =0 ;
+        if ($id == 0) {
+            Party::whereIn('id', $request->users)->update(['archive'=>1,'active'=>0]);
+            return Response::json('true', 200);
+        }
+
+        $party = Party::find($id);
+        $party->archive = 1;
+        $party->active = 0;
         $party->save();
-        return redirect::route("party.index");
+        return redirect::route('party.index');
     }
 
     /**
@@ -170,9 +184,9 @@ class PartyController extends Controller
      */
     public function dearchive($id)
     {
-        $party = party::find($id);
-        $party->archive =0 ;
+        $party = Party::find($id);
+        $party->archive = 0;
         $party->save();
-        return redirect::route("party.indexArchive");
+        return redirect::route('party.indexArchive');
     }
 }

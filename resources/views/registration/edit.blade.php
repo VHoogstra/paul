@@ -4,7 +4,7 @@
 
         <i class="fa fa-table"></i> {{$student->first_name}} {{$student->middle_name}} {{$student->last_name}}
         - {{$student->stamnr}} - {{$student->class}}
-        <a class="pull-right" href="{{route('registering.index')}}">
+        <a class="float-right" href="{{route('registering.index')}}">
             <span class="nav-link-text">back</span>
             <i class="fa fa-chevron-right"></i>
         </a>
@@ -20,7 +20,8 @@
                 <div>
                     <i class="fa fa-phone" aria-hidden="true"></i> {{$student->phone_number}}<br>
                     <i class="fa fa-birthday-cake" aria-hidden="true"></i> {{$student->birth_date}}<br>
-                    <i class="fa fa-birthday-cake" aria-hidden="true"></i> {{$age}} Years old!
+                    <i class="fa fa-birthday-cake" aria-hidden="true"></i> {{$age}} Years old!<br>
+                    <i class="fas fa-hand-holding-usd"></i> {{$status['msg']}}
                 </div>
                 <hr>
                 @if(session('error'))
@@ -33,112 +34,78 @@
                             <strong>Oh snap!</strong> no active party set!!
                         </div>
                     @else
-                        <a href="/registering/payed/{{$student->id}}">
-                            @if($payedStatus)
-                                <button class="btn btn-primary btn-sm-block btn-block" style="margin-bottom: 10px;"
-                                > betaald
-                                </button>
-                            @else
-                                <button class="btn btn-primary btn-sm-block btn-block" style="margin-bottom: 10px;"
-                                        disabled>
-                                    betaald
-                                </button>
-                            @endif
-                        </a>
-                        <a href="/registering/inside/{{$student->id}}">
-                            @if($insideStatus)
-                                <button type="button" class="btn btn-primary btn-block" style="margin-bottom: 10px;"
-                                >binnen
-                                </button>
-                            @else
-                                <button type="button" class="btn btn-primary btn-block" style="margin-bottom: 10px;"
-                                        disabled>binnen
-                                </button>
-                            @endif
 
-                        </a>
-
-                        <a href="/registering/speciale/{{$student->id}}">
-                            @if($payedStatus)
-
-                                <button class="btn btn-primary btn-block " style="margin-bottom: 10px;">speciaal
+                        @if($status['code']== 0)
+                            <a href="/registering/payed/{{$student->stamnr}}">
+                                <button class="btn btn-primary btn-sm-block btn-block" style="margin-bottom: 10px;">
+                                    Betaald
                                 </button>
-                            @else
-                                <button class="btn btn-primary btn-block " style="margin-bottom: 10px;" disabled>
-                                    speciaal
-                                </button>
-                            @endif
-
-                        </a>
-                            <a href="/registering/payedAndInside/{{$student->id}}">
-                                @if($payedStatus)
-
-                                <button class="btn btn-warning btn-block " style="margin-bottom: 10px;">betaald en
-                                    binnen
-                                </button>
-                                    @else
-                                    <button class="btn btn-warning btn-block " style="margin-bottom: 10px;" disabled>betaald en
-                                        binnen
-                                    </button>
-                                @endif
-
                             </a>
 
+                            <a href="/registering/speciale/{{$student->stamnr}}">
+                                <button class="btn btn-primary btn-block " style="margin-bottom: 10px;">
+                                    Speciaal
+                                </button>
+                            </a>
+                            <a href="/registering/inside/{{$student->stamnr}}">
+                                <button type="button" class="btn btn-primary btn-block" style="margin-bottom: 10px;">
+                                    Binnen
+                                </button>
+                            </a>
+                            <a href="/registering/payedAndInside/{{$student->stamnr}}">
+                                <button class="btn btn-warning btn-block " style="margin-bottom: 10px;">
+                                    Betaald en binnen
+                                </button>
+                            </a>
+                        @endif
 
-                        {{--@if($payedCount == 0)--}}
-                        {{--<a href="/registering/payed/{{$student->id}}">--}}
-                        {{--<button class="btn btn-primary ">betaald</button>--}}
-                        {{--</a>--}}
-                        {{--<a>--}}
-                        {{--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#error"--}}
-                        {{--disabled>binnen--}}
-                        {{--</button>--}}
-                        {{--</a>--}}
-                        {{--<a href="/registering/speciale/{{$student->id}}">--}}
-                        {{--<button class="btn btn-primary ">speciaal</button>--}}
-                        {{--</a>--}}
-                        {{--<hr>--}}
-                        {{--<a href="/registering/payedAndInside/{{$student->id}}">--}}
-                        {{--<button class="btn btn-warning ">betaald en binnen</button>--}}
-                        {{--</a>--}}
-                        {{--@else--}}
-                        {{--@if($payed[0]->payed == 1 || $payed[0]->special == 1)<a>--}}
-                        {{--<button class="btn btn-primary" disabled>betaald</button>--}}
-                        {{--</a>--}}
-                        {{--@else <a href="/registering/payed/{{$student->id}}">--}}
-                        {{--<button class="btn btn-primary">betaald</button>--}}
-                        {{--</a> @endif--}}
-                        {{--@if($payed[0]->payed == 1 || $payed[0]->special == 1)--}}
-                        {{--@if($payed[0]->inside == 1)<a>--}}
-                        {{--<button class="btn btn-primary" disabled>binnen</button>--}}
-                        {{--</a>--}}
-                        {{--@else <a href="/registering/inside/{{$student->id}}">--}}
-                        {{--<button class="btn btn-primary ">binnen</button>--}}
-                        {{--</a>@endif--}}
-                        {{--@else--}}
-                        {{--<a>--}}
-                        {{--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#error">--}}
-                        {{--binnen--}}
-                        {{--</button>--}}
-                        {{--</a>--}}
-                        {{--@endif--}}
-                        {{--@if($payed[0]->special == 1 || $payed[0]->payed == 1)<a>--}}
-                        {{--<button class="btn btn-primary" disabled>speciaal</button>--}}
-                        {{--</a>--}}
-                        {{--@else<a href="/registering/speciale/{{$student->id}}">--}}
-                        {{--<button class="btn btn-primary ">speciaal</button>--}}
-                        {{--</a>@endif--}}
-                        {{--<br>--}}
-                        {{--@if($payed[0]->payed == 1 || $payed[0]->special == 1 || $payed[0]->inside == 1)--}}
-                        {{--<a>--}}
-                        {{--<button class="btn btn-warning" disabled>betaald en binnen</button>--}}
-                        {{--</a>--}}
-                        {{--@else--}}
-                        {{--<a href="/registering/payedAndInside/{{$student->id}}">--}}
-                        {{--<button class="btn btn-warning ">betaald en binnen</button>--}}
-                        {{--</a>--}}
-                        {{--@endif--}}
-                        {{--@endif--}}
+                        @if($status['code']== 1)
+                            <a href="/registering/payed/{{$student->stamnr}}">
+                                <button class="btn btn-primary btn-sm-block btn-block" style="margin-bottom: 10px;" disabled>
+                                    Betaald
+                                </button>
+                            </a>
+
+                            <a href="/registering/speciale/{{$student->stamnr}}">
+                                <button class="btn btn-primary btn-block " style="margin-bottom: 10px;" disabled>
+                                    Speciaal
+                                </button>
+                            </a>
+                            <a href="/registering/inside/{{$student->stamnr}}">
+                                <button type="button" class="btn btn-primary btn-block" style="margin-bottom: 10px;">
+                                    Binnen
+                                </button>
+                            </a>
+                            <a href="/registering/payedAndInside/{{$student->stamnr}}">
+                                <button class="btn btn-warning btn-block " style="margin-bottom: 10px;" disabled>
+                                    Betaald en binnen
+                                </button>
+                            </a>
+                        @endif
+
+                        @if($status['code']== 2)
+                            <a href="/registering/payed/{{$student->stamnr}}">
+                                <button class="btn btn-primary btn-sm-block btn-block" style="margin-bottom: 10px;" disabled>
+                                    Betaald
+                                </button>
+                            </a>
+
+                            <a href="/registering/speciale/{{$student->stamnr}}">
+                                <button class="btn btn-primary btn-block " style="margin-bottom: 10px;" disabled>
+                                    Speciaal
+                                </button>
+                            </a>
+                            <a href="/registering/inside/{{$student->stamnr}}">
+                                <button type="button" class="btn btn-primary btn-block" style="margin-bottom: 10px;" disabled>
+                                    Binnen
+                                </button>
+                            </a>
+                            <a href="/registering/payedAndInside/{{$student->stamnr}}">
+                                <button class="btn btn-warning btn-block " style="margin-bottom: 10px;" disabled>
+                                    Betaald en binnen
+                                </button>
+                            </a>
+                        @endif
                     @endif
                 </div> {{--close button group--}}
             </div>{{--close row--}}

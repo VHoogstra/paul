@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\party;
-use App\registration;
+use App\Party;
+use App\Registration;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -17,33 +17,5 @@ class HomeController extends Controller
     {
         $this->middleware('auth');
     }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function payedninside()
-    {
-        $location = 'Betaald en Binnen';
-        $activeParty = party::getActive();
-        $students = registration::payedNinsde($activeParty->id);
-        return view('home', compact('students', 'location', 'activeParty'));
-    }
-
-    public function inside()
-    {
-        $location = 'Binnen';
-        $activeParty = party::getActive();
-        $students = registration::insideUsers($activeParty->id);
-        return view('home', compact('students', 'location', 'activeParty'));
-    }
-
-    public function payed()
-    {
-        $location = 'Betaald';
-        $activeParty = party::getActive();
-        $students = registration::payedUsers($activeParty->id);
-        return view('home', compact('students', 'location', 'activeParty'));
-    }
+//todo can be removed?
 }

@@ -10,3 +10,4 @@ settings
 
 party alleen admin
 move reset to below image
+s

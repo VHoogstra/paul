@@ -3,7 +3,7 @@
 namespace App\Events;
 
 use Illuminate\Broadcasting\Channel;
-use App\student;
+use App\Student;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -11,7 +11,7 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class studentSearched
+class StudentSearched
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -21,7 +21,7 @@ class studentSearched
      *
      * @return void
      */
-    public function __construct(student $student)
+    public function __construct(Student $student)
     {
         $this->student = $student;
     }

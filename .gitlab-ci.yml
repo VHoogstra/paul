@@ -1,0 +1,78 @@
+image: php:7-fpm
+
+stages:
+- build
+- test
+- quality
+- deploy
+
+build:
+  stage: build
+  image: php:7.1
+  script:
+  - bash docker_install.sh > /dev/null
+  artifacts:
+    paths:
+    - ./vendor/*
+
+unit_test:
+  stage: test
+  image: php:7.1
+  script:
+  - php vendor/bin/codecept run unit --colors
+
+coverage:
+  stage: quality
+  allow_failure: true
+  script:
+  - install_xdebug
+  - php vendor/bin/codecept run unit --coverage --coverage-html
+  artifacts:
+    paths:
+    - ./tests/_output/coverage/*
+
+phpcs:
+  stage: quality
+  allow_failure: true
+  script:
+  - php vendor/bin/phpcs --error-severity=1 --warning-severity=8 --extensions=php --colors
+
+#deploy:
+#  stage: deploy
+#  only:
+#  - dev
+#  script:
+#  - bash docker_install.sh > /dev/null
+#  - apt-get update -qq && apt-get install -y -qq sshpass
+#  - sshpass -V
+#  - export SSHPASS=$USER_PASS
+#  - sshpass -e scp -o stricthostkeychecking=no -r . ozmd_paulsite@ozmd.ftp.infomaniak.com:paulDev
+
+
+.before_script_bash: &before_script_bash |
+
+  # DevOps variables and functions
+  [[ "$TRACE" ]] && set -x
+
+  # Install composer and install project dependencies
+  function install_composer() {
+
+    # Install composer
+    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+    # Install all project dependencies
+    composer install
+
+  }
+
+  function install_xdebug() {
+    apk add --no-cache --virtual .phpize-deps $PHPIZE_DEPS \
+    && pecl install xdebug-2.6.0 \
+    && docker-php-ext-enable xdebug
+  }
+
+
+before_script:
+- *before_script_bash
+
+

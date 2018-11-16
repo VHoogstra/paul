@@ -1,13 +1,13 @@
 @extends('layouts.master') @section('content')
 
     <div class="h4">
-        <i class="fa fa-table"></i> {{$location}} - @if(!$activeParty) feest active not set @else feest {{$activeParty->name}} (active) @endif
+        <i class="fa fa-table"></i> {{$location}} - @if(!$activeParty) feest active not set @else
+            feest {{$activeParty->name}} (active) @endif
     </div>
     <hr>
     <table class="table dataTable" cellspacing="0" width="100%">
         <thead>
         <tr role="row">
-            <th rowspan="1" colspan="1">show</th>
             <th rowspan="1" colspan="1">student nummer</th>
             <th rowspan="1" colspan="1">naam</th>
             <th rowspan="1" colspan="1">klas</th>
@@ -15,7 +15,6 @@
         </thead>
         <tfoot>
         <tr>
-            <th rowspan="1" colspan="1">show</th>
             <th rowspan="1" colspan="1">student nummer</th>
             <th rowspan="1" colspan="1">naam</th>
             <th rowspan="1" colspan="1">klas</th>
@@ -23,9 +22,10 @@
         </tfoot>
         <tbody>
         @foreach ($students as $student)
-            <tr>
-                <td><a class='btn btn-secondary' href='{{ route('registering.edit',['id' => $student->id])}}'><i class="fa fa-plus" aria-hidden="true"></i></a></td>
-                <td>{{ $student->stamnr}}</td>
+            <tr style="height:100%;">
+                <td style="padding:0px;height:0px;"><a class="link_full_space_party" style="padding:12px;"
+                       href='{{ route('registering.edit',['id' => $student->id])}}'><strong>{{ $student->stamnr}}</strong></a></td>
+                {{--<td>{{ $student->stamnr}}</td>--}}
                 <td>{{ $student->first_name}} {{ $student->middle_name}} {{ $student->last_name}}</td>
                 <td>{{ $student->class}}</td>
             </tr>
@@ -34,10 +34,7 @@
     </table>
 
     <script>
-        $(document).ready(function() {
-            // Setup - add a text input to each footer cell
-
-
+        $(document).ready(function () {
             // DataTable
             var table = $('.dataTable').DataTable({
                 "columnDefs": [{
@@ -46,9 +43,6 @@
                 }],
                 "order": [1, 'asc']
             });
-
-            // Apply the search
-
         });
 
     </script>

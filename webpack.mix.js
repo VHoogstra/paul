@@ -12,4 +12,15 @@ let mix = require('laravel-mix');
  */
 
 mix.js('resources/assets/js/app.js', 'public/js')
-   .sass('resources/assets/sass/app.scss', 'public/css');
+    .sass('resources/assets/sass/app.scss', 'public/css');
+
+mix.styles([
+    'resources/assets/css/dropzone.css',
+    // 'resources/assets/css/sb-admin.min.css',
+], 'public/css/all.css');
+
+mix.scripts([
+    'resources/assets/js/dropzone.js',
+    // 'resources/assets/js/sb-admin.js',
+    // 'resources/assets/js/sb-admin-datatables.js',
+], 'public/js/all.js');

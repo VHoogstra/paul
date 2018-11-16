@@ -3,114 +3,54 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\party;
+use App\Party;
 use App\User;
-use App\registration;
+use App\Registration;
+use Illuminate\Support\Facades\Auth;
 
-class dashboardController extends Controller
+class DashboardController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display the front page
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $activeParty = party::getActive();
-        $role = User::hasRole('user');
-        if ($activeParty==false) {
-            $inside= 0;
-            $payed= 0;
-            $payedNInside= 0;
-        } else {
-            $inside = registration::where('inside', '=', '1')->where('party_id', '=', $activeParty->id)->count();
-
-            $payed = registration::where(
-                function ($query) {
-                    $query->where('payed', '=', '1')
-                        ->orwhere('special', '=', '1');
-                }
-            )
-                ->where('party_id', '=', $activeParty->id)
-                ->count();
-
-            $payedNInside = registration::where(
-                function ($query) {
-                    $query->where('payed', '=', '1')
-                        ->orwhere('special', '=', '1');
-                }
-            )
-                ->where('inside', '=', '0')
-                ->where('party_id', '=', $activeParty->id)
-                ->count();
+        $inside = $payed = $payedNInside = 0;
+        $activeParty = Party::getActive();
+        if ($activeParty !== true) {
+            $inside = Registration::insideCount();
+            $payed = Registration::payedCount();
+            $payedNInside = Registration::payedNotInsideCount();
         }
 
+//        dd(Auth::user()->userRole);
         return view('dashboard.index', compact('activeParty', 'inside', 'payed', 'payedNInside'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Display the list of users depending on status
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function show($status)
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int                      $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $activeParty = Party::getActive();
+        switch ($status) {
+            case 'payed':
+                $location = 'Betaald';
+                $students = Registration::payedUsers($activeParty->id);
+                break;
+            case 'inside':
+                $location = 'Binnen';
+                $students = Registration::insideUsers($activeParty->id);
+                break;
+            case 'payedAndNotInside':
+                $location = 'Betaald en niet binnen';
+                $students = Registration::payedAndNotInside($activeParty->id);
+                break;
+        }
+        return view('dashboard.list', compact('students', 'location', 'activeParty'));
     }
 }

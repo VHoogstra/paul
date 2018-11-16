@@ -2,13 +2,13 @@
 
 namespace App\Listeners;
 
-use App\log;
+use App\Log;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Http\Request;
 
-class loginEvent
+class LoginEvent
 {
     /**
      * Create the event listener.
@@ -28,7 +28,7 @@ class loginEvent
      */
     public function handle(Login $event)
     {
-        $log = new log();
+        $log = new Log();
         $log->user_id = $event->user->id;
         $log->category = 'logon';
         $log->info = $event->user->email. ' logged in at '. \Carbon\Carbon::now() . ' from: '.app('request')->ip();
