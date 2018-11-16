@@ -35,5 +35,4 @@ class StudentSiteSearch
     {
         return new PrivateChannel('channel-name');
     }
-
 }

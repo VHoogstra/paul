@@ -2,7 +2,6 @@
 
 namespace App\Listeners;
 
-
 use App\Events\StudentSiteSearch;
 use App\Log;
 use Illuminate\Support\Facades\Auth;
