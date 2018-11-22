@@ -13,10 +13,10 @@
     <div class="card-body">
         <div class='row'>
             <div class='col-sm-6'>
-                <div>
-                    <i class="fa fa-map-marker" aria-hidden="true"></i> {{$student->adres}}<br>
-                    <i class="fa fa-home" aria-hidden="true"></i> {{$student->postalcode}} - {{$student->town}}
-                </div>
+                {{--<div>--}}
+                    {{--<i class="fa fa-map-marker" aria-hidden="true"></i> {{$student->adres}}<br>--}}
+                    {{--<i class="fa fa-home" aria-hidden="true"></i> {{$student->postalcode}} - {{$student->town}}--}}
+                {{--</div>--}}
                 <div>
                     <i class="fa fa-phone" aria-hidden="true"></i> {{$student->phone_number}}<br>
                     <i class="fa fa-birthday-cake" aria-hidden="true"></i> {{$student->birth_date}}<br>

@@ -44,7 +44,7 @@
                 </li>
                 <li>
                     <a href='{{route('student.create')}}' class="link_full_space">
-                        <i class="far fa-file-excel"></i> Upload new students
+                        <i class="far fa-file-excel fa-lg"></i> Upload new students
                     </a>
                 </li>
             </ul>
