@@ -30,27 +30,28 @@
                     <i class='fab fa-fort-awesome-alt fa-lg'></i> Feesten
                 </a>
             </li>
-            <li>
-                <a href='{{route('user.index')}}' class="link_full_space">
 
-                    <i class='fas fa-hat-wizard fa-lg'></i> Admin
-
-                </a>
+            <li data-toggle='collapse' data-target='#service' class='collapsed'>
+                <a class="link_full_space" style='width: 100%;'>
+                    <i class='fas fa-hat-wizard fa-lg'></i> Admin <span
+                            class='fas fa-angle-down arrow'></span></a>
             </li>
-            {{--<li data-toggle='collapse' data-target='#service' class='collapsed'>--}}
-            {{--<a class="link_full_space" style='width: 100%;'>--}}
-            {{--<i class='fa fa-globe fa-lg'></i> Services <span--}}
-            {{--class='fas fa-angle-down arrow'></span><span class='badge badge-warning higher-badge'>(comming soon)</span></a>--}}
-            {{--</li>--}}
-            {{--<ul class='sub-menu collapse' id='service'>--}}
-            {{--<li>New Service 1</li>--}}
-            {{--<li>New Service 2</li>--}}
-            {{--<li>New Service 3</li>--}}
-            {{--</ul>--}}
+            <ul class='sub-menu collapse' id='service'>
+                <li>
+                    <a href='{{route('user.index')}}' class="link_full_space">
+                        <i class="fas fa-users-cog"></i> Users
+                    </a>
+                </li>
+                <li>
+                    <a href='{{route('student.create')}}' class="link_full_space">
+                        <i class="far fa-file-excel"></i> Upload new students
+                    </a>
+                </li>
+            </ul>
             @endif
             <li>
                 <a class="link_full_space">
-                    <i class='fa fa-user fa-lg'></i> Profiel <span class='badge badge-warning higher-badge'>(comming soon)</span>
+                    <i class="fas fa-user-circle fa-lg"></i></i> Profiel <span class='badge badge-warning higher-badge'>(comming soon)</span>
                 </a>
             </li>
             <li>
