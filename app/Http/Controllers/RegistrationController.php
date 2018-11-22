@@ -82,11 +82,13 @@ class RegistrationController extends Controller
         if (!$activeParty) {
             $payed = false;
             $payedCount = false;
+            $registration=null;
         } else {
             $payed = Registration::where('user_id', '=', $id)->where('party_id', '=', $activeParty->id)->first();
             $payedCount = Registration::where('user_id', '=', $id)->where('party_id', '=', $activeParty->id)->count();
+            $registration = Registration::where('user_id', $id)->where('party_id', '=', $activeParty->id)->first();
         }
-        $registration = Registration::where('user_id', $id)->where('party_id', '=', $activeParty->id)->first();
+
         if (!$registration) {
             $status = ['code'=>0,'msg'=>'Wie is dit?'];
         } else {
