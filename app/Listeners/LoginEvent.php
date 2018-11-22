@@ -30,7 +30,8 @@ class LoginEvent
     {
         $log = new Log();
         $log->user_id = $event->user->id;
-        $log->category = 'logon';
+        $category = LogCategory::where('name', 'login')->first();
+        $log->logCategory()->associate($category);
         $log->info = $event->user->email. ' logged in at '. \Carbon\Carbon::now() . ' from: '.app('request')->ip();
         $log->var = app('request')->ip();
         $log->save();

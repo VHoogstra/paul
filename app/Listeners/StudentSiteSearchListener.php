@@ -2,8 +2,8 @@
 
 namespace App\Listeners;
 
-use App\Events\StudentSiteSearch;
 use App\Log;
+use App\Events\StudentSiteSearch;
 use Illuminate\Support\Facades\Auth;
 
 class StudentSiteSearchListener
@@ -28,8 +28,10 @@ class StudentSiteSearchListener
     {
         $log = new Log();
         $log->user_id = Auth::user()->id;
-        $log->category = 'searchSite';
-        $log->info = Auth::user()->email . ' searched at' . \Carbon\Carbon::now();
+        $category = LogCategory::where('name', 'searchOnIndex')->first();
+        $log->logCategory()->associate($category);
+
+        $log->info = Auth::user()->email . ' searched at ' . \Carbon\Carbon::now();
         $log->var = $event->searchedString;
         $log->save();
     }

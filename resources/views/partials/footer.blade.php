@@ -20,9 +20,7 @@
 {{--<script src="/js/sb-admin-datatables.min.js"></script>--}}
 <script>
     var menuState = true;
-    $(document).ready(function () {
-        console.log(menuState);
-    });
+
     // $('#menuColapase').click();
     $('#menuColapase').click(function () {
 
