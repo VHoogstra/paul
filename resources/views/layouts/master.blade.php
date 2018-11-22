@@ -1,6 +1,6 @@
 @include('partials.header') @include('partials.nav')
 
-<div class="container content-wrapper" id="main">
+<div class=" content-wrapper" id="main">
 
     <div class="modal fade" id="LogoutModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
