@@ -46,6 +46,10 @@
                     <a href='{{route('student.create')}}' class="link_full_space">
                         <i class="far fa-file-excel fa-lg"></i> Upload new students
                     </a>
+                </li> <li>
+                    <a href='{{route('log.index')}}' class="link_full_space">
+                        <i class="fas fa-hdd fa-lg"></i> Logs
+                    </a>
                 </li>
             </ul>
             @endif

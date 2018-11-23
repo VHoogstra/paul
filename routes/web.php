@@ -48,4 +48,14 @@ Route::middleware(['role:3', 'auth'])->group(function () {
     route::post('student/storePhotoYear', 'StudentController@storePhotoYear')->name('studentStoreYear');
     route::post('student/storePhoto', 'StudentController@storePhoto')->name('studentStore');
     route::resource('user', 'UserController');
+    route::resource('log', 'LogController');
+
+
+    route::get('update',function (){
+       return  Artisan::call('migrate');
+    });
+    route::get('fill',function (){
+        return  App\Log::fixTable();
+//        App\LogCategory::generate();
+    });
 });
