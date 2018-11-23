@@ -4,6 +4,7 @@ namespace App\Listeners;
 
 use App\Log;
 use App\Events\StudentSearched;
+use App\LogCategory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -30,8 +31,10 @@ class StudentSearche
     {
         $log = new Log();
         $log->user_id = Auth::user()->id;
-        $log->category = 'search';
-        $log->info = Auth::user()->email . ' searched at' . \Carbon\Carbon::now() . '  for user: ' . $event->student->stamnr;
+        $category = LogCategory::where('name', 'showSearchData')->first();
+        $log->logCategory()->associate($category);
+
+        $log->info = Auth::user()->email . ' searched at ' . \Carbon\Carbon::now() . '  for user: ' . $event->student->stamnr;
         $log->var = $event->student->stamnr;
         $log->save();
     }

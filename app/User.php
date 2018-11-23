@@ -75,4 +75,9 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\UserRole', 'id', 'role');
     }
+
+    public function logs()
+    {
+        return $this->hasMany(Log::class);
+    }
 }

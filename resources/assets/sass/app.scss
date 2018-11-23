@@ -2,7 +2,7 @@
 // Variables
 @import "variables";
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
+//@import '~bootstrap/scss/bootstrap';
 
 .nav-side-menu {
   overflow: auto;
@@ -10,10 +10,9 @@
   font-weight: 200;
   background-color: #2e353d;
   position: fixed;
-  top: 0px;
   width: 200px;
   height: 100%;
-  color: #e1ffff;
+  color: #ffffff;
 }
 
 .nav-side-menu .brand {
@@ -156,7 +155,7 @@ body {
 }
 
 body.sticky-footer .content-wrapper {
-  min-height: calc(100vh - 56px)
+  min-height: calc(100vh - var($footer-height))
 }
 
 footer.sticky-footer {
@@ -164,13 +163,13 @@ footer.sticky-footer {
   left: 200px;
   bottom: 0;
   width: calc(100% - 200px);
-  height: 56px;
+  height: $footer-height;
   background-color: #e9ecef;
   line-height: 55px
 }
 
 body.sticky-footer {
-  margin-bottom: 56px
+  margin-bottom: $footer-height
 }
 
 .thead-dark tr th {
@@ -202,6 +201,65 @@ html, body {
 
 #main {
   margin-bottom: 70px;
+  padding: 0px 20px 0px 20px;
+  margin-top: 20px;
+  height: 100%;
+}
+
+.badge-pill {
+  padding-right: 0.6em;
+  padding-left: 0.6em;
+  border-radius: 10rem;
+}
+
+.badge.badge-pill, .shortcut-mappings .key {
+  font-weight: 400;
+  background-color: rgba(0, 0, 0, 0.07);
+  color: #707070;
+  vertical-align: baseline;
+}
+
+.top-area .nav-links, .wiki-page-header .nav-links {
+  margin-bottom: 0;
+  border-bottom: 0;
+  float: left;
+}
+
+.top-area {
+  border-bottom: 1px solid grey;
+  height: 40px;
+  margin-bottom:20px;
+}
+
+.nav-tabs {
+  height: 100%;
+}
+
+.nav-tabs li a {
+  padding-top: auto;
+  padding-bottom: auto;
+  height: 100%;
+  text-decoration:none;
+}
+
+.nav-tabs li:hover{
+  border-bottom:1px solid grey;
+}
+
+
+.nav-tabs .active {
+  border-bottom: 1px solid cornflowerblue;
+}
+
+.nav-links:not(.quick-links) li:not(.md-header-toolbar) a, .nav-links:not(.quick-links) li:not(.md-header-toolbar) button {
+  padding: 10px;
+  padding-bottom: 11px;
+  font-size: 14px;
+  line-height: 28px;
+  color: #707070;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
 }
 
 @media (max-width: 767px) {
@@ -209,7 +267,7 @@ html, body {
     position: relative;
     width: 100%;
     height: 51px;
-    margin-bottom: 10px;
+    min-height: 51px;
   }
   .nav-side-menu .toggle-btn {
     display: block;
@@ -233,13 +291,22 @@ html, body {
   footer.sticky-footer {
     position: fixed;
     bottom: 0;
-    height: 56px;
+    height: $footer-height;
     background-color: #e9ecef;
     line-height: 55px;
     width: 100%;
     left: 0px;
   }
-
+  #main .container-fluid {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  #main {
+    padding-top: 15px;
+    margin-top: 0px;
+    margin-bottom: 57px;
+    height: calc(100% - 100px);
+  }
 }
 
 @media (min-width: 767px) {
@@ -247,10 +314,11 @@ html, body {
     display: block;
   }
   #main {
-    min-height: calc(100vh - 56px);
     width: calc(100% - 200px);
-    padding-top: 10px;
-    margin-bottom: 70px;
+    margin-bottom: $footer-height;
+    margin-top: 0px;
+    padding-top: 20px;
     float: right;
+    height: calc(100% - var($footer-height));
   }
 }

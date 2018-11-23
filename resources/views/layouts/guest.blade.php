@@ -1,5 +1,5 @@
 @include('partials.header') @include('partials.nav_guest')
-<div class="container content-wrapper" id="main">
+<div class=" content-wrapper" id="main">
 
     <div class="modal fade" id="LogoutModel" tabindex="-1" role="dialog"
          aria-hidden="true">
@@ -28,6 +28,6 @@
     <div class="content-wrapper">
         <div class="container-fluid">
             <!-- Icon Cards-->
-        @yield('content')
+            @yield('content')
         </div>
 @include('partials.footer')

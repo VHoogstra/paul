@@ -11,7 +11,7 @@
         <button id='search_go_button' type="submit" class="btn btn-primary mb-2">Zoeken</button>
     </div>
 
-    <table class="table dataTable" cellspacing="0" width="100%">
+    <table class="table dataTable table-responsive-sm" cellspacing="0" width="100%">
         <thead>
         <tr role="row">
             <th rowspan="1" colspan="1">show</th>
@@ -44,6 +44,7 @@
 
             // DataTable
             var table = $('.dataTable').DataTable({
+                "searching": false,
                 "columnDefs": [{
                     "orderable": false,
                     "targets": 0

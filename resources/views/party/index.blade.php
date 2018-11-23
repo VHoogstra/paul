@@ -38,7 +38,7 @@
         </thead>
         <tfoot>
         <tr>
-            <th rowspan="1" colspan="1"><input id="cb-select-all-1" type="checkbox"></th>
+            <th rowspan="1" colspan="1"><input id="cb-select-all-2" type="checkbox"></th>
             <th rowspan="1" colspan="1">naam</th>
             <th rowspan="1" colspan="1">prijs</th>
             <th rowspan="1" colspan="1">datum</th>
@@ -198,13 +198,11 @@
         });
 
         $('#cb-select-all-1').click(function () {
-            console.log($("[name='users[]']").is(':checked'));
-            $("[name='users[]']").prop('checked', $("#cb-select-all-1").is(':checked'));
+            $("[name='parties[]']").prop('checked', $("#cb-select-all-1").is(':checked'));
             $("#cb-select-all-2").prop('checked', $("#cb-select-all-1").is(':checked'));
         });
         $('#cb-select-all-2').click(function () {
-            console.log($("[name='users[]']").is(':checked'));
-            $("[name='users[]']").prop('checked', $("#cb-select-all-2").is(':checked'));
+            $("[name='parties[]']").prop('checked', $("#cb-select-all-2").is(':checked'));
             $("#cb-select-all-1").prop('checked', $("#cb-select-all-2").is(':checked'));
         });
         $("[name='users[]']").click(function () {

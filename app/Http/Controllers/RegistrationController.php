@@ -82,16 +82,18 @@ class RegistrationController extends Controller
         if (!$activeParty) {
             $payed = false;
             $payedCount = false;
+            $registration = null;
         } else {
             $payed = Registration::where('user_id', '=', $id)->where('party_id', '=', $activeParty->id)->first();
             $payedCount = Registration::where('user_id', '=', $id)->where('party_id', '=', $activeParty->id)->count();
+            $registration = Registration::where('user_id', $id)->where('party_id', '=', $activeParty->id)->first();
         }
-        $registration = Registration::where('user_id', $id)->where('party_id', '=', $activeParty->id)->first();
-        if (!$registration) {
-            $status = ['code'=>0,'msg'=>'Wie is dit?'];
-        } else {
-            $status = $registration->getState();
-        }
+//dd($registration);
+        if (!$registration || ($registration->payed === 0 && $registration->inside === 0 && $registration->special === 0)) {
+        $status = ['code' => 0, 'msg' => 'Wie is dit?'];
+    } else {
+        $status = $registration->getState();
+    }
         $student = Student::where('stamnr', $id)->first();
         $birthDate = Carbon::parse($student->birth_date);
         $age = Carbon::createFromDate($birthDate->year, $birthDate->month, $birthDate->day)->age;
