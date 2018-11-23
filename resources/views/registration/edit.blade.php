@@ -115,7 +115,7 @@
                 <img src="{{$contents}}" class="img-fluid">
             </div>
             <div class='col-sm-12'>
-                <a href="/registering/reset/{{$student->id}}">
+                <a href="/registering/reset/{{$student->stamnr}}">
                     <button class="btn btn-danger btn-block">reset!</button>
                 </a>
             </div>

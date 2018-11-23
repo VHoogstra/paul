@@ -155,7 +155,7 @@ body {
 }
 
 body.sticky-footer .content-wrapper {
-  min-height: calc(100vh - 56px)
+  min-height: calc(100vh - var($footer-height))
 }
 
 footer.sticky-footer {
@@ -163,13 +163,13 @@ footer.sticky-footer {
   left: 200px;
   bottom: 0;
   width: calc(100% - 200px);
-  height: 56px;
+  height: $footer-height;
   background-color: #e9ecef;
   line-height: 55px
 }
 
 body.sticky-footer {
-  margin-bottom: 56px
+  margin-bottom: $footer-height
 }
 
 .thead-dark tr th {
@@ -291,7 +291,7 @@ html, body {
   footer.sticky-footer {
     position: fixed;
     bottom: 0;
-    height: 56px;
+    height: $footer-height;
     background-color: #e9ecef;
     line-height: 55px;
     width: 100%;
@@ -305,7 +305,7 @@ html, body {
     padding-top: 15px;
     margin-top: 0px;
     margin-bottom: 57px;
-    height: calc(100% - 120px);
+    height: calc(100% - 100px);
   }
 }
 
@@ -315,10 +315,10 @@ html, body {
   }
   #main {
     width: calc(100% - 200px);
-    margin-bottom: 70px;
+    margin-bottom: $footer-height;
     margin-top: 0px;
     padding-top: 20px;
     float: right;
-    height: calc(100% - 70px);
+    height: calc(100% - var($footer-height));
   }
 }

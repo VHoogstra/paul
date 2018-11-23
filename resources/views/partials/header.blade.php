@@ -9,6 +9,10 @@
     <title>{{ config('app.name', 'Paul') }}</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+    {{--favicon--}}
+    <link rel="shortcut icon" href="/storage/logo/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/storage/logo/favicon.ico" type="image/x-icon">
+
     <!-- Bootstrap core CSS-->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom fonts for this template-->

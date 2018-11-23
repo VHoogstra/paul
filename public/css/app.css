@@ -145,7 +145,7 @@ body {
 }
 
 body.sticky-footer .content-wrapper {
-  min-height: calc(100vh - 56px);
+  min-height: calc(100vh - var($footer-height));
 }
 
 footer.sticky-footer {
@@ -303,7 +303,7 @@ body {
     padding-top: 15px;
     margin-top: 0px;
     margin-bottom: 57px;
-    height: calc(100% - 120px);
+    height: calc(100% - 100px);
   }
 }
 
@@ -314,11 +314,11 @@ body {
 
   #main {
     width: calc(100% - 200px);
-    margin-bottom: 70px;
+    margin-bottom: 56px;
     margin-top: 0px;
     padding-top: 20px;
     float: right;
-    height: calc(100% - 70px);
+    height: calc(100% - var($footer-height));
   }
 }
 
