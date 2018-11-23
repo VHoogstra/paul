@@ -24,7 +24,7 @@
         @foreach ($students as $student)
             <tr style="height:100%;">
                 <td style="padding:0px;height:0px;"><a class="link_full_space_party" style="padding:12px;"
-                       href='{{ route('registering.edit',['id' => $student->id])}}'><strong>{{ $student->stamnr}}</strong></a></td>
+                       href='/registering/get/{{$student->stamnr}}'><strong>{{ $student->stamnr}}</strong></a></td>
                 {{--<td>{{ $student->stamnr}}</td>--}}
                 <td>{{ $student->first_name}} {{ $student->middle_name}} {{ $student->last_name}}</td>
                 <td>{{ $student->class}}</td>
