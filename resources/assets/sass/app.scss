@@ -206,6 +206,62 @@ html, body {
   height: 100%;
 }
 
+.badge-pill {
+  padding-right: 0.6em;
+  padding-left: 0.6em;
+  border-radius: 10rem;
+}
+
+.badge.badge-pill, .shortcut-mappings .key {
+  font-weight: 400;
+  background-color: rgba(0, 0, 0, 0.07);
+  color: #707070;
+  vertical-align: baseline;
+}
+
+.top-area .nav-links, .wiki-page-header .nav-links {
+  margin-bottom: 0;
+  border-bottom: 0;
+  float: left;
+}
+
+.top-area {
+  border-bottom: 1px solid grey;
+  height: 40px;
+  margin-bottom:20px;
+}
+
+.nav-tabs {
+  height: 100%;
+}
+
+.nav-tabs li a {
+  padding-top: auto;
+  padding-bottom: auto;
+  height: 100%;
+  text-decoration:none;
+}
+
+.nav-tabs li:hover{
+  border-bottom:1px solid grey;
+}
+
+
+.nav-tabs .active {
+  border-bottom: 1px solid cornflowerblue;
+}
+
+.nav-links:not(.quick-links) li:not(.md-header-toolbar) a, .nav-links:not(.quick-links) li:not(.md-header-toolbar) button {
+  padding: 10px;
+  padding-bottom: 11px;
+  font-size: 14px;
+  line-height: 28px;
+  color: #707070;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+}
+
 @media (max-width: 767px) {
   .nav-side-menu {
     position: relative;
@@ -241,15 +297,15 @@ html, body {
     width: 100%;
     left: 0px;
   }
-  #main .container-fluid{
+  #main .container-fluid {
     padding-left: 0px;
     padding-right: 0px;
   }
-  #main{
-    padding-top:15px;
-    margin-top:0px;
-    margin-bottom:57px;
-    height:  calc(100% - 120px);
+  #main {
+    padding-top: 15px;
+    margin-top: 0px;
+    margin-bottom: 57px;
+    height: calc(100% - 120px);
   }
 }
 
@@ -261,8 +317,8 @@ html, body {
     width: calc(100% - 200px);
     margin-bottom: 70px;
     margin-top: 0px;
-    padding-top:20px;
+    padding-top: 20px;
     float: right;
-    height:  calc(100% - 70px);
+    height: calc(100% - 70px);
   }
 }

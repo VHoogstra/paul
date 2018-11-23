@@ -4,6 +4,7 @@ namespace App\Listeners;
 
 use App\Log;
 use App\Events\StudentSearched;
+use App\LogCategory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
