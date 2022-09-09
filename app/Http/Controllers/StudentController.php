@@ -108,7 +108,9 @@ class StudentController extends Controller
 
         $worksheet = $spreadsheet->getActiveSheet();
         $p = 0;
+        $studentRowCounter = 0;
         foreach ($worksheet->getRowIterator() as $row) {
+            $studentRowCounter++;
             $cellIterator = $row->getCellIterator();
             $cellIterator->setIterateOnlyExistingCells(false); // This loops through all cells,
             //    even if a cell value is not set.
@@ -182,7 +184,7 @@ class StudentController extends Controller
             }
             $p++;
         }
-        return redirect::back()->with('succes', 'successvol geupload ');
+        return redirect::back()->with('succes', 'successvol geupload '.$studentRowCounter);
     }
 
 
